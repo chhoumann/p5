@@ -12,6 +12,12 @@
 *.idx
 *.ilg
 *.ind
+*-blx.bib
+*.fdb_latexmk
+*.fls
+*.log
+*.run.xml
+*.tdo
 
 # Ignore PDF files.
 *.pdf
