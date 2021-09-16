@@ -120,6 +120,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Misc
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Hide the ugly red borders around clickable hyperlinks/references
+\usepackage[hidelinks]{hyperref}
 % Add bibliography and index to the table of
 % contents
 \usepackage[nottoc]{tocbibind}
@@ -155,4 +157,94 @@
 	linkcolor=black,% you should probably change this to black before printing
 	urlcolor=black,%
 	pdfstartview=FitH%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Listings (Code Snippets)
+% https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{listings}
+\usepackage{color}
+
+\renewcommand{\lstlistingname}{Code Snippet} % Listing -> Code Snippet
+\definecolor{lighter-gray}{RGB}{240,240,240}
+
+\lstset{
+  backgroundcolor=\color{lighter-gray},
+  extendedchars=true,
+  basicstyle=\footnotesize\ttfamily,
+  showstringspaces=false,
+  showspaces=false,
+  numbers=left,
+  tabsize=4,
+  breaklines=true,
+  showtabs=false,
+  captionpos=b,
+  numberstyle=\footnotesize,
+  numbersep=5pt
+}
+
+% Define C# as a snippet language.
+\usepackage{courier}
+
+\definecolor{Green}{rgb}{0, 0.3, 0}
+\definecolor{DarkCyan}{rgb}{0, 0.545, 0.545}
+\definecolor{Navy}{rgb}{0, 0, 0.5}
+\definecolor{Teal}{rgb}{0, 0.5, 0.5}
+\definecolor{DarkGray}{gray}{0.66}
+\definecolor{Olive}{rgb}{0.5, 0.5, 0}
+\definecolor{Pink}{rgb}{1.0, 0.75, 0.8}
+\definecolor{DeepPink}{rgb}{1, 0.08, 0.58}
+\definecolor{Brown}{rgb}{0.65, 0.165, 0.165}
+\definecolor{DarkViolet}{rgb}{0.58, 0, 0.83}
+\definecolor{SaddleBrown}{rgb}{0.55, 0.27, 0.07}
+\definecolor{Orange}{rgb}{0.9, 0.427, 0}
+\lstdefinelanguage{CSharp}{
+  morecomment = [l]{//}, 
+  morecomment = [l]{///},
+  morecomment = [s]{/*}{*/},
+  morestring=[b]", 
+  morestring=[b]',
+  basicstyle=\footnotesize\ttfamily,
+  commentstyle=\color{Green}\textit,
+  stringstyle=\color{Orange},
+  sensitive = true,
+  morekeywords=[1]{this, base},
+  keywordstyle=[1]\bfseries\color{Navy},
+  morekeywords=[2]{as, is, new, sizeof, typeof, true, false, stackalloc},
+  keywordstyle=[2]\color{Navy}\bfseries,
+  morekeywords=[3]{else, if, switch, case, default,
+  do, for, foreach, while, in},
+  keywordstyle=[3]\bfseries\color{Navy} ,
+  morekeywords=[4]{break, continue, goto, return,
+  yield, partial, global, where},
+  keywordstyle=[4]\bfseries\color{Navy},
+  morekeywords=[5]{try, throw, catch, finally},
+  keywordstyle=[5]\color{Navy}\bfseries,
+  morekeywords=[6]{checked, unchecked},
+  keywordstyle=[6]\color{Navy}\bfseries,
+  morekeywords=[7]{fixed, unsafe},
+  keywordstyle=[7]\bfseries\color{Navy},
+  morekeywords=[8]{bool, byte, sbyte, char, short, ushort, int, uint, long, ulong, float,
+  double, decimal, enum, struct},
+  keywordstyle=[8]\bfseries\color{Navy},
+  morekeywords=[9]{class, interface, delegate, object, string,
+  void},
+  keywordstyle=[9]\bfseries\color{Navy},
+  morekeywords=[10]{explicit, implicit, operator},
+  keywordstyle=[10]\bfseries\color{Navy},
+  morekeywords=[11]{params, ref, out},
+  keywordstyle=[11]\bfseries\color{Navy},
+  morekeywords=[12]{private, protected, internal, public},
+  keywordstyle=[12]\bfseries\color{Navy},
+  morekeywords=[13]{abstract, const, event, var, override, virtual, volatile, extern, readonly, sealed, static},
+  keywordstyle=[13]\bfseries\color{Navy},
+  morekeywords=[14]{namespace, using},
+  keywordstyle=[14]\bfseries\color{Navy},
+  morekeywords=[15]{lock},
+  keywordstyle=[15]\bfseries\color{Navy},
+  morekeywords=[16]{get, set, add, remove},
+  keywordstyle=[16]\bfseries\color{Navy},
+  morekeywords=[17]{null, value},
+  keywordstyle=[17]\bfseries\color{Navy},
 }
