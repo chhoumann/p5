@@ -1,9 +1,9 @@
 \section{Current state}
 
-As previously mentioned, \knox{} was initially started in 2020 and thus code has already been written.
-The previous group chose to develop their layer using Java and many different frameworks.
+As previously mentioned, \knox{} was initially started in 2020, thus some code has already been written.
+The previous group chose to develop this layer using Java.
 
-Using the framework Apache Jena in combination with the Fuseky package, they set up a simple database system.
+Using the framework Apache Jena in combination with the Fuseki package, they set up a simple database system.
 
 The system has two functionalities. 
 Firstly, it can store knowledge graphs in HDT and convert triples to HDT.
@@ -14,21 +14,17 @@ In addition, the other layers are directly connected to the database.
 Overall, not much code was written and its quality is questionable. 
 The Java language convention was not followed, no documentation was made, and only a single test exists. 
 It appears as though no structure was established, making it difficult to navigate the code. 
-In addition, the database is set up such that is must be restarted every time new data is written to it - otherwise, the data cannot be fetched.
+Furthermore, the database is set up such that is must be restarted every time new data is written to it - otherwise, the data cannot be fetched.
 
 This leaves us with plenty of work to do.
 After having read and understood the current code, we will have to start by cleaning up the inconsistencies and structure.
 We will then have to document what the code does and write tests for it.
-Finally, we will need to address unfornate the database implemenation such that constantly restarting is no longer required.
+We must also address the unfornate database implemenation such that constantly restarting is no longer required.
+Finally, we need to decouple the other layers such that they are no longer directly connected to the database.
 
 These tasks will take a long time.
 The environment and programming language are unfamiliar to us, and the poor structure and lack of documentation makes it problematic for us to understand.
 
-This lead to a hefty discussion in which we concluded that it would be faster to redo the whole system in C# Considering how little code was written. 
-While doing so, we will follow a proper structure and writing tests and documentation along the way. 
+This lead to a hefty discussion in which we concluded that it would be faster to redo the whole system in C# considering how little code was written. 
+While doing so, we will follow a proper structure and write tests and documentation along the way. 
 Moreover, it would make the system more accessible to future students as C# is taught on the 3rd semester.  
-
-- what did they did they do last year
-- what tech did they use
-- what needs to be done by us
-- why we ain't doing that
