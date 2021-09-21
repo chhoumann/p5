@@ -1,0 +1,31 @@
+\section{Current state}
+
+As previously mentioned, \knox{} was initially started in 2020.
+The previous group chose to develop this layer using Java.
+
+They set up a simple database system using the Apache Jena framework in combination with the Fuseki package.
+
+The system has two functionalities. 
+First, it can store knowledge graphs in HDT and convert triples to HDT.
+Second, it contains a prototype for counting the number of words in an article.
+There is no API for reading this data, only for writing. 
+In addition, at least one of other layers are directly connected to the database.
+
+Overall, not much code was written and its quality is unknown due to a lack of testing and documentation.
+The Java language convention was also not followed \cite{java_convention}, making it difficult to comprehend.
+It appears as though no structure was established, making it difficult to navigate the code. 
+Furthermore, the database is set up such that is must be restarted every time new data is written to it - otherwise, the data cannot be fetched by the other layers.
+
+Based on this, we have discussed what work to do and in what order.
+After having read and understood the current code, we will have to start by cleaning up the inconsistencies and structure.
+We will then have to document what the code does and write tests for it.
+We must also address the unfortunate database implemenation such that constantly restarting is no longer required.
+Finally, we need to decouple the other layers such that they are no longer directly connected to the database.
+
+To solve these issues, it was decided that the best approach was to discard all current implementations. 
+This decision was based on several factors such as unfamilarity with the environment and the previously mentioned poor structure. 
+Discarding the current implementation also allows us to build the layer using C#, a programming language that we are more familiar with which is also taught in the future semesters. 
+This will make it easier for the following groups to continue and not have to learn a new language.
+
+While doing so, we will follow a proper structure and write tests and documentation along the way. 
+Moreover, it would make the system more accessible to future students as C# is taught on the 3rd semester.
