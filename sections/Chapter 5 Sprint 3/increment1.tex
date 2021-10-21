@@ -1,5 +1,128 @@
 \section{Increment 1.}
+This section will cover the progress made in the first increment. 
+
+% --TEORI--
+
+% Docker
+    % hvad kan det
+    % hvorfor bruger vi det
+\subsection{Docker}
+Docker is an open source containerization platform that through the usage of containers allows for a simplification of deliveries in distributed applications. 
+Before giving a more detailed description of Docker an overview of what a container is and how it is used is needed. 
+
+
+Containers were originally developed to remove the problem of a piece of system working on one system but having problem when moved to a different one. 
+To tackle this problem software containers were developed. 
+Using containers allows developers to package their code together with its required dependencies. This package then ensures that the software can be moved reliably between environments with a minimal amount of problems
+
+
+Here a container image is a lightweight version encapsulating everything needed to run that application. These images are then turned into containers at runtime. 
+Mowing around a prepackaged application with all its dependencies insures that the software is going to run the same regardless of the infrastructure in place. 
+This is made possibly by the built process isolation and virtualization capabilities in the Linux kernel. 
+These capabilities allows for multiple application components to share the ressources of single host operating system, 
+in much the same way a hypervisors allows multiple virtual Machines to share the same hardware resources of a single computer. 
+\todo{Cite docker og IBM}
+
+
+The result being that containers allows for the same functionality and benefits as VM’s gives us the following advantages:
+
+\begin{itemize}
+    \item Light weight 
+    \item Resource efficiency
+    \item Improved developer productivity
+\end{itemize}
+
+Docker itself it then used to enhance these native linux features allowing us to easier move the containers between environments and automation of container creation.
+
+% Entity framework
+    % Hvad er Object relational mapping (ORM) tool
+    % EF vs dapper?
+    % hvad er EF
+    % hvorfor bruger vi det
+    
+% postgresql
+    % hvad er det
+    % hvorfor bruger vi det
+        % det vi lærer i kurserne
+        % det er hvad der var på databasen i forvejen
+
+
+
+% --Implementation--
+% Docker
+    % hvad bruger vi det til
+        % Test DB
+    % hvordan har vi implementeret det
+
+% Entity framework
+    % hvad bruger vi det til
+        % lige nu til at tilgå elementer i databasen
+        % svært at bruge med den nuværende struktur på databasen
+        % i fremtiden vil vi også generere en ny database med EF for at have en code first approach
+
+% postgresql
+    % Vi har unmaterialised et view
+
+% vores fokus har været på at få serveren op at køre med de andre lag, 
+% derfor har vi hovedsagligt arbejdet på at få nogle APIer op at køre
+
+%CRUD
+
+
+\subsection{CRUD}
+
+\todo{insert node02 graph}
+The main focus of this sprint was to get the server up and running for the other layers. 
+As we already had a working database, the goal of this increment became to write a CRUD api through HTTP, 
+the other layers could use to acces the database.
+The CRUD operations we implemented are based on requests from the other layers, and what they thought they needed to retrieve from the database.
+
+To implement this we split the CRUD operations into three different API's handling different aspects of the database.
+\subsub{wordcount}
+The first API was the wordcount API, which has implemented two Get methods.
+The first method called GetAll() retrieves all the words currently stored in the database.
+Another method called Get() takes a word as an argument and checks wether that word already exist in the database.
+
+
+% Create, Read, Update, Delete
+% vi har implementeret CRUD operationer til databasen som de andre lag kan bruge.
+    % get
+        %All wordRatios
+            % why?
+        % get all words
+            % why?
+        % get word by word
+            % checks if a word exists
+            % why do we have it
+A few different Get methods were implemented, corresponding to the "Read" of CRUD.
+
+The first get method that was implemented was the a method to get all of the stored words.
+The second is a method to check if a word is already stored.
+The third  get method is used to get all entries in the wordRatios table.
+
+    % post
+        % post articles as json
+            % checks if the input matches a jsonschema from the DB
+            % checks if an article name exists
+            % checks if a filepath exists
+            % checks if a word exists 
+        % post Jsonschema
+    % Jsonschema
+
+Some Post methods were also implemented as the "Create" of CRUD.
+The 
+
+
+\todo{Mention earlier that the database was accesed directly, instead of through an API}
+\todo{describe the structure of the database}
+
+
+We chose not to implement the update and delete function to our api in this increment, 
+because it was not strictly needed to make the search engine work
+
+
+
 %Deliverable, implementation and documentation
-%During tis increment we will.... description of results of the implementation and needed documentation / theory. 
+%During this increment we will.... description of results of the implementation and needed documentation / theory. 
 %Backlog overview / fulfilment
 %updated diagrams
