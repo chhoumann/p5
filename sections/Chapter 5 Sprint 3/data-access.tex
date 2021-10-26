@@ -12,7 +12,9 @@ Dappers simple approach to ORM's means that a large part of the stadard features
 This means that Dapper as a framework covers our usecases with the caveat that additional time is going to be needed in order to fullfil the sprints mvp. 
 
 \textbf{Entity Framework Core}
-
+The second technology that we considered was Entity Framework Core (EF Core), which is a data access technology developed by Microsoft for the .NET platform. EF Core can serve as an object-relational mapper (https://en.wikipedia.org/wiki/Object\%E2\%80\%93relational_mapping) which lets developers abstract away the complications of converting data to .NET objects, in addition to eliminating the majority of the data-access code that would typically have to be written. (https://docs.microsoft.com/en-us/ef/core/).
+EF Core works by using models to create the data access, where a model represents the entities in a database and a context object representing a session with the given database. Queries are then able to be performed through the context object. 
+This means that EF Core serves as a layer between 
 
 % What are the alternatives?
 % - ADO was an option. Why/Why not?
