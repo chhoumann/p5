@@ -6,7 +6,7 @@ As we already had a working database, the goal of this increment became to write
 the other layers could use to acces the database.
 The CRUD operations we implemented are based on requests from the other layers, and what they thought they needed to retrieve from the database.
 
-To implement this we split the CRUD operations into three different API's handling different aspects of the database.
+To implement this we split the CRUD operations into three different APIs handling different aspects of the database.
 
 \begin{figure} \centering
    \includegraphics{Images/Node02Sprint3.PNG}
@@ -15,13 +15,13 @@ To implement this we split the CRUD operations into three different API's handli
 \end{figure}
 
 \subsubsection{WordCount API}
-The first API was the wordcount API, which has implemented two Get methods.
-The first method called GetAll() retrieves all the words currently stored in the database.
-Another method called Get() takes a word as an argument and checks wether that word already exist in the database.
-In the WordCount API we also implemented a Post method called Post() which takes a json object from the HTTP body as a parameter. 
-The Json object should correspond to an array of articles which will then be posted to the database. 
-The method checks wether key information or words already exists in the database, 
-and the input mathces JSONschema from the database before adding the item.
+The first API we created was the WordCount API in which we implemented two \texttt{GET} methods.
+The first method called \texttt{GetAll} retrieves all words currently stored in the database.
+The other \texttt{GET} method, simply called \texttt{Get}, takes a word as an argument and checks whether that word already exist in the database.
+In the WordCount API, we also implemented a \texttt{POST} method called \texttt{Post} which takes a JSON object from the HTTP body as a parameter. 
+The JSON object should correspond to an array of articles which will then be posted to the database. 
+
+Before posting the data to the database, the method checks whether the article title, file path or words already exists in the database, and whether the input matches the JSON schema from the database.
 
 
 \subsubsection{WordRatios API}
@@ -34,10 +34,6 @@ The first method \texttt{GetAllWordRatios} is used to get all the entries in the
 The second method \texttt{GetMatches} is used to query one or more specific words. 
 One may provide one or more sources in which to search for the specified words.
 If no sources are provided, the database searches for the given words in all sources.
-
-%% word ratios view for checking how many times a specific word occours in an article.
-% its a view that is used by layer 4 (view can't store)
-
 
 \subsubsection{Schema API}
 
