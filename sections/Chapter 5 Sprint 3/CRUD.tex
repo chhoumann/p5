@@ -24,9 +24,20 @@ The method checks wether key information or words already exists in the database
 and the input mathces JSONschema from the database before adding the item.
 
 
-\subsubsection{Wordratios API}
-The second API is the WordRatios API. which only has one get method.
-The method gets all entries in the WordRatios table. 
+\subsubsection{WordRatios API}
+The WordRatios API is a view used by layer 4 to fetch specific data from the database.
+As it is a view, it cannot be used to store new data. 
+The primary purpose of the WordRatios API is to check how many times a given word occours in an article.
+
+The API consists of two \texttt{GET} methods. 
+The first method \texttt{GetAllWordRatios} is used to get all the entries in the WordRatios table.
+The second method \texttt{GetMatches} is used to query one or more specific words. 
+One may provide one or more sources in which to search for the specified words.
+If no sources are provided, the database searches for the given words in all sources.
+
+%% word ratios view for checking how many times a specific word occours in an article.
+% its a view that is used by layer 4 (view can't store)
+
 
 \subsubsection{Schema API}
 
@@ -35,6 +46,7 @@ The route to this endpoint is simply \texttt{/Schema}.
 The body of the post request must consist of two fields - the schema name, which is its primary key in the database, and the schema content itself. 
 A schema gets stored in the database in the format known as \texttt{jsonb} or JSON binary which is a built-in type provided by \postgres{}.
 This format is used to store a JSON object as binary which uses much less space than a varchar or regular JSON type would.
+
 
 % Create, Read, Update, Delete
 % vi har implementeret CRUD operationer til databasen som de andre lag kan bruge.
