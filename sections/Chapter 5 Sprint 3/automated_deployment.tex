@@ -1,0 +1,14 @@
+\subsection{Continuous Integration and Delivery}
+In our work, we have used both Continuous Integration (CI) and Continuous Delivery (CD).
+For CI, we have used GitHub with Github Actions. We have created a Github Actions workflow that
+runs the tests in our project; and another one that tests the code quality. These checks run
+on every time commits are made towards the main branch. This ensures that we keep that branch production-ready
+at all times.
+
+For CD, we have implemented an automatic deployment system that deploys the code to the production server.
+We start the workflow by tagging the commit with the version number. Once we push the tag, a GitHub Actions
+workflow is triggered that deploys the code to the production server.
+To facilitate the deployment, we containerized our software. The Action workflow starts by building the
+Docker image, which is pushed to the GitHub Package Repository. On the production server, we have a Docker 
+container watching for new releases. When a new release is pushed, the container pulls the new image and
+deploys it.
