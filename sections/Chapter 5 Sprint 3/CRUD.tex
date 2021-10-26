@@ -30,8 +30,11 @@ The method gets all entries in the WordRatios table.
 
 \subsubsection{Schema API}
 
-The last API we implemented in this iteration is the Schema API which is used to post a JSONschema to the database, 
-which is later used to verify JSON objects.
+The last API we implemented in this iteration is the Schema API which is used to post a JSON schema to the database, which is later used to verify JSON objects.
+The route to this endpoint is simply \texttt{/Schema}. 
+The body of the post request must consist of two fields - the schema name, which is its primary key in the database, and the schema content itself. 
+A schema gets stored in the database in the format known as \texttt{jsonb} or JSON binary which is a built-in type provided by \postgres{}.
+This format is used to store a JSON object as binary which uses much less space than a varchar or regular JSON type would.
 
 % Create, Read, Update, Delete
 % vi har implementeret CRUD operationer til databasen som de andre lag kan bruge.
