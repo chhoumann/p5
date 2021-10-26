@@ -4,18 +4,18 @@ The primary requirement for the choice of technology was fast implementation and
 \subsubsection{Dapper}
 Dapper is an open source Micro ORM or Micro object relational mapper. This means that Dapper is a mapping framework that helps mapping the native out queries to domain classes. Dapper is a light weight framework made for developers that prefers to use stored procedures or native query language over using a large scale ORM tool. 
 
-Dapper, when added to projects, extendeds the IdbConnection inferface. This extension adds helpers for executing a command with no return results, executing a command multiple times, executing a query and mapping it to a strongly typed list and mapping it to a list of dynamic objects. \cite{Dapper_Git}
+Dapper, when added to projects, extendeds the IdbConnection inferface. This extension adds helpers for executing a command with no return results, executing a command multiple times, executing a query and mapping it to a strongly typed list and mapping it to a list of dynamic objects \cite{Dapper_Git}.
 
-Dappers simple approach to ORM's means that a large part of the standard features have been dropped. This means that Dappers focuses on being a lightweight and efficient framework that should cover most of the users needs over being a fullfledge ORM.\cite{Dapper_Git} 
+Dappers simple approach to ORM's means that a large part of the standard features have been dropped. This means that Dappers focuses on being a lightweight and efficient framework that should cover most of the users needs over being a fullfledge ORM \cite{Dapper_Git}.
 
-This means that Dapper as a framework covers our usecases with the caveat that additional time is going to be needed in order to fullfil the sprints mvp. 
+This means that Dapper as a framework covers our usecases with the caveat that additional time is going to be needed in order to fullfil the sprints MVP. 
 
 \subsubsection{Entity Framework Core}
 The second technology that we considered was Entity Framework Core (EF Core), which is a data access technology developed by Microsoft for the .NET platform. EF Core can serve as an object-relational mapper \cite{Object_relational_mapping} which lets developers abstract away the complications of converting data to .NET objects, in addition to eliminating the majority of the data-access code that would typically have to be written.
 
 EF Core works by using models to create the data access, where a model represents the entities in a database and a context object representing a session with the given database. Queries are then able to be performed through the context object. 
 The use case for EF Core is that, it is a fast way of implementing data access without the overhead for manual implementation such as the case with dapper. 
-The drawback of EF Core, is that the learning curve is high and that there is a requirement to be at least an intermediate level user of the framework to avoid common security and performance pitfalls. \cite{EFCore}
+The drawback of EF Core, is that the learning curve is high and that there is a requirement to be at least an intermediate level user of the framework to avoid common security and performance pitfalls \cite{EFCore}.
 
 Due to previous experience with the framework among group members we had the ability to quickly implement EF Core and fulfill the use cases that we had. With this in mind, we concluded that we were also better suited to accommodate the tight deadline for the required features of the \knox{} project and as a result, EF Core seemed to be an appropiate choice.
 
