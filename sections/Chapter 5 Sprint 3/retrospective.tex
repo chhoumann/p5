@@ -1,1 +1,110 @@
 \section{Retrospective}
+
+
+\subsection{Sprint goal}
+The goal of this sprint can be seen in \ref{sprint3Goal}.
+All of the features planned during the sprint planning was implemented by the end of the sprint, but we did not document the code as well as we had initially planned. This clashes with our Definition Of Done, which means we did not fully reach the goal of this sprint.
+
+\todo{ref to definition of done}
+
+- **What was the goal of the sprint? Did we accomplish it?**
+    
+    We implemented all we wanted to implement, but did not document it as much as we had set out to. So no, we did not accomplish it.
+
+
+    
+- **What had been planned?**
+    
+    We planned out the implementation to a certain degree, but used a non-optimal format, which led to confusion down the line. We also did not use user-stories, which contributed to the confusion, as they would have otherwise provided a certain context for the tasks.
+    
+    The remaining tasks were lackluster / nonexistent, which led to trouble doing structured writing, as we had to figure out *what* to write every time we wanted to write.
+    
+- **What was done and what not? Plan vs. reality**
+    
+    Already answered in the goal bullet point. A reason for this was excessive confusion as the sprint progressed. To some extent, this was caused by conflicting information given by various sources. We also received a lot of 'urgent, not important' tasks from other groups, which we had to react to immediately.
+    
+    Another cause was our planning, which resulted in the aforementioned confusion.
+    
+    Not to mention that, due to all of the above, there were points where we did not exactly know what we had finished, what others in our groups were working on, and so on. Tasks were added almost daily, continuously changing the scope of the sprint.
+    
+- **Which training, skill, or knowledge contributed to the difference?** This documents our usage of the course syllabi subjects.
+    
+    We learned that we had to be more vigilant about narrowing the scope of our tasks. This was especially true when working on the API's where we initially thought that we should develop full CRUD capabilities, but it turned out that only some of the capabilities were necessary. From this we gathered that we should use some agile method to better our understanding of the needs of different actors/layers. Here we have chosen to use user stories to accommodate this. 
+    
+    Group members with previous experience using databases and EF Core also helped us develop the program much faster. 
+    
+- **What was added and what was removed from the sprint?**
+    
+    Literally too much was changed (added or removed) to say here. Lots of minor tasks were added/changed/removed constantly.
+    
+- **Did we hit our point estimation? If not, why?**
+    
+    Not at all. In some way, we went way off. This was due to a set of reasons including: Adding tasks that were not originally in the sprint, removing tasks that were and there were frequent interruptions from other groups which slowed progress on tasks.
+    
+- **What risks and problems were discovered? How did we solve them?**
+    
+    We lack domain knowledge about the data, data structure and general issues from the layers connecting to the database. We are operating in the dark, being blind from lack of knowledge. This means, that whenever we gain new insight in the domain, we have to ***QUICKLY** re-implement to accommodate.* 
+    
+- **Feedback from informants — if any.**
+    
+    We should not change response object structure - we could solve this by implementing classes that represent the response objects, instead of sending domain models. 
+    
+    Communication works! The other groups agreed that communication in-between groups (sitting in the same room) when testing works!
+    
+    Response from supervisor regarding report structure and content. This mainly regards itself with what is lacking/missing.
+    
+- **How did the iteration go wrong?**
+    
+    Lack of correct communication between groups, too much irrelevant communication. Contradicting information and tasks. Lack of production due to meetings that, by large, were not particularly useful. 
+    
+    Insufficient / poor planning.
+    
+    Too many distractions.
+    
+    Too much multi-tasking (which is horrible).
+    
+    Lack of internal communications (also slightly caused by not all members being present at all times) which has led to people not being caught up to all different aspects of our work.
+    
+- **What did we do well?**
+    
+    At some point, we implemented a bare minimum skeleton to provide content to other layers quickly. This made it possible for us to find issues quickly.
+    
+- **Which techniques were useful?**
+    
+    Using Scrum techniques to alleviate some of the issues. Pair programming(also writing). Daily Scrum, planning poker (what is our weaknesses in the group), kanban boards (although we are bad at updating).
+    
+- **Which techniques were not useful?**
+    
+    all techniques were useful, however we should be aware that we are not using them correctly. 
+    
+- **How can we improve in the next iteration? Make a plan for how we'll address the issues.**
+    
+    **Start doing**
+    
+    - User stories (product owner) from stakeholders
+    - Specification of the data in the database - this should be given to the other groups so less issues regarding CRUD operations occur.
+    - More schemas for communication between layers
+    - Updating Kanban board
+    - Change planning poker strategy:
+        - if everyone is within two cards of each other, just average the sum of your cards.
+        - If people are more than three cards apart, the high and low cards talk about why they think what they do.
+        - don't estimate in hours, estimate in 'work' (size) - Scrum book has something to say about this
+    - @Christian Bager Bach Houmann Velocity analysis
+    - Component diagram versioning - we want to show the progress!
+    - Tasks are **NOT** done before they are *released*. Will make a lane on the Kanban board as a landing for them while they wait for deployment.
+    - Write testable code and test more. We will aim for 70% test coverage.
+    - Sprints changed to 2-week duration. 4 is too long.
+    
+    **Continue doing**
+    
+    - Schemas, writing immediately after implementation
+    - Development environments
+    - Production deployments
+    
+    **Stop doing**
+    
+    - solving small tasks other groups introduce immediately.
+- **Information about the next sprint. What should we do next?**
+    - RDF (maybe, depending on other groups?)
+    - Ticket system with system status
+    - Benchmarking could be interesting
