@@ -1,17 +1,22 @@
-\subsection{Data access technologies}
-The primary requirement for the choice of technology was fast implementation and ease of use, due to the timeline constraints that were imposed by the \knox{} project. 
+\subsection{Object Relational Mapping}
+An Object Relational Mapping (ORM) is often used in an application to connect to, and manipulate data on a database.
+
+The primary requirement for the choice of an ORM was fast implementation and ease of use, due to the timeline constraints that were imposed by the \knox{} project. 
 
 \subsubsection{Dapper}
-Dapper is an open source Micro ORM or Micro object relational mapper. This means that Dapper is a mapping framework that helps mapping the native out queries to domain classes. Dapper is a light weight framework made for developers that prefers to use stored procedures or native query language over using a large scale ORM tool. 
+Dapper is an open source Micro ORM. This means that Dapper is a mapping framework that helps mapping the result from a native query to a class with the same attributes as the tables that are being queried. Dapper is a light weight framework made for developers that prefers to use stored procedures or native query language over using a large scale ORM tool. 
 
-Dapper, when added to projects, extendeds the IdbConnection inferface. This extension adds helpers for executing a command with no return results, executing a command multiple times, executing a query and mapping it to a strongly typed list and mapping it to a list of dynamic objects \cite{Dapper_Git}.
+
+Dapper, when added to projects, extends the IDbConnection inferface. This extension adds helpers. 
+One of the helpers is the Query() method. The query method will take an sql query as a parameter, the method returns a list. The type of list that is returned can either be a strongly typed list or a list of dynamic objects.
+Another helper that is added to IDbConnection is the Execute() method which takes some SQL commands as a parameter, and returns no results. When the method is called the commands used as parameter will be executed. The Execute() method can also be used to execute commands multiple times\cite{Dapper_Git}.
 
 Dappers simple approach to ORM's means that a large part of the standard features have been dropped. This means that Dappers focuses on being a lightweight and efficient framework that should cover most of the users needs over being a fullfledge ORM \cite{Dapper_Git}.
 
 This means that Dapper as a framework covers our usecases with the caveat that additional time is going to be needed in order to fullfil the sprints MVP. 
 
 \subsubsection{Entity Framework Core}
-The second technology that we considered was Entity Framework Core (EF Core), which is a data access technology developed by Microsoft for the .NET platform. EF Core can serve as an object-relational mapper \cite{Object_relational_mapping} which lets developers abstract away the complications of converting data to .NET objects, in addition to eliminating the majority of the data-access code that would typically have to be written.
+The second technology that we considered was Entity Framework Core (EF Core), which is a data access technology developed by Microsoft for the .NET platform. EF Core can serve as an ORM \cite{Object_relational_mapping} which lets developers abstract away the complications of converting data to .NET objects, in addition to eliminating the majority of the data-access code that would typically have to be written.
 
 EF Core works by using models to create the data access, where a model represents the entities in a database and a context object representing a session with the given database. Queries are then able to be performed through the context object. 
 The use case for EF Core is that, it is a fast way of implementing data access without the overhead for manual implementation such as the case with dapper. 
