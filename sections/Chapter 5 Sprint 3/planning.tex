@@ -1,4 +1,5 @@
 \section{Sprint Planning}
+
 \subsection{Knox Goal}\label{ssec:sprint3Goal}
 The overall goal for the Knox project during this sprint was to get the search engine to work. To accomplish this goal the product owner specified a list of expectation that when completed would fufill a minimal viable product. The specified list is outlined below.
 \begin{figure}
@@ -12,34 +13,34 @@ The overall goal for the Knox project during this sprint was to get the search e
 \end{figure}
 With the overall goal for the sprint outlined, a granulated sprint goal could be made that accounts for the focus of our scrum group.
 
-\subsubsection{Sprint goal}
-As noted in the preceding sprint, the codebase inherited from the previous iteration was deemed problematic and costly to maintain. 
-Therefore our sprint goal for this iteration was based on updating the codebase to better comply with the requirements for the \knox{} goal.
 
-
-Based on this observation as well as the aforementioned requirements, our sprint goal was as follows:
+Based on this observation as well as the aforementioned requirements, the MVP for our part of the sprint goal was as follows:
 \vspace{\baselineskip}
 
-\textit{Make the minimally required amount of API endpoints available to satisfy the requirements for the search engine, and create the necessary documentation.}
+\textit{Make the minimally required amount of API endpoints in order to fulfill the needs for a working search functionality, and create the necessary documenation.}
 
 \subsubsection{Backlog \& Increments}
-After defining the sprint goal, it was granulated into subtasks. 
-With the tasks granulated, a session of Scrum poker was held in order to evaluate the time requirement of each task. 
-Afterwards, the tasks were categorized by their priority and focus points.
-Lastly, the tasks were divided into three different sprint increments: \textit{Wordcount API}, \textit{Write Report}, \textit{Wiki Documentation}. 
-
-
-%%Remember to add an estimate to Write report and wiki update
-\begin{table}[]
+The next step of the planning phase was to granulate the sprint goal into smaller tasks, and further granulate these into subtasks if possible.
+A table of the tasks gained from granulating our sprint goal can be seen in table \ref{BacklogGranulationSprint3}. 
+After granulating the tasks, a session of planning poker was held. Each individual task was evaluated by the group with the time estimation added to the table. 
+\begin{table}[h]
+\centering
 \begin{tabular}{|l|l|l|ll}
 \cline{1-3}
-Estimate & Increments                         & Tasks                         &  &  \\ \cline{1-3}
-82       & \multicolumn{1}{c|}{Wordcount API} & CRUD operations on controller &  &  \\ \cline{1-3}
-X        & Write Report                       & Document the process          &  &  \\ \cline{1-3}
-X        & Wiki Update                        & Feature documentation         &  &  \\ \cline{1-3}
+WordCount API Granulation   & Subtasks & Estimation &  &  \\ \cline{1-3}
+\multirow{4}{*}{Controller} & Get      & 2          &  &  \\ \cline{2-3}
+                            & Post     & 5          &  &  \\ \cline{2-3}
+                            & Update   & 8          &  &  \\ \cline{2-3}
+                            & Delete   & 3          &  &  \\ \cline{1-3}
+Docker                      &          & 13         &  &  \\ \cline{1-3}
+Repository Service          &          & 10         &  &  \\ \cline{1-3}
+CI/CD                       &          & 5          &  &  \\ \cline{1-3}
 \end{tabular}
+\caption{Backlog Granulation \& Estimation}
+\label{BacklogEstimationSprint3}
 \end{table}
 
+With the planning phase of the sprint completed, the development phase can now begin. 
 
 
 
