@@ -1,4 +1,6 @@
-\chapter{Introduction to the search engine}
+\section{Introduction to the search engine}\label{SHARED-search-engine}
+\texit{The following section have been written in collaboration with other Knox project groups.}
+
 For the third sprint, the various groups of the Knox project were tasked with finishing the implementation of the Search Engine. The goal of the Search Engine is to search through files provided by \textit{Grundfos} and \textit{Nordjyske Mediehus}, using phrases or words. When the groups received the project, the Search Engine was non-functional. Issues in the different components resulted in the groups collaborating on fixing current modules or implementing new ones. Many of the problems inherited from last years' implementations were results of miscommunications between the pipeline layers. These issues mainly occurred due to inconsistency in the structure of objects sent between the different layers. Other issues included a lack of documentation and routing issues. 
 
 The preprocessing layer experienced problems with parsing some files, as well as API communication with the knowledge layer. The knowledge layer did not have an established connection to the Data layer and could not  add the entries to the database. The data layer did not have working APIs for accessing the database and the functionality layer, therefore, accessed the wordcount database directly. At this point in time, the database only contained test data.
