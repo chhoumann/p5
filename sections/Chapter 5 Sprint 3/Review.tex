@@ -1,1 +1,38 @@
 \section{Review}
+For this Sprint, we will review what we have accomplished so far. We will also review the changes to the Knox multi-project. Lastly, we will
+cover what the next steps are.
+
+\subsubsection{What has been accomplished?}
+This sprint, we have implemented operations for the WordCount API. This was done in close collaboration with the neighboring layers. Besides this, we also wrote documentation for the relevant implementation details. A full overview of what was done can be seen below.
+
+\begin{itemize}
+    \item \texttt{GET} \& \texttt{POST} API endpoints for the WordCount database
+    \item WordRatio response objects for endpoints, rather than previous layers directly querying the view
+    \item API for JSON schemas used for validating data sent to the API
+    \item Development and production environment set up and configured for rapid development & deployment
+    \item Implemented CI/CD using Docker and GitHub Actions
+    \item Restructured database using a code-first approach
+    \item Repository-unit of work pattern has been implemented to promote encapsulation and separation of concerns
+    \item Wiki restructuring and documentation of configuration and API
+\end{itemize}
+
+While we did manage to implement most of what was requested of us, we did not document this to the extent that our Definition of Done requires. We have decided to carry over these tasks to the next sprint, prioritizing them first. In the sprint retrospective, we will discuss why we did not accomplish everything we wanted to, and what we are doing about it.
+
+\subsubsection{What has changed in the environment?}
+For this sprint, the primary focus has been to implement the Knox Search Engine. As such, all other groups have had the same focus, and therefore they have not requested anything from the database layer yet. We expect to see a lot of changes to the database layer in the next sprint, as some groups have mentioned that they would like to store different types of data next sprint.
+A full overview of what has changed can be seen below.
+
+\begin{itemize}
+    \item The structure of the objects' sent from the below layer have changed: a 'publication' field has been introduced in the schema defining the object.
+    \item We found out that the Knox Product Owner will not be creating a new backlog with tasks for us to solve, but that we should rather create meaningful tasks ourselves.
+    \item We have made other groups realize that creating server-users, database schemas based on their use-cases, and similar task are their responsibility.
+\end{itemize}
+
+\subsubsection{What next?}
+As mentioned before, we were asked to suggest possible next steps for our share of the Knox project. The below list encapsulates our suggestions---some of which are based upon requests from other groups.
+
+\begin{itemize}
+    \item At the Scrum of Scrum retrospect, many groups told that they want to work with knowledge graphs. Therefore, we should prepare for tasks regarding the RDF database.
+    \item We should be prepared to provide assistance with the WordCount database endpoints. This included minor changes and new endpoint implementation.
+    \item Potentially, we could benchmark database technologies for the Knox project, to find a good option for the Knox use-case.
+\end{itemize}
