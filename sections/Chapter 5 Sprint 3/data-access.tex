@@ -8,7 +8,7 @@ Dapper is an open source Micro ORM. It is a mapping framework that helps mapping
 
 
 Dapper, when added to projects, extends the IDbConnection inferface. This extension adds helpers. 
-One of the helpers is the Query() method. The query method will take an sql query as a parameter, the method returns a list. The type of list that is returned can either be a strongly typed list or a list of dynamic objects.
+One of the helpers is the \texttt{Query} method. This method will take an SQL query as a parameter and return a list. The returned list can either be strongly or dynamically typed.
 Another helper that is added to IDbConnection is the Execute() method which takes some SQL commands as a parameter, and returns no results. When the method is called the commands used as parameter will be executed. The Execute() method can also be used to execute commands multiple times\cite{Dapper_Git}.
 
 Dappers simple approach to ORM's means that a large part of the standard features have been dropped. This means that Dappers focuses on being a lightweight and efficient framework that should cover most of the users needs over being a fullfledge ORM \cite{Dapper_Git}.
