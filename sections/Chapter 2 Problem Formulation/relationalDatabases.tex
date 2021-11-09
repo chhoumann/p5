@@ -4,6 +4,9 @@ These relations consist of rows, known as tuples. Each tuple represents an entit
 In the context of an enterprise company, one could for example model an employee and a manager, and the relationship between them.
 The goal of the designing such relations is to represent entities as intuitively as possible, making it easy to establish relationships between them. (source: the book from the db course)
 
+To distinguish between tuples, keys are used to ensure that tuples in a relation can be uniquely identified.
+Foreign keys are used for modelling relationships between relations where foreign key in one relation represents the primary key of another relation.
+
 Data from a relational database can be queried using relational query languages such as SQL.
 Executing a query instructs the database system to perform a set of operations to compute a desired result, known as transactions.
 
@@ -16,7 +19,6 @@ To prevent this from happening, a relational database must ensure four crucial p
     \item Durability: Changes caused by a comitted transaction persist even in the event of system failures.
 \end{itemize}
 
-- keys
 - structure of database (physical/logical)
 - postgress 
 - ER diagram
