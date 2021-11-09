@@ -1,8 +1,13 @@
-\section{Current state}
+\section{The current state of \knox{}}
+\input{sections/Chapter 3 Sprint 1/Server_specifications.tex}
+\subsection{The \knox{} databases}
+\subsubsection*{Postgres database}
+\subsubsection*{Fuseki database}
+\subsection{Database endpoints and implemented applications}
+
 
 As previously mentioned, \knox{} was initially started in 2020.
-The previous group chose to develop this layer using Java.
-
+The previous group chose to develop API endpoints using Java.
 They set up a simple database system using the Apache Jena framework in combination with the Fuseki package.
 
 The system has two functionalities. 
@@ -19,11 +24,11 @@ Furthermore, the database is set up such that is must be restarted every time ne
 Based on this, we have discussed what work to do and in what order.
 After having read and understood the current code, we will have to start by cleaning up the inconsistencies and structure.
 We will then have to document what the code does and write tests for it.
-We must also address the unfortunate database implemenation such that constantly restarting is no longer required.
+We must also address the unfortunate database implementation such that constantly restarting is no longer required.
 Finally, we need to decouple the other layers such that they are no longer directly connected to the database.
 
 To solve these issues, it was decided that the best approach was to discard all current implementations. 
-This decision was based on several factors such as unfamilarity with the environment and the previously mentioned poor structure. 
+This decision was based on several factors such as unfamiliarity with the environment and the previously mentioned poor structure. 
 Discarding the current implementation also allows us to build the layer using C\#, a programming language that we are more familiar with which is also taught in the future semesters. 
 This will make it easier for the following groups to continue and not have to learn a new language.
 
