@@ -23,6 +23,16 @@ The JSON object should correspond to an array of articles which will then be pos
 
 Before posting the data to the database, the method checks whether the article title, file path or words already exists in the database, and whether the input matches the JSON schema from the database.
 
+\begin{table}[]
+\begin{tabular}{|llll|}
+\hline
+\multicolumn{4}{|c|}{\textbf{WordCount API}}                                                                                 \\ \hline
+\multicolumn{1}{|l|}{Name}                 & \multicolumn{1}{l|}{Method} & \multicolumn{1}{l|}{Input}       & Response on success       \\ \hline
+\multicolumn{1}{|l|}{\texttt{GetFilepath}} & \multicolumn{1}{l|}{GET}    & \multicolumn{1}{l|}{Integer}     & Article        \\ \hline
+\multicolumn{1}{|l|}{\texttt{Post}}        & \multicolumn{1}{l|}{POST}   & \multicolumn{1}{l|}{JSON Object} & Status message \\ \hline
+\end{tabular}
+\end{table}
+
 
 \subsubsection{WordRatios API}
 The WordRatios API is a view used by layer 4 to fetch specific data from the database.
@@ -35,6 +45,17 @@ The second method \texttt{GetMatches} is used to query one or more specific word
 One may provide one or more sources in which to search for the specified words.
 If no sources are provided, the database searches for the given words in all sources.
 
+\begin{table}[]
+\begin{tabular}{|llll|}
+\hline
+\multicolumn{4}{|c|}{\textbf{WordRatios API}}                                                                                                                                           \\ \hline
+\multicolumn{1}{|l|}{Name}                      & \multicolumn{1}{l|}{Method} & \multicolumn{1}{l|}{Input}                           & Reponse on success                               \\ \hline
+\multicolumn{1}{|l|}{\texttt{GetAllWordRatios}} & \multicolumn{1}{l|}{GET}    & \multicolumn{1}{l|}{None}                            & WordRatio Table                                  \\ \hline
+\multicolumn{1}{|l|}{\texttt{GetMatches}}       & \multicolumn{1}{l|}{GET}    & \multicolumn{1}{l|}{term (string), sources (string)} & WordRatio for all articles with term from source \\ \hline
+\multicolumn{1}{|l|}{\texttt{GetMatches}}       & \multicolumn{1}{l|}{GET}    & \multicolumn{1}{l|}{term (string)}                   & WordRatio for all articles with term             \\ \hline
+\end{tabular}
+\end{table}
+
 \subsubsection{Schema API}
 
 The last API we implemented in this iteration is the Schema API which is used to post a JSON schema to the database, which is later used to verify JSON objects.
@@ -42,6 +63,17 @@ The route to this endpoint is simply \texttt{/Schema}.
 The body of the post request must consist of two fields - the schema name, which is its primary key in the database, and the schema content itself. 
 A schema gets stored in the database in the format known as \texttt{jsonb} or JSON binary which is a built-in type provided by \postgres{}.
 This format is used to store a JSON object as binary which uses much less space than a varchar or regular JSON type would.
+
+\begin{table}[]
+\begin{tabular}{|llll|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Schema API}}                                                                                                     \\ \hline
+\multicolumn{1}{|l|}{Name}                     & \multicolumn{1}{l|}{Method} & \multicolumn{1}{l|}{Input}               & Response on success \\ \hline
+\multicolumn{1}{|l|}{\textit{GetSchema}}       & \multicolumn{1}{l|}{GET}    & \multicolumn{1}{l|}{SchemaName (string)} & JSON Schema         \\ \hline
+\multicolumn{1}{|l|}{\textit{GetAllSchemas}}   & \multicolumn{1}{l|}{GET}    & \multicolumn{1}{l|}{None}                & All JSON Schemas    \\ \hline
+\multicolumn{1}{|l|}{\textit{PostJsonSchemas}} & \multicolumn{1}{l|}{POST}   & \multicolumn{1}{l|}{JSON Schema}         & Status message      \\ \hline
+\end{tabular}
+\end{table}
 
 \todo{Mention earlier that the database was accesed directly, instead of through an API}
 \todo{Describe the structure of the database}
