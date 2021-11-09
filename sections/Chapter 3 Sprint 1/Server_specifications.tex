@@ -4,7 +4,7 @@ The \knox{} server system consists of six servers, each having the Ubuntu 18.04 
 Four of these nodes have no ports open to public, and serve as containers for running the various applications of the \knox{} pipeline.
 These servers will be referred to as \textit{node servers} or \textit{server nodes}. The remaining two servers have port 80 and 443 open to public. These nodes will be referred to as \textit{master nodes}.
 Currently, one of the master nodes run Grafana, Prometheus, blackbox-exporter, Apache, and Docker. The other master node only have a single running program, NMap.
-The Docker container runs images of Portainer, Wiki.JS, as well as a PostgreSQL database.
+The Docker instance runs containers based on images of Portainer, Wiki.JS, as well as a PostgreSQL database.
 Many of the node servers runs applications written in Java and Python, as well as databases for the applications. 
 No firewalls are set in place between the servers.
 
