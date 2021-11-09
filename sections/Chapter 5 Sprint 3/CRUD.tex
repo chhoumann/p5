@@ -15,9 +15,8 @@ The pipeline for these APIs is outlined in figure \ref{Node02Sprint3}.
 \end{figure}
 
 \subsubsection{WordCount API}
-The first API we created was the WordCount API in which we implemented two \texttt{GET} methods.
-The first method called \texttt{GetAll} retrieves all words currently stored in the database.
-The other \texttt{GET} method, simply called \texttt{Get}, takes a word as an argument and checks whether that word already exist in the database.
+The first API we created was the WordCount API which has the route \texttt{/wordcount}. Here we implemented a \texttt{GET} and a \texttt{POST} method.
+The \texttt{GET} method, simply called \texttt{GetFilepath}, takes a integer id as an argument and finds an article with the given id and returns the article.
 In the WordCount API, we also implemented a \texttt{POST} method called \texttt{Post} which takes a JSON object from the HTTP body as a parameter. 
 The JSON object should correspond to an array of articles which will then be posted to the database. 
 
@@ -38,8 +37,7 @@ Before posting the data to the database, the method checks whether the article t
 The WordRatios API is a view used by layer 4 to fetch specific data from the database.
 As it is a view, it cannot be used to store new data. 
 The primary purpose of the WordRatios API is to check how many times a given word occours in an article.
-
-The API consists of two \texttt{GET} methods. 
+The route to this endpoint is \texttt{/wordratio} and the API consists of two \texttt{GET} methods. 
 The first method \texttt{GetAllWordRatios} is used to get all the entries in the WordRatios table.
 The second method \texttt{GetMatches} is used to query one or more specific words. 
 One may provide one or more sources in which to search for the specified words.
@@ -58,8 +56,9 @@ If no sources are provided, the database searches for the given words in all sou
 
 \subsubsection{Schema API}
 
-The last API we implemented in this iteration is the Schema API which is used to post a JSON schema to the database, which is later used to verify JSON objects.
+The last API we implemented in this iteration is the Schema API which is used to post and retrieve a JSON schema from the database. These are later used to verify JSON objects.
 The route to this endpoint is simply \texttt{/Schema}. 
+This API concists of two \texttt{GET} methods and a single \texttt{POST} method. The first \texttt{GET} method is called GetSchema which takes a SchemaName as its input and returns a JSON Schema. The second \texttt{GET} method is called GetAllSchemas which takes no input and returns all stored JSON schemas. The last method is a \texttt{POST} method called PostJSONSchema and takes a JSON Schema as its input and inserts it into the database.  
 The body of the post request must consist of two fields - the schema name, which is its primary key in the database, and the schema content itself. 
 A schema gets stored in the database in the format known as \texttt{jsonb} or JSON binary which is a built-in type provided by \postgres{}.
 This format is used to store a JSON object as binary which uses much less space than a varchar or regular JSON type would.
@@ -71,7 +70,7 @@ This format is used to store a JSON object as binary which uses much less space 
 \multicolumn{1}{|l|}{Name}                     & \multicolumn{1}{l|}{Method} & \multicolumn{1}{l|}{Input}               & Response on success \\ \hline
 \multicolumn{1}{|l|}{\textit{GetSchema}}       & \multicolumn{1}{l|}{GET}    & \multicolumn{1}{l|}{SchemaName (string)} & JSON Schema         \\ \hline
 \multicolumn{1}{|l|}{\textit{GetAllSchemas}}   & \multicolumn{1}{l|}{GET}    & \multicolumn{1}{l|}{None}                & All JSON Schemas    \\ \hline
-\multicolumn{1}{|l|}{\textit{PostJsonSchemas}} & \multicolumn{1}{l|}{POST}   & \multicolumn{1}{l|}{JSON Schema}         & Status message      \\ \hline
+\multicolumn{1}{|l|}{\textit{PostJSONSchemas}} & \multicolumn{1}{l|}{POST}   & \multicolumn{1}{l|}{JSON Schema}         & Status message      \\ \hline
 \end{tabular}
 \end{table}
 
