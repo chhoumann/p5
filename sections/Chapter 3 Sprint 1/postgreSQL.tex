@@ -1,4 +1,4 @@
-\section{Relational databases}
+\subsection{PostgreSQL}
 The group last year chose to implement the database using PostgreSQL which is an relational database system \todo{Cite report from last year.}.
 
 A relational database is a collection of tables, known as relations. Relational databases are used to provide access to related data points.
@@ -30,4 +30,14 @@ The logical layer describes what data are stored and the relationsships between 
 
 The highest of abstraction is the view layer which describes only part of the database. It exits to simplify the interaction with the system. Many views may exist for the same database.
 
-- wat is le diagramme d'ER?
+Entity-relation diagrams (ER diagrams) can be used to express the relationships in a relational database in a concise and graphical manner.
+Figure \ref{olddatabase} shows an ER diagram of the old database from last year.
+
+\mathbf{X}\mathbf{D} 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\linewidth]{Images/old wordcount db.PNG}
+    \caption{ER diagram of the relational database from last year.}
+    \label{olddatabase}
+\end{figure}
