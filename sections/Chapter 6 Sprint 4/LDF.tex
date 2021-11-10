@@ -1,0 +1,21 @@
+
+\subsection{Triple Pattern Fragments}
+One of the common issues when working with knowledge graphs is to easily and intelligently fetch (without downloading the dataset) information a semantic web. \cite{TPF} 
+APIs should be used, as to enable information storage --> 
+ -> One can use server-heavy computations by using very specific data queries in SPARQL
+ -> One can use more generic responses, but this requires more bandwidth and is heavy on client. 
+
+
+
+One way to accommodate these issues is using \textit{Linked Data Fragments} (LDT).
+These data fragments can be conceptually considered to be a subset of RDF\todo{What is RDF triples} triples but also containing meta-data described in RDF triples.
+Formally, LDFs can be described using sets of literals, URIs and blank nodes. 
+Let \mathcal{U}, \mathcal{B}, and \mathcal{L} denote the infinite sets of URIs, blank nodes, and literals respectively. 
+The possible sets of these triples can be described as a cartesian product: \begin{math}
+    \mathcal{T} = ( \mathcal{U} \cup \mathcal{B}) \times  \mathcal{U} \times ( \mathcal{U} \cup \mathcal{B} \cup \mathcal{L}) 
+\end{math}
+Each of the fragments, $f \in \mathcal{T}$ contains triples that somehow belong together.
+
+
+
+
