@@ -11,6 +11,14 @@ This in turn will help us generate as much value to the pipeline as quickly as p
 \userStory{functionality layer}{query an RDF graph in a standardized way}{do not have to worry about changes to the database}
 
 \subsubsection*{Granulating the epics}
+After talking to the functionality layer, we found out details about how they want database access to work. 
+\begin{enumerate}
+    \item They want to be able to send SPARQL queries directly to an endpoint to fetch the data.
+    \item The would prefer if the response was in XML format. 
+    \item They do not know the size of the data they will be querying.
+\end{enumerate}
+
+
 
 \todo{reference to what an epic is}
 
