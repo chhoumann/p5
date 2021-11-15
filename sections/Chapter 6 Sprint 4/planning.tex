@@ -14,8 +14,10 @@ This in turn will help us generate as much value to the pipeline as quickly as p
 After talking to the functionality layer, we found out details about how they want database access to work. 
 \begin{enumerate}
     \item They want to be able to send SPARQL queries directly to an endpoint to fetch the data.
-    \item The would prefer if the response was in XML format. 
+    \item The would prefer if the response was in XML format. They have given us an example.
     \item They do not know the size of the data they will be querying.
+    \item The route for GET request should have a string parameter called "query" containing the SPARQL query as a string.
+    The query will be in URL-coded format.
 \end{enumerate}
 
 
