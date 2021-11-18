@@ -60,7 +60,8 @@ The Rows of the table matching the terms and sources.
 
 \subsubsection{Schema API}
 The last API we implemented in this iteration is the Schema API which is used to post and retrieve a JSON schema from the database. These are later used to verify JSON objects as input on other APIs. 
-This API concists of two \texttt{GET} methods and a single \texttt{POST} method. 
+This API concists of two \texttt{GET} methods and a single \texttt{POST} method.
+By creating an API for fetching the validation schemas, we enable easy validation and a common understanding of the structure of input data from the knowledge layer.
 \begin{table}[h]
     \begin{tabular}{|llll|}
     \hline
@@ -80,7 +81,7 @@ The last method is a \texttt{POST} method called PostJSONSchema and takes a JSON
 The body of the post request must consist of two fields - the schema name, which is its primary key in the database, and the schema content itself. Before the schema is inserted in the database it is checked if it is a duplicate, if that is the case an error message will be sent in response.
 A schema gets stored in the database in the format known as \texttt{jsonb} or JSON binary which is a built-in type provided by \postgres{}.
 This format is used to store a JSON object as binary which uses much less space than a varchar or regular JSON type would.
-Even though \postgres{} may not be the most efficient DBMS for storing JSON data, it is sufficient for this usecase, as posting Schemas will be somewhat rare, and typicly only one Schema must be fetced to handle each POST request.
+Even though \postgres{} may not be the most efficient DBMS for storing JSON data, it is sufficient for this usecase, as posting and fetching Schemas will not be done often.
 
 
 
