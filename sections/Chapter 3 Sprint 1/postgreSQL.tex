@@ -1,6 +1,39 @@
 \subsection{Relational Databases}
-The group last year chose to implement the \texttt{WordCount} (see Section \ref{sec:Sprint2And3}) and \texttt{Fuseki} databases using PostgreSQL.
+The group last year chose to implement the \texttt{WordCount} (Section \ref{sec:Sprint2And3}) and \texttt{Fuseki} databases using PostgreSQL.
 Postgres is a relational database system \cite{knox2020}.
+Relational database systems can be mathematically described using relations, mapping a unique key to a tuple of information \cite[Chapter~2.3]{DBSBook}.
+The values of the tuples contained within the relation can be described by the attributes of the relation and their corresponding domains \cite{KatjaFirstPP}. 
+The relations are often described using a \textit{relational schema}, denoting the name and domains of the attributes.
+Equation \ref{eq:relational_schema} shows an example of a relation describing books as tuples containing three text fields and a positive integer.
+The relation also denotes a super key for the relation. A super key is one or more attributes that can uniquely identify a tuple in a given relation. Attributes describing the superkey are underlined.
+
+\begin{equation} \label{eq:relational_schema}
+    book(author\_name:text, title: text, number\_of\_pages:\mathbb{Z}^+, \underline{ISBN: text})
+\end{equation}
+Superkeys can be defined as $t_1 \in r,\neq t_2 \in r \implies t_1.K \neq t_2.K$. 
+
+That is, no two tuples $t_1, t_2$ from relation $r$ have same values for all superkey attributes $K$. 
+If the superkey does not contain extraneous attributes it is said to be \textit{minimal}. \cite[Chapter 2.3]{DBSBook}
+We will use the term \textit{primary key} to denote a chosen superkey of a relation. 
+When describing a database, it is often necessary to describe how various data is connected. 
+To do this, one can use \textit{foreign keys} to denote that tuples of $r_1$ is related to $r_2$.
+One could model the relationship between a book owner and a book using the relational schemas seen in Equation \ref{eq:bookOwnerExample} and \ref{eq:relational_schema}.
+There, primary keys from other relations are used to reference unique tuples. The $owns$ relation describes how $book$ and $book\_owner$ are connected. 
+\begin{equation}\label{eq:bookOwnerExample}
+    \begin{split}
+        owns(\underline{owner\_id \rightarrow book\_owner}, \underline{ISBN \rightarrow book}), \\
+        book\_owner(name:text,\underline{owner\_id:\mathbb{Z}^+})
+    \end{split}
+\end{equation}
+
+Having established the fundamentals of relational databases, we will now describe the operations that can be performed on relations. 
+
+\subsubsection*{Relational algebra}
+Relational algebra is a set of unary and binary operations on relations that produces new relations \cite[Chapter 2.6]{DBSBook}.
+
+\subsubsection*{Database design}
+
+
 
 A relational database is a collection of tables, known as relations. Relational databases are used to provide access to related data points.
 These relations consist of rows, known as tuples. Each tuple represents an entity with specific attributes represented by the columns of the given relation.
