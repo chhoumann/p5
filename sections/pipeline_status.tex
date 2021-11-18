@@ -1,0 +1,41 @@
+\section*{Search engine status}
+The goal of the second sprint was to make the search engine operational, such that it was possible to go from extracting data from articles and manuals, from both \texttt{Nordjyske} as well as \texttt{Grundfos}, to serving search results in the front-end. The previous semester groups had managed to establish some functionality within their respective layers, but were unable to realize a full end-to-end connection through all the layers. 
+In order to accomplish this, a set of missing features and functionalities were identified within each layer.
+
+\subsection*{Preprocessing layer}
+The responsibility of the preprocessing layer is, as previously mentioned, to extract data from the \texttt{Nordjyske} articles and the \texttt{Grundfos} manuals. For this layer to accomplish this the following issues had to be resolved:
+\begin{itemize}
+    \item The ability to correctly parse articles and manuals.
+    \item The ability to store the parsed text.
+    \item The ability to extract text from images with higher accuracy.
+    \item The ability to correctly annotate images 
+\end{itemize}
+
+\subsection*{Knowledge layer}
+For the knowledge layer to extract information from the data provided by the preprocessing layer, the following issues had to be resolved:
+\begin{itemize}
+    \item The ability to process the \texttt{Nordjyske} articles and \texttt{Grundfos} manuals.
+    \item The ability to store the extracted information.
+\end{itemize}
+
+\subsection*{Data layer}
+For our layer, the responsibility was to be able to receive and provide data through application interfaces to the surrounding layers. To fulfill this we had to resolve the following issues:
+\begin{itemize}
+    \item Provide endpoints for storing data.
+    \item Provide endpoints for retrieving data.
+\end{itemize}
+
+\subsection*{Functionality layer}
+For the functionality layer to be able to provide the search functionality to a web based user interface the following issues had to be resolved:
+\begin{itemize}
+    \item Fetch article files based on words occuring in the article and the article publisher.
+    \item Display the search results in the user interface.
+\end{itemize}
+
+* Introduction to the section
+    * Establish a common understanding of the state of the project
+* Whats the state for the first layer
+* Whats the state for the second layer
+* Whats the state for the third layer
+* Whats the state for the fourth layer
+* Summary
