@@ -1,8 +1,7 @@
 \section{Sprint Planning}
-%The sprint goal for this group
-%How does our sprint goal help with the overall sprint goal
-%The purpose and priority for each increment
-%Show the available backlog
+In this sprint, we will be working on the RDF database seeing as the WordCount database is now finished.
+We will focus on creating user stories from epics, and these epics will then be granulated into tasks.
+This will ultimately result in the backlog for this sprint.
 
 \subsection{User stories}
 The \knox{} product owner have given us three user stories, which we can use to detail the coming tasks for the sprint.
@@ -18,7 +17,7 @@ This in turn will help us generate as much value to the pipeline as quickly as p
 After talking to the functionality layer, we found out some of the details about how they want database access to work. 
 
 \begin{enumerate}
-    \item It should be possible to write RDF data to the Fuseki database using the Terse RDF Triple Language (Turtle) syntax and file format.
+    \item It should be possible to write RDF data to the Fuseki database using the Terse RDF Triple Language (Turtle) syntax and file format \cite{TurtleFormat}.
     \item They want to be able to send SPARQL queries directly to an endpoint to fetch the data.
     \item They would prefer if the response was in XML format. They have given us an example.
     \item They do not know the size of the data they will be querying.
@@ -29,7 +28,7 @@ After talking to the functionality layer, we found out some of the details about
 We have gotten enough insight to begin work on the database, however due to the other groups not knowing exactly what they want, the planning for this sprint will be a little ad hoc and unpredictable.  
 This means that there is a possibility of newly discovered works during the sprint.
 
-With this in mind, we first transferred the remaining report backlog from the last sprint and recieved three user stories from the PO. 
+With this in mind, we first transferred the remaining report backlog from the last sprint and received three user stories from the PO. 
 From this backlog, we have formulated the goals for this sprint.
 
 From the epics, we created a backlog. As mentioned in section \ref{Whatwelearnedsprint3}, we decided to work with a different unit of mesurement for determining the size of a task.
@@ -39,3 +38,17 @@ We partook in a game of Inversion \todo{citation needed} where we tried to find 
 We took the items from the backlog that we defined as fulfilling our sprint goal, and tried to think about what would happen if we failed to fulfill them. 
 This was done to validate the tasks — making sure that they are absolutely necessary. 
 This was only done to the implementation tasks as they have the most significant impact on \knox{} as a whole.
+
+\subsection*{Release planning}
+The \textbf{functional requirement} include reading from and writing to the RDF database. 
+The read operation should be done through an endpoint which returns the data in the XML format.
+Likewise, writing should be facilitated through an endpoint which receives data in the aforementioned Turtle format.
+
+
+The \textbf{non-functional requirement} for this sprint is simply that the reading and writing operations should be reasonably fast such that an acceptable amount of tuples can be queried within a feasible amount of time.
+
+
+The \textbf{acceptance criteria} is that the aforementioned functional and non-functional requirements must be met before this feature is deemed acceptable. 
+
+
+With the planning phase completed, we now have a backlog and a MVP to which we will now begin implementing.
