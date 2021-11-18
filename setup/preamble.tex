@@ -248,5 +248,16 @@
   morekeywords=[17]{null, value},
   keywordstyle=[17]\bfseries\color{Navy},
 }
-
+\newcommand{\userStory}[3]{
+  \begin{center}
+    \begin{tabular}{|p{0.8\textwidth}|} 
+     \hline
+     \textbf{USER STORY}\\
+     As \textit{#1}\\
+     I want to be able to #2\\
+     so I #3.\\ [0.5ex] 
+     \hline
+    \end{tabular}
+    \end{center}  
+    }
 \usepackage{multirow}

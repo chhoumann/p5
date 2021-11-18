@@ -3,3 +3,22 @@
 %How does our sprint goal help with the overall sprint goal
 %The purpose and priority for each increment
 %Show the available backlog
+\subsection{User stories}
+The \knox{} product owner have given us three user stories, which we can use to detail the coming tasks for the sprint.
+Our own product owner will split these user stories, which we consider to be \textit{epics}, together with the involving layer \cite{Epics}.
+This will help us understand how to accommodate the needs of the involving layer and prioritize the stories.
+This in turn will help us generate as much value to the pipeline as quickly as possible \cite{UserStories}.
+
+\userStory{the knowledge layer}{insert Triples into a storage}{others can access it later}
+\userStory{the functionality layer}{query an RDF graph}{can use it in search results, fact checking and virtual assistant applications}
+\userStory{the functionality layer}{query an RDF graph in a standardized way}{do not have to worry about changes to the database}
+
+\subsubsection*{Granulating the epics}
+After talking to the functionality layer, we found out details about how they want database access to work. 
+\begin{enumerate}
+    \item They want to be able to send SPARQL queries directly to an endpoint to fetch the data.
+    \item They would prefer if the response was in XML format. They have given us an example.
+    \item They do not know the size of the data they will be querying.
+    \item The route for GET request should have a string parameter called "query" containing the SPARQL query as a string.
+    The query will be in URL-coded format.
+\end{enumerate}
