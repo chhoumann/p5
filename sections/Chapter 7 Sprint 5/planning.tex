@@ -17,7 +17,7 @@ This in turn will help us generate as much value to the pipeline as quickly as p
 After talking to the functionality layer, we found out some of the details about how they want database access to work. 
 
 \begin{enumerate}
-    \item It should be possible to write RDF data to the Fuseki database using the Terse RDF Triple Language (Turtle) syntax and file format.
+    \item It should be possible to write RDF data to the Fuseki database using the Terse RDF Triple Language (Turtle) syntax and file format \cite{TurtleFormat}.
     \item They want to be able to send SPARQL queries directly to an endpoint to fetch the data.
     \item They would prefer if the response was in XML format. They have given us an example.
     \item They do not know the size of the data they will be querying.
@@ -40,12 +40,15 @@ This was done to validate the tasks — making sure that they are absolutely nec
 This was only done to the implementation tasks as they have the most significant impact on \knox{} as a whole.
 
 \subsection*{Release planning}
-The \textbf{acceptance criteria} include reading from and writing to the RDF database. 
+The \textbf{functional requirement} include reading from and writing to the RDF database. 
 The read operation should be done through an endpoint which returns the data in the XML format.
 Likewise, writing should be facilitated through an endpoint which receives data in the aforementioned Turtle format.
 
 
-The \textbf{UI requirements} 
-
-
 The \textbf{non-functional requirement} for this sprint is simply that the reading and writing operations should be reasonably fast such that an acceptable amount of tuples can be queried within a feasible amount of time.
+
+
+The \textbf{acceptance criteria} is that the aforementioned functional and non-functional requirements must be met before this feature is deemed acceptable. 
+
+
+With the planning phase completed, we now have a backlog and a MVP to which we will now begin implementing.
