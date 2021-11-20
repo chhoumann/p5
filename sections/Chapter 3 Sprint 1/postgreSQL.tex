@@ -1,19 +1,6 @@
 \subsection{Relational Databases}
 The group last year chose to implement the \texttt{WordCount} (see Section \ref{sec:Sprint2And3}) and \texttt{Fuseki} databases using PostgreSQL.
 Postgres is a relational database system \cite{knox2020}.
-Compared to storing data on a regular file system, a database system provides many advantages including atomicity of operations, concurrent access to data, and lowered inconsistency and redundancy of data.\cite[Chapter 1.2]{DBSBook}.
-
-
-These advantages can be directly seen in the ACID properties that databases adhere to when performing a transaction (see Section \ref{sec:SQL}).
-To prevent this from happening, a relational database must ensure four crucial properties:
-\begin{itemize} \label{ACID}
-    \item Atomicity: A transaction must either be fully completed or partial side-effects of a failed transaction must be undone.
-    \item Consistency: A transaction in isolation must ensure values remain consistent after a transaction has been completed or terminated.
-    \item Isolation: Transactions are unaware of other transactions being executed concurrently to avoid confusion.
-    \item Durability: Changes caused by a committed transaction persist even in the event of system failures.
-\end{itemize}
-
-
 
 
 A relational database consists of several layers.
@@ -22,12 +9,19 @@ The purpose of the relational model is abstract over the physical layer of the d
 This abstraction is known as the logical layer and allows database administrators to manage the physical storage without directly manipulating the physical data representation.
 The logical layer describes what data are stored and the relationships between the data.
 The highest of abstraction is the view layer which describes only part of the database. It exits to simplify the interaction with the system. Many views may exist for the same database.
+\cite[Chapter 1.3]{DBSBook}
 
+Compared to storing data on a regular file system, a database system provides many advantages including atomicity of operations, concurrent access to data, and lowered inconsistency and redundancy of data \cite[Chapter 1.2]{DBSBook}.
+These advantages can be directly seen in the ACID properties that databases adhere to when performing a transaction (see Section \ref{sec:SQL}) \cite[Chapter~17]{DBSBook}.
+\begin{itemize} \label{ACID}
+    \item Atomicity: A transaction must either be fully completed or partial side-effects of a failed transaction must be undone.
+    \item Consistency: A transaction in isolation must ensure values remain consistent after a transaction has been completed or terminated.
+    \item Isolation: Transactions are unaware of other transactions being executed concurrently to avoid confusion.
+    \item Durability: Changes caused by a committed transaction persist even in the event of system failures.
+\end{itemize}
 
-
-
-In this section, we will describe how one can model and describe a relational database design, both mathematically and with a more graphic design.
-After doing this, we will examine how operations on these models can be described. 
+In the coming sections, we will describe how one can model and describe a relational database design, both mathematically and with a more graphic design.
+After doing this, we will examine how operations on these models can be described using SQL (Section~\ref{sec:SQL}) and relational algebra (Section~\ref{sec:relationalAlgebra}).
 
 \subsubsection*{Mathematical description}
 Relational database systems can be mathematically described using relations and sets, mapping a unique key to a tuple of information \cite[Chapter~2.3]{DBSBook}.
@@ -70,7 +64,9 @@ Instead of describing the data structures of the database in these relations, on
 
 
 Having established the mathematical foundations for how databases function, we will now describe how operations can be performed on the tuples within the relation.
-\subsubsection{Relational algebra}
+
+
+\subsubsection{Relational algebra}\label{sec:relationalAlgebra}
 Relational algebra describes a set of unary and binary operations on relations that produces new relations.
 These operators form the foundations of data manipulation languages (see Section \ref{sec:SQL}) which can be used to define database operations \cite[Chapter 6.2]{DBSBook}.
 We will describe some of the operators of relational algebra, and use them to describe implemented queries later.
@@ -90,16 +86,6 @@ We will describe some of the operators of relational algebra, and use them to de
     \label{Relational algebra operators}
 \end{table}
 
-
-\textbf{Select}\\
-The select operation gives back only tuples that satisfy the given predicate. Thus, if $\sigma_{predicate}(r_1) = r_2$, then $r_2 \subseteq r_1$.\\
-\textbf{Projection}\\
-The projection operator selects a subset $a$ of all attributes $A$ of the given relation.\\
-\textbf{Cartesian product}\\
-The cartesian product of two relations $r_1$ and $r_2$ describes the concatenation of all tuples from the two relations. 
-Thus $r1(A1:\mathbb{Z}^+, A2:text) \Join r2(A3:\mathbb{R})$ will give tuples of the form $(A1:\mathbb{Z}^+, A2:text,A3:\mathbb{R})$\\
-\textbf{Join}\\
-\textbf{Theta Join}\\
 
 
 
