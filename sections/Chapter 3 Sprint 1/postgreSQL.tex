@@ -63,8 +63,7 @@ Instead of describing the data structures of the database in these relations, on
 \end{figure}
 
 
-Having established the mathematical foundations for how databases function, we will now describe how operations can be performed on the tuples within the relation.
-
+Having established the mathematical foundations for how databases function and how to one can model the structure of the data, we will now describe how operations can be performed on the tuples within the relation.
 
 \subsubsection{Relational algebra}\label{sec:relationalAlgebra}
 Relational algebra describes a set of unary and binary operations on relations that produces new relations.
@@ -88,21 +87,7 @@ We will describe some of the operators of relational algebra, and use them to de
 
 
 
-
-
-
 \subsubsection{SQL}\label{sec:SQL}
 
 Data from a relational database can be queried using relational query languages such as SQL.
 Executing a query instructs the database system to perform a set of operations to compute a desired result, known as transactions.
-
-These transactions encapsulate several atomic operations and thus the transactions themselves are not inherently atomic which can cause data inconsistencies. 
-To prevent this from happening, a relational database must ensure four crucial properties:
-\begin{itemize}
-    \item Atomicity: A transaction must either be fully completed or partial side-effects of a failed transaction must be undone.
-    \item Consistency: A transaction in isolation must ensure values remain consistent after a transaction has been completed or terminated.
-    \item Isolation: Transactions are unaware of other transactions being executed concurrently to avoid confusion.
-    \item Durability: Changes caused by a committed transaction persist even in the event of system failures.
-\end{itemize}
-
-
