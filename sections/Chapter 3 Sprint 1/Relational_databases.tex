@@ -56,6 +56,28 @@ There, primary keys from other relations are used to reference unique tuples. Th
 Instead of describing the data structures of the database in these relations, one can use a different model that represents the logic of the relational schemas.
 
 \subsubsection{Entity relation model}\label{sec:EntityRelationModel}
+The entity relation model is a graphical representation of how database relations, are structured.
+This is done in a \textit{E-R diagram}. 
+However, in the E-R model, we differentiate between \textit{relationships} connecting relations and \textit{entity sets} representing domain elements. 
+The entity sets are represented graphically with a rectangle and relationships between the entity sets with a diamond. \cite[Chapter 6.2]{DBSBook}
+The attribute associated with the entity sets can be modelled using ovals \cite{KatjaFirstPP}, however other alternatives exists \footnotetext{Alternatives diagram styles are presented in Chapter 6.2 of \cite{DBSBook}}
+Similar to the mathematical approach, the entities (tuples) must be uniquely identified by one or more attributes. This is denoted by underlining the attributes. 
+The E-R model have notations that denotes the participations each entity have in a connecting relationship \cite[Chapter 6.4]{DBSBook}.
+In this project, we will use \text{min-max} notation; this notation denotes the minimum and maximum amount of entities participating in a relationship. 
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[scale=0.5]{Images/book_example_w_cardinality.png}
+    \caption{E-R diagram of the book and book owner example}
+    \label{fig:ER_Book_Example}
+\end{figure}
+
+Figure \ref{fig:ER_Book_Example} shows the $book$, $owns$, and $book_owner$ relations from equation \ref{eq:bookOwnerExample} and \ref{eq:relational_schema}.
+In figure \ref{fig:ER_Book_Example} we also see the  the participation cardinalities of the two entity sets. 
+The relationship from $book\_owner$ to $owns$ is a one-to-many relationship. That is, each book owner entity must own at least one book, and thus the relationship has full participation. 
+The relationship from $book$ to $owns$ is zero-to-many. That is, the database can register books that no one owns. This relationship does not have full participation. 
+Participation connections can be seen on \ref{fig:ERDiagram_Cardinality}.
+
 \begin{figure}
     \centering
     \includegraphics[scale=0.5]{Images/cardinalities.png}
