@@ -59,8 +59,8 @@ Instead of describing the data structures of the database in these relations, on
 The entity relation model is a graphical representation of how database relations, are structured.
 This is done in a \textit{E-R diagram}, and is commonly used facilitate database design from specifications of enterprise schemas \cite*[Chapter 6.2]{DBSBook}.
 However, in the E-R model, we differentiate between \textit{relationships} connecting relations and \textit{entity sets} representing domain elements. 
-The entity sets are represented graphically with a rectangle and relationships between the entity sets with a diamond. \cite[Chapter 6.2]{DBSBook}
-The attribute associated with the entity sets can be modelled using ovals \cite{KatjaFirstPP}, however other alternatives exists \footnotetext{Alternatives diagram styles are presented in Chapter 6.10 of \cite{DBSBook}}
+The entity sets are represented graphically with a rectangle and relationships between the entity sets with a diamond \cite[Chapter 6.2]{DBSBook}.
+The attribute associated with the entity sets can be modelled using ovals \cite{KatjaFirstPP}, however other alternatives exists \footnotetext{Our style of choice is presented in Chapter 6.10 of \cite{DBSBook}}
 Similar to the mathematical approach, the entities (tuples) must be uniquely identified by one or more attributes. This is denoted by underlining the attributes. 
 The E-R model have notations that denotes the participations each entity have in a connecting relationship \cite[Chapter 6.4]{DBSBook}.
 In this project, we will use \text{min-max} notation; this notation denotes the minimum and maximum amount of entities participating in a relationship. 
@@ -82,8 +82,7 @@ The relationship from $book\_owner$ to $owns$ is a one-to-many relationship. Tha
     \label{fig:ERDiagram_Cardinality}
 \end{figure}
 The relationship from $book$ to $owns$ is zero-to-many. That is, the diagram represents books that no one owns, and that a book can be owned by multiple book owners.
-This relationship does not have full participation.
-Participation connections can be seen on figure \ref{fig:ERDiagram_Cardinality}.
+This relationship does not have full participation. Participation connections can be seen on figure \ref{fig:ERDiagram_Cardinality}.
 
 
 Other forms of entity sets exits. For instance, a weak entity set, denoted by a an oval with doubled edges, is an entity sets whose existence is based on another entity set.
@@ -128,12 +127,7 @@ We will describe some of the operators of relational algebra, and use them to de
 -> What is DDL
 -> What is DML
    --> How is it similar to relational algebra?
-
-
-
-
-
-\subsubsection*{Evaluating a database design}
-
 Data from a relational database can be queried using relational query languages such as SQL.
 Executing a query instructs the database system to perform a set of operations to compute a desired result. Collectively, the resulting set of operations is known as a transaction.
+   
+\subsubsection*{Evaluating a database design}
