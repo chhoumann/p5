@@ -74,7 +74,7 @@ In this project, we will use \text{min-max} notation; this notation denotes the 
 
 Figure \ref{fig:ER_Book_Example} shows the $book$, $owns$, and $book_owner$ relations from equation \ref{eq:bookOwnerExample} and \ref{eq:relational_schema}.
 In figure \ref{fig:ER_Book_Example} we also see the  the participation cardinalities of the two entity sets. 
-The relationship from $book\_owner$ to $owns$ is a one-to-many relationship. That is, each book owner entity must own at least one book, and thus the relationship has full participation. 
+The relationship from $book\_owner$ to $owns$ is a one-to-many relationship. That is, each book owner entity must own at least one book. Thus the relationship has full participation. 
 The relationship from $book$ to $owns$ is zero-to-many. That is, the database can register books that no one owns. This relationship does not have full participation. 
 Participation connections can be seen on \ref{fig:ERDiagram_Cardinality}.
 
@@ -92,6 +92,8 @@ Having established the mathematical foundations for how databases function, and 
 Relational algebra describes a set of unary and binary operations on relations that produce new relations.
 These operators form the foundations of data manipulation languages (see Section \ref{sec:SQL}) which can be used to define database operations \cite[Chapter 6.2]{DBSBook}.
 We will describe some of the operators of relational algebra, and use them to describe implemented queries later.
+
+
 
 \begin{table}[h]
     \centering
