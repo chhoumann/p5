@@ -1,4 +1,4 @@
-\subsection{Relational Databases}
+\subsection{Relational databases}
 The group last year chose to implement the \texttt{WordCount} (see Section \ref{sec:Sprint2And3}) and \texttt{Fuseki} databases using PostgreSQL.
 Postgres is a relational database system \cite{knox2020}.
 
@@ -23,7 +23,7 @@ These advantages can be directly seen in the ACID properties that databases adhe
 In the coming sections, we will describe how one can model and describe a relational database design, both mathematically and with a more graphic design.
 After doing this, we will examine how operations on these models can be described using SQL (Section~\ref{sec:SQL}) and relational algebra (Section~\ref{sec:relationalAlgebra}).
 
-\subsubsection*{Mathematical description}
+\subsubsection*{Relational model}
 Relational database systems can be mathematically described using relations and sets, mapping a unique key to a tuple of information \cite[Chapter~2.3]{DBSBook}.
 The values of the tuples contained within the relation can be described by the attributes of the relation and their corresponding domains \cite{KatjaFirstPP}. 
 The relations are often described using a \textit{relational schema}, denoting the name and domains of the attributes.
@@ -57,10 +57,10 @@ Instead of describing the data structures of the database in these relations, on
 
 \subsubsection{Entity relation model}\label{sec:EntityRelationModel}
 The entity relation model is a graphical representation of how database relations, are structured.
-This is done in a \textit{E-R diagram}. 
+This is done in a \textit{E-R diagram}, and is commonly used facilitate database design from specifications of enterprise schemas \cite*[Chapter 6.2]{DBSBook}.
 However, in the E-R model, we differentiate between \textit{relationships} connecting relations and \textit{entity sets} representing domain elements. 
 The entity sets are represented graphically with a rectangle and relationships between the entity sets with a diamond. \cite[Chapter 6.2]{DBSBook}
-The attribute associated with the entity sets can be modelled using ovals \cite{KatjaFirstPP}, however other alternatives exists \footnotetext{Alternatives diagram styles are presented in Chapter 6.2 of \cite{DBSBook}}
+The attribute associated with the entity sets can be modelled using ovals \cite{KatjaFirstPP}, however other alternatives exists \footnotetext{Alternatives diagram styles are presented in Chapter 6.10 of \cite{DBSBook}}
 Similar to the mathematical approach, the entities (tuples) must be uniquely identified by one or more attributes. This is denoted by underlining the attributes. 
 The E-R model have notations that denotes the participations each entity have in a connecting relationship \cite[Chapter 6.4]{DBSBook}.
 In this project, we will use \text{min-max} notation; this notation denotes the minimum and maximum amount of entities participating in a relationship. 
@@ -68,30 +68,41 @@ In this project, we will use \text{min-max} notation; this notation denotes the 
 \begin{figure}[htp]
     \centering
     \includegraphics[scale=0.5]{Images/book_example_w_cardinality.png}
-    \caption{E-R diagram of the book and book owner example}
+    \caption{E-R diagram of the book and book owner example.}
     \label{fig:ER_Book_Example}
 \end{figure}
 
 Figure \ref{fig:ER_Book_Example} shows the $book$, $owns$, and $book_owner$ relations from equation \ref{eq:bookOwnerExample} and \ref{eq:relational_schema}.
 In figure \ref{fig:ER_Book_Example} we also see the  the participation cardinalities of the two entity sets. 
 The relationship from $book\_owner$ to $owns$ is a one-to-many relationship. That is, each book owner entity must own at least one book. Thus the relationship has full participation. 
-The relationship from $book$ to $owns$ is zero-to-many. That is, the database can register books that no one owns. This relationship does not have full participation. 
-Participation connections can be seen on \ref{fig:ERDiagram_Cardinality}.
-
-\begin{figure}
+\begin{figure}[h]
     \centering
     \includegraphics[scale=0.5]{Images/cardinalities.png}
     \caption{Participation ratios for ER relationships}
     \label{fig:ERDiagram_Cardinality}
 \end{figure}
+The relationship from $book$ to $owns$ is zero-to-many. That is, the diagram represents books that no one owns, and that a book can be owned by multiple book owners.
+This relationship does not have full participation.
+Participation connections can be seen on figure \ref{fig:ERDiagram_Cardinality}.
 
 
-Having established the mathematical foundations for how databases function, and how to one can model the structure of the data, we will now describe how operations can be performed on the tuples within a relation.
+Other forms of entity sets exits. For instance, a weak entity set, denoted by a an oval with doubled edges, is an entity sets whose existence is based on another entity set.
+A weak entity set is identified by its \textit{identifying entity set}'s primary key along with extra attributes. 
+The relationship between weak entity sets and its identifying set is always many-to-one with full participation of the weak entity set.
+
+
+Since the relational model is described using sets, we can also describe operations that can be performed on the relations.
+Therefore, it is useful to be able to convert an E-R model into an equivalent relational model, where domains of attributes can be well defined and operations on the entity sets described mathematically.
+\subsubsection*{Converting E-R models to relations}
+
+
 
 \subsubsection{Relational algebra}\label{sec:relationalAlgebra}
 Relational algebra describes a set of unary and binary operations on relations that produce new relations.
 These operators form the foundations of data manipulation languages (see Section \ref{sec:SQL}) which can be used to define database operations \cite[Chapter 6.2]{DBSBook}.
 We will describe some of the operators of relational algebra, and use them to describe implemented queries later.
+
+
 
 
 
@@ -113,6 +124,16 @@ We will describe some of the operators of relational algebra, and use them to de
 
 
 \subsubsection{SQL}\label{sec:SQL}
+-> What is SQL
+-> What is DDL
+-> What is DML
+   --> How is it similar to relational algebra?
+
+
+
+
+
+\subsubsection*{Evaluating a database design}
 
 Data from a relational database can be queried using relational query languages such as SQL.
 Executing a query instructs the database system to perform a set of operations to compute a desired result. Collectively, the resulting set of operations is known as a transaction.
