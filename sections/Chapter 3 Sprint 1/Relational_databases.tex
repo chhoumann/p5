@@ -56,7 +56,7 @@ There, primary keys from other relations are used to reference unique tuples. Th
 Instead of describing the data structures of the database in these relations, one can use a different model that represents the logic of the relational schemas.
 
 \subsubsection{Entity relation model}\label{sec:EntityRelationModel}
-The entity relation model is a graphical representation of how database relations, are structured.
+The entity relation model is a graphical representation of how database relations are structured.
 This is done in a \textit{E-R diagram}, and is commonly used facilitate database design from specifications of enterprise schemas \cite*[Chapter 6.2]{DBSBook}.
 However, in the E-R model, we differentiate between \textit{relationships} connecting relations and \textit{entity sets} representing domain elements. 
 The entity sets are represented graphically with a rectangle and relationships between the entity sets with a diamond \cite[Chapter 6.2]{DBSBook}.
@@ -109,17 +109,10 @@ If we have a many-to-one relationship between two sets, with total participation
 This new schema will have use the primary key of the entity set as its primary key.
 When converting one-to-one relationships, we simply create a union of the attributes from the relationship and the two relationship sets. \cite*[Chapter 6.7.6]{DBSBook}
 
-\subsubsection*{Evaluating a database design}
-
-
-
-
 \subsubsection{Relational algebra}\label{sec:relationalAlgebra}
 Relational algebra describes a set of unary and binary operations on relations that produce new relations.
-These operators form the foundations of data manipulation languages (see Section \ref{sec:SQL}) which can be used to define database operations \cite[Chapter 6.2]{DBSBook}.
-We will describe some of the operators of relational algebra, and use them to describe implemented queries later.
-
-
+The operations are used to define new relations, often the tuples within the set will satisfy defined predicates.
+The relational operators form the foundations of data manipulation languages (see Section \ref{sec:SQL}) which can be used to define database operations \cite[Chapter 6.2]{DBSBook}.
 
 
 \begin{table}[h]
@@ -137,6 +130,13 @@ We will describe some of the operators of relational algebra, and use them to de
     \label{Relational algebra operators}
 \end{table}
 
+We will describe some of the operators of relational algebra, and use them to describe implemented queries later.
+Some of the common operators of in relational algebra can be seen on table \ref{Relational algebra operators}.\\
+\textbf{Select}\\
+\textbf{Projection}\\
+\textbf{Join and Theta Join}\\
+\textbf{Cartesian product}\\
+
 
 
 \subsubsection{SQL}\label{sec:SQL}
@@ -146,5 +146,6 @@ We will describe some of the operators of relational algebra, and use them to de
    --> How is it similar to relational algebra?
 Data from a relational database can be queried using relational query languages such as SQL.
 Executing a query instructs the database system to perform a set of operations to compute a desired result. Collectively, the resulting set of operations is known as a transaction.
-    
 
+Having established how one can define a database schemas using SQL as a DLL, as well as query data from the database using SQL as a DML, we will now discuss how one can evaluate a database design.
+\subsubsection*{Evaluating a database design}
