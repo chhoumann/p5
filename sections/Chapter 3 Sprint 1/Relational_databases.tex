@@ -61,7 +61,8 @@ This is done in a \textit{E-R diagram}, and is commonly used facilitate database
 However, in the E-R model, we differentiate between \textit{relationships} connecting relations and \textit{entity sets} representing domain elements. 
 The entity sets are represented graphically with a rectangle and relationships between the entity sets with a diamond \cite[Chapter 6.2]{DBSBook}.
 The attribute associated with the entity sets can be modelled using ovals \cite{KatjaFirstPP}, however other alternatives exists \footnotetext{Our style of choice is presented in Chapter 6.10 of \cite{DBSBook}}
-Similar to the mathematical approach, the entities (tuples) must be uniquely identified by one or more attributes. This is denoted by underlining the attributes. 
+Similar to the relational model, the entities (tuples) must be uniquely identified by one or more attributes. This is denoted by underlining the attributes. 
+
 The E-R model have notations that denotes the participations each entity have in a connecting relationship \cite[Chapter 6.4]{DBSBook}.
 In this project, we will use \text{min-max} notation; this notation denotes the minimum and maximum amount of entities participating in a relationship. 
 
@@ -74,7 +75,7 @@ In this project, we will use \text{min-max} notation; this notation denotes the 
 
 Figure \ref{fig:ER_Book_Example} shows the $book$, $owns$, and $book_owner$ relations from equation \ref{eq:bookOwnerExample} and \ref{eq:relational_schema}.
 In figure \ref{fig:ER_Book_Example} we also see the  the participation cardinalities of the two entity sets. 
-The relationship from $book\_owner$ to $owns$ is a one-to-many relationship. That is, each book owner entity must own at least one book. Thus the relationship has full participation. 
+The relationship from $book\_owner$ to $owns$ is a one-to-many relationship. That is, each book owner entity must own at least one book. Thus the relationship has total participation. 
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.5]{Images/cardinalities.png}
@@ -82,17 +83,34 @@ The relationship from $book\_owner$ to $owns$ is a one-to-many relationship. Tha
     \label{fig:ERDiagram_Cardinality}
 \end{figure}
 The relationship from $book$ to $owns$ is zero-to-many. That is, the diagram represents books that no one owns, and that a book can be owned by multiple book owners.
-This relationship does not have full participation. Participation connections can be seen on figure \ref{fig:ERDiagram_Cardinality}.
+This relationship does not have total participation. Participation connections can be seen on figure \ref{fig:ERDiagram_Cardinality}.
 
 
 Other forms of entity sets exits. For instance, a weak entity set, denoted by a an oval with doubled edges, is an entity sets whose existence is based on another entity set.
 A weak entity set is identified by its \textit{identifying entity set}'s primary key along with extra attributes. 
-The relationship between weak entity sets and its identifying set is always many-to-one with full participation of the weak entity set.
-
+The relationship between weak entity sets and its identifying set is always many-to-one with total  participation of the weak entity set.
 
 Since the relational model is described using sets, we can also describe operations that can be performed on the relations.
 Therefore, it is useful to be able to convert an E-R model into an equivalent relational model, where domains of attributes can be well defined and operations on the entity sets described mathematically.
+
 \subsubsection*{Converting E-R models to relations}
+When converting non-weak entity sets to relations, one create a relation with a primary key attribute with the same name of the primary key of the entity set \cite[Chapter 6.7.1]{DBSBook}.
+The remaining attributes of the entity set is similarly mapped to the relation. 
+
+When representing weak entity sets, one creates a relation containing the attributes of the weak entity set as well as the attributes of the identifying set's primary keys. 
+The primary key of the relation will consist of the identifying sets primary keys and the weak entity sets primary keys. 
+The primary key of the identifying relation will also serve as a foreign key to the identifying relation.  \cite[Chapter 6.7.1]{DBSBook}.
+
+E-R relationship sets are converted to relations by forming a union of all primary keys of the participating entity sets, along with any attributes of the relationship set. 
+The primary keys for the participating entity sets are used as a foreign keys to their corresponding relation.
+If the relationship is between a weak- and its identifying entity set, it is simply ignored, as the relationship set will not have any attributes, and the relation created from the weak entity will already have a foreign key referencing the identifying entity \cite[Chapter 6.7.5]{DBSBook}. 
+
+If we have a many-to-one relationship between two sets, with total participation on the 'many' side, we can combine the relationship and the relation created from the 'many' side and the relationship.
+This new schema will have use the primary key of the entity set as its primary key.
+When converting one-to-one relationships, we simply create a union of the attributes from the relationship and the two relationship sets. \cite*[Chapter 6.7.6]{DBSBook}
+
+\subsubsection*{Evaluating a database design}
+
 
 
 
@@ -100,7 +118,6 @@ Therefore, it is useful to be able to convert an E-R model into an equivalent re
 Relational algebra describes a set of unary and binary operations on relations that produce new relations.
 These operators form the foundations of data manipulation languages (see Section \ref{sec:SQL}) which can be used to define database operations \cite[Chapter 6.2]{DBSBook}.
 We will describe some of the operators of relational algebra, and use them to describe implemented queries later.
-
 
 
 
@@ -129,5 +146,5 @@ We will describe some of the operators of relational algebra, and use them to de
    --> How is it similar to relational algebra?
 Data from a relational database can be queried using relational query languages such as SQL.
 Executing a query instructs the database system to perform a set of operations to compute a desired result. Collectively, the resulting set of operations is known as a transaction.
-   
-\subsubsection*{Evaluating a database design}
+    
+
