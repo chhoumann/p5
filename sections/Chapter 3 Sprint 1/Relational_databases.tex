@@ -190,9 +190,12 @@ Whenever a new tuple is inserted into the table, the sequence will generate a un
 As a DML, SQL provides functionality to fetch data stored in the database. 
 Many of the operators presented in the previous section is predefined in SQL and describe the exact same operation. 
 Listing \ref{lst:join} shows a simple join operation, returning all book titles of books that are owned by the book\_owner with owner\_id 10.
+
+
+
 \begin{lstlisting}[
     language=SQL,
-    caption=Query returning the title of all books owned by owner with ID 10.,
+    caption=Query returning the title of all books owned by book\_owner with owner\_id = 10,
     showspaces=false,
     basicstyle=\ttfamily,
     numbers=left,
@@ -200,7 +203,7 @@ Listing \ref{lst:join} shows a simple join operation, returning all book titles 
     commentstyle=\color{gray},
     escapechar=|
  ]\label{lst:CreatingTablesInSQL}
-   JOIN book ON owner_id = 10;
+    SELECT title FROM book_owner JOIN book ON owner_id = 10;   
 \end{lstlisting}
 
 Having established how one can define a database schemas using SQL as a DLL, as well as query data from the database using SQL as a DML, we will now discuss how one can evaluate a database design.
