@@ -148,12 +148,61 @@ Thus it is defined as $\sigma_{\Theta} (R_1 \times R_2)$ \cite[Chapter 2.6.5]{DB
 As we have now established both how to model database relations as well fundamental operations used to extract data (tuples) from these relations, we can now look at how to implement the relations in a database.
 
 \subsubsection{SQL}\label{sec:SQL}
--> What is SQL
--> What is DDL
--> What is DML
-   --> How is it similar to relational algebra?
-Data from a relational database can be queried using relational query languages such as SQL.
-Executing a query instructs the database system to perform a set of operations to compute a desired result. Collectively, the resulting set of operations is known as a transaction.
+SQL is one of the most commonly used data definition language (DDL) and data manipulation languages (DML) \cite[Chapter 3.1]{DBSBook}.
+SQL is a declarative query language, where one executes a query to instruct the database system to perform a set of operations to compute a desired result. 
+Collectively, the resulting set of operations is known as a transaction.
+In PostgreSQL, all queries, both to define and to manipulate data, are executed as transactions \cite{postgres_transactions}.
+As a DDL, SQL provides queries to define and modify relation schemas, as well as provide constraints for the attributes of the schema, such that data in the relation satisfies the constraint.  
+
+
+\begin{lstlisting}[
+    language=SQL,
+    caption=Implementing the relations from in equation \ref{eq:bookOwnerExample} and \ref{eq:relational_schema},
+    showspaces=false,
+    basicstyle=\ttfamily,
+    numbers=left,
+    numberstyle=\tiny,
+    commentstyle=\color{gray},
+    escapechar=|
+ ]\label{lst:CreatingTablesInSQL}
+    CREATE TABLE book (
+        author_name varchar(250) not null,
+        title varchar(250) NOT NULL,
+        number_of_pages INTEGER NOT NULL CHECK(number_of_pages > 0),
+        ISBN char(10) UNIQUE NOT NULL,
+        primary key (ISBN)
+    );
+    CREATE SEQUENCE ownerSequence INCREMENT BY 1 START 1; |\label{line:sequence}|
+    CREATE TABLE book_owner (
+        name varchar(250),
+        owner_id integer NOT NULL DEFAULT nextval('ownerSequence')
+    );
+    CREATE TABLE owns (
+        owner_id INTEGER NOT NULL REFERENCES book_owner(owner_id),
+        isbn char(10) NOT null REFERENCES book(isbn),
+        PRIMARY KEY (isbn, owner_id)
+    );
+\end{lstlisting}
+
+Listing \ref{lst:} shows a possible definition of the relations from equation \ref{eq:bookOwnerExample} and \ref{eq:relational_schema}.
+On line \ref{line:sequence} a sequence describing the \texttt{owner\_id} primary key for the \texttt{owner} relation has been defined.
+Whenever a new tuple is inserted into the table, the sequence will generate a unique owner\_id for the data.
+As a DML, SQL provides functionality to fetch data stored in the database. 
+Many of the operators presented in the previous section is predefined in SQL and describe the exact same operation. 
+Listing \ref{lst:join} shows a simple join operation, returning all book titles of books that are owned by the book\_owner with owner\_id 10.
+\begin{lstlisting}[
+    language=SQL,
+    caption=Query returning the title of all books owned by owner with ID 10.,
+    showspaces=false,
+    basicstyle=\ttfamily,
+    numbers=left,
+    numberstyle=\tiny,
+    commentstyle=\color{gray},
+    escapechar=|
+ ]\label{lst:CreatingTablesInSQL}
+   JOIN book ON owner_id = 10;
+\end{lstlisting}
 
 Having established how one can define a database schemas using SQL as a DLL, as well as query data from the database using SQL as a DML, we will now discuss how one can evaluate a database design.
 \subsubsection*{Evaluating a database design}
+
