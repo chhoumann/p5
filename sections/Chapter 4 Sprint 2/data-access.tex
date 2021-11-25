@@ -1,9 +1,11 @@
 \subsection{Object Relational Mapping}
-An Object Relational Mapping (ORM) is often used in an application to connect to and manipulate data on a database.
+In order to improve on the way data access was done in the original code base, we decided to consider Object Relational Mapping (ORM). An ORM is often used in an application to connect to and manipulate data on a relational database. (en.wikipedia.org/wiki/Object-relational_mapping)
 
-The primary requirement for the choice of an ORM was fast implementation and ease of use due to the timeline constraints that were imposed by the \knox{} project. 
+Additionally the decision to use an ORM was based on the need for fast implementation and ease of use due to the timeline constraints. This constraint was partly imposed by the \knox{} project due to change of direction from the updated goal specification and partly due to our desire to change the code base to C#. 
 
 \subsubsection{Dapper}
+There are a variety of different ORM's that work within C#, but we were mostly familiar with two technologies. The first of these being Dapper.
+ 
 Dapper is an open source Micro ORM. It is a mapping framework that helps mapping the result from a native query to a class with the same attributes as the tables. Dapper is a lightweight framework made for developers that emphasizes using stored procedures or native query language over using a large scale ORM tool. 
 
 
