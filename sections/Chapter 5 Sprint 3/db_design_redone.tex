@@ -10,7 +10,7 @@ Instead, we had to model the current database design using C\# classes.
 
 This caused problems as the current design did not translate well into an object-oriented approach.
 To execute what would otherwise be considered a relatively simple SQL query, we had to write additional code which ultimately defeated the purpose of the Code First approach. 
-The most important method for the WordCount controller, the POST method, can be seen in code snippet \ref{lst:old_controller} for the old database design.
+The most complex method for the WordCount controller, the POST method, can be seen in code snippet \ref{lst:old_controller} for the old database design.
 
 \begin{lstlisting}[language=CSharp, caption={Old controller}, label={lst:old_controller}]
 [HttpPost]
