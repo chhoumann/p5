@@ -1,0 +1,22 @@
+\section{Database redesign}
+
+As previously mentioned in section \ref{currentState}, the code from last year was left in an unfinished and undocumented state. We estimated that it would be faster and easier to scrap it and start over rather than spending time trying to understand and document it.
+However, the database design seemed good enough to work with despite its flaws. 
+We therefore decided to keep it as we were under time constraints.
+
+In order to communicate with the database from the C\# application, we opted to use EF Core.
+Because EF Core is designed with the Code First approach in mind, we are unable to simply make SQL queries in the code itself as the old group did. 
+Instead, we had to model the current database design using C\# classes. 
+
+This caused problems as the current design did not translate well into an object-oriented approach.
+To execute what would otherwise be considered a relative simple SQL query, we had to write a ton of code which ultimately defeated the purpose of the Code First approach. 
+
+It proved difficult to work with and caused more problems than benefits, especially under the aforementioned time constraints. 
+Therefore, we decided to rework the design completely by creating C\# models that would translate to a relational database design using EF Core migrations.
+
+The end result is much easier to work with and removed a lot of unnecessary complexity in the code.
+However, despite the many advantages from the redesign, it has a major memory issue.
+In our rush to quickly implement the redesign, we unfortunately overlooked how to effectively store words from articles. 
+Currently, we just store every single word in the database without regard for duplicates, which takes up way more space than necessary.
+Ideally, we should instead store each word only once with an associated counter for how many times the given appears in an article.
+We realize the issues with the current design and would like to address them in the near-future if time permits it.
