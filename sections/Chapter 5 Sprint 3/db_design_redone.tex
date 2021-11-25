@@ -143,7 +143,7 @@ By comparing the semantics and overall size of code snippet \ref{lst:old_control
 However, despite the many advantages from the redesign, it has a major memory issue.
 In our rush to quickly implement the redesign, we unfortunately overlooked how to effectively store words from articles. 
 
-Currently, we just store every single word in the database without regard for duplicates, which takes up way more space than necessary. Thus it is not of the third normal form, and thus not in BCNF either.
+Currently, we just store every single word in the database without regard for duplicates, which takes up way more space than necessary. Thus it is not of the third normal form, and therefore not in BCNF either.
 Ideally, we should instead store each word only once with an associated counter for how many times the given appears in an article.
 We realize the issues with the current design and would like to address them in the near-future if time permits it.
 
