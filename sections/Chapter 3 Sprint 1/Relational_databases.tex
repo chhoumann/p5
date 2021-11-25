@@ -1,18 +1,18 @@
 \subsection{Relational databases}
-The group last year chose to implement the \texttt{WordCount} (see Section \ref{sec:Sprint2And3}) and \texttt{Fuseki} databases using PostgreSQL.
-Postgres is a relational database system \cite{knox2020}.
+The group last year chose to implement the \texttt{WordCount} and \texttt{Fuseki} databases using PostgreSQL.
+PostgreSQL is a relational database system \cite{knox2020}.
 
 
 A relational database consists of several layers.
-The lowest level is the physical layer which describes how the data are stored physically.
+The lowest level is the physical layer which describes how the data is stored physically.
 The purpose of the relational model is to abstract over the physical layer of the database.
 This abstraction is known as the logical layer and allows database administrators to manage the physical storage without directly manipulating the physical data representation.
-The logical layer describes what data are stored and the relationships between the data.
+The logical layer describes what data is stored and the relationships between the data.
 The highest of abstraction is the view layer which describes only part of the database. It exists to simplify the interaction with the system. Many views may exist for the same database.
 \cite[Chapter 1.3]{DBSBook}
 
 Compared to storing data on a regular file system, a database system provides many advantages including atomicity of operations, concurrent access to data, and lowered inconsistency and redundancy of data \cite[Chapter 1.2]{DBSBook}.
-These advantages can be directly seen in the ACID properties that databases adhere to when performing a transaction (see Section \ref{sec:SQL}) \cite[Chapter~17]{DBSBook}.
+These advantages can be directly seen in the ACID properties that databases adhere to when performing a transaction \cite[Chapter~17]{DBSBook}.
 \begin{itemize} \label{ACID}
     \item Atomicity: A transaction must either be fully completed or partial side-effects of a failed transaction must be undone.
     \item Consistency: A transaction in isolation must ensure values remain consistent after a transaction has been completed or terminated.
@@ -21,7 +21,7 @@ These advantages can be directly seen in the ACID properties that databases adhe
 \end{itemize}
 
 In the coming sections, we will describe how one can model and describe a relational database design, both mathematically and with a more graphic design.
-After doing this, we will examine how operations on these models can be described using SQL (Section~\ref{sec:SQL}) and relational algebra (Section~\ref{sec:relationalAlgebra}).
+After doing this, we will examine how operations on these models can be described using SQL and relational algebra.
 
 \subsubsection*{Relational model}
 Relational database systems can be mathematically described using relations and sets, mapping a unique key to a tuple of information \cite[Chapter~2.3]{DBSBook}.
@@ -29,7 +29,7 @@ The values of the tuples contained within the relation can be described by the a
 The relations are often described using a \textit{relational schema}, denoting the name and domains of the attributes.
 
 
-Equation \ref{eq:relational_schema} shows an example of a relation describing books as quadruples of three text fields (author\_name, title, and ISBN) and a positive integer (number\_of\_pages).
+Equation \ref{eq:relational_schema} shows an example of a relation describing books as tuples of three text fields (author\_name, title, and ISBN) and a positive integer (number\_of\_pages).
 The relation also denotes a super key for the relation. A super key is one or more attributes that can uniquely identify a tuple in a given relation.
 Any super key, where if just one attribute is removed it does no longer uniquely identify tuples, is called a \textit{candidate key}.
 Attributes describing the super key are underlined.
@@ -57,10 +57,10 @@ There, primary keys from other relations are used to reference unique tuples. Th
 
 Instead of describing the data structures of the database in these relations, one can use a different model that represents the logic of the relational schemas.
 
-\subsubsection{Entity relation model}\label{sec:EntityRelationModel}
-The entity relation model is a graphical representation of how database relations are structured.
+\subsubsection{Entity relationship model}\label{sec:EntityRelationModel}
+The entity relationship model is a graphical representation of how database relations are structured.
 This is done in a \textit{E-R diagram}, and is commonly used facilitate database design from specifications of enterprise schemas \cite*[Chapter 6.2]{DBSBook}.
-However, in the E-R model we differentiate between \textit{relationships sets} connecting relations and \textit{entity sets} representing domain elements. 
+However, in the E-R model we differentiate between \textit{entity sets} representing domain elements and \textit{relationships sets} representing the connections between the domain elements. 
 The entity sets are represented graphically with a rectangle and relationship sets connecting the entity sets with a diamond \cite[Chapter 6.2]{DBSBook}.
 The attributes associated with the entity- and relationship sets can be modelled using ovals \cite{KatjaFirstPP}, however other alternatives exists.\footnote{Our style of choice is presented in Chapter 6.10 of \citetitle{DBSBook} \textit{\citefield[]{DBSBook}[]{edition}}}
 Similar to the relational model, the entities (tuples) must be uniquely identified by one or more attributes. This is denoted by underlining the attributes. 
@@ -75,41 +75,42 @@ In this project, we will use \text{min-max} notation; this notation denotes the 
     \label{fig:ER_Book_Example}
 \end{figure}
 
-Figure \ref{fig:ER_Book_Example} shows the $book$, $owns$, and $book_owner$ relations from equation \ref{eq:bookOwnerExample} and \ref{eq:relational_schema}.
+Figure \ref{fig:ER_Book_Example} shows an E-R diagram equivalent to the $book$, $owns$, and $book_owner$ relations from equation \ref{eq:bookOwnerExample} and \ref{eq:relational_schema}.
 In figure \ref{fig:ER_Book_Example} we also see the  the participation cardinalities of the two entity sets. 
-The relationship from $book\_owner$ to $owns$ is a one-to-many relationship. That is, each book owner entity must own at least one book. Thus the relationship has total participation. 
+The relationship from $book\_owner$ to $owns$ is one of total participation. That is, each book owner entity must own at least one book.
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.5]{Images/cardinalities.png}
     \caption{Participation ratios for ER relationships}
     \label{fig:ERDiagram_Cardinality}
 \end{figure}
-The relationship from $book$ to $owns$ is zero-to-many. That is, the diagram represents books that no one owns, and that a book can be owned by multiple book owners.
-This relationship does not have total participation. Participation connections can be seen on figure \ref{fig:ERDiagram_Cardinality}.
+The participation from $book$ to $owns$ is partial. Thus the model represents that books can be in the database, even if no one owns it, that a book can be owned by multiple book owners.
+Participation connections can be seen on figure \ref{fig:ERDiagram_Cardinality}.
 
 
-Other forms of entity sets exits. For instance, a weak entity set, denoted by a an oval with doubled edges, is an entity sets whose existence is based on another entity set.
+Other forms of entity sets exits. For instance, a weak entity set, denoted by a an oval with doubled edges, is an entity sets whose existence is based on another entity set. Relationship sets connecting a weak entity set to its' identifying entity set will not have any attributes. 
 A weak entity set is identified by its \textit{identifying entity set}'s primary key along with extra attributes. 
 The relationship between weak entity sets and its identifying set is always many-to-one with total  participation of the weak entity set.
 
-Since the relational model is described using sets, we can also describe operations that can be performed on the relations.
+Since the relational model is described using relations, we can also describe operations that can be performed on the relations.
 Therefore, it is useful to be able to convert an E-R model into an equivalent relational model, where domains of attributes can be well defined and operations on the entity sets described mathematically.
 
 \subsubsection*{Converting E-R models to relations}
-When converting non-weak entity sets to relations, one create a relation with a primary key attribute with the same name of the primary key of the entity set \cite[Chapter 6.7.1]{DBSBook}.
-The remaining attributes of the entity set is similarly mapped to the relation. 
+\textbf{Strong entity sets}\\
+Strong entity sets are converted by taking each attribute of the entity set, and a relation with corresponding attributes. 
+The primary key of the entity set is chosen as primary key for the relation \cite[Chapter 6.7.1]{DBSBook}.\\
+\textbf{Many-to-many relationships}
+When converting many-to-many relationships to a relation, one create a single relation with primary key attributes from the participating entity sets \cite[Chapter 6.7.1]{DBSBook}. These keys are used as foreign key to reference the converted entities participating in the relationship. 
+The remaining attributes of the entity set is similarly mapped to the relation.\\
+\textbf{Many-to-one relationships}
+If we have a many-to-one relationship between two sets we can combine the relationship set and the relation created from the entity set on the 'many' side into a single relation. This relation will use the primary key of the entity set as its primary key, and have a foreign referencing the relation created from the 'one' side of the relationship.\\
+\textbf{One-to-one relationships}
+When converting one-to-one relationships with total participation, we simply create a union of the attributes of the participating entity sets and the relationship set \cite[Chapter 6.7.6]{DBSBook}. If there is not total participation, two relations are created from the entity set, and a foreign key is placed on one of the sets.\\
+\textbf{Weak entity sets}
+When representing weak entity sets, one creates a relation containing the attributes of the weak entity set as well as the attributes of the identifying set's primary key.
+The primary key of the identifying relation will also serve as a foreign key to the identifying relation. \cite[Chapter 6.7.1]{DBSBook}.
+The relationship set is simply ignored, as the relationship set will not have any attributes \cite[Chapter 6.7.5]{DBSBook}. 
 
-When representing weak entity sets, one creates a relation containing the attributes of the weak entity set as well as the attributes of the identifying set's primary keys. 
-The primary key of the relation will consist of the identifying sets primary keys and the weak entity sets primary keys. 
-The primary key of the identifying relation will also serve as a foreign key to the identifying relation.  \cite[Chapter 6.7.1]{DBSBook}.
-
-E-R relationship sets are converted to relations by forming a union of all primary keys of the participating entity sets, along with any attributes of the relationship set. 
-The primary keys for the participating entity sets are used as a foreign keys to their corresponding relation.
-If the relationship is between a weak- and its identifying entity set, it is simply ignored, as the relationship set will not have any attributes, and the relation created from the weak entity will already have a foreign key referencing the identifying entity \cite[Chapter 6.7.5]{DBSBook}. 
-
-If we have a many-to-one relationship between two sets, with total participation on the 'many' side, we can combine the relationship and the relation created from the 'many' side and the relationship.
-This new schema will have use the primary key of the entity set as its primary key.
-When converting one-to-one relationships, we simply create a union of the attributes from the relationship and the two relationship sets. \cite*[Chapter 6.7.6]{DBSBook}
 
 \subsubsection{Relational algebra}\label{sec:relationalAlgebra}
 Relational algebra describes a set of unary and binary operations on relations that produce new relations.
@@ -156,8 +157,8 @@ Collectively, the resulting set of operations is known as a transaction.
 In PostgreSQL, all queries, both to define and to manipulate data, are executed as transactions \cite{postgres_transactions}.
 As a DDL, SQL provides queries to define and modify relation schemas, as well as provide constraints for the attributes of the schema, such that data in the relation satisfies the constraint.  
 
-
 \begin{lstlisting}[
+    label=lst:CreatingTablesInSQL,
     language=SQL,
     caption=Implementing the relations from in equation \ref{eq:bookOwnerExample} and \ref{eq:relational_schema},
     showspaces=false,
@@ -194,6 +195,7 @@ Many of the operators presented in the previous section is predefined in SQL and
 Code Snippet \ref{lst:join} shows a simple join operation, returning all book titles of books that are owned by the book\_owner with owner\_id 10.
 
 \begin{lstlisting}[
+    label=lst:join,
     language=SQL,
     caption=Query returning the title of all books owned by book\_owner with owner\_id = 10,
     showspaces=false,
@@ -208,6 +210,31 @@ Code Snippet \ref{lst:join} shows a simple join operation, returning all book ti
 \end{lstlisting}
 
 Having established how one can define a database schemas using SQL as a DLL, as well as query data from the database using SQL as a DML, we will now discuss how one can evaluate a database design.
+
+
+\subsubsection*{Evaluating a database design}
+When evaluating the design of relational database schemas, we want to avoid redundant data duplication, loss by decomposition, change of dependencies \cite[Chapter 7, Chapter 7.3.3]{DBSBook}.
+One approach to ensure this, is to use normalization theory \cite[Chapter 7.1.3]{DBSBook}. This approach examines he functional dependencies of the relations and evaluate them based on their \textit{normal form}.
+When a relation is of a normal form, it adheres to certain design criteria. These criteria are defined using \textit{functional dependencies}.
+
+A functional dependency describes the relationship between two sets of attributes. 
+Functional dependency between $\alpha$ and $\beta$ written as $\alpha \rightarrow \beta$ defines that a value for $\alpha$ is sufficient to identify unique values for $\beta$ \cite[Chapter 7.4]{DBSBook}.
+In this case, we say that $\alpha$ is the determinant and $\beta$ is the dependant. 
+We say that $\beta$ is functionally determined by $\alpha$ if $\alpha \rightarrow \beta$.
+It is logically implied that if $\alpha \rightarrow \beta$ and $\beta \rightarrow \gamma$ then $\gamma$ is functionally determined by $\alpha$.
+If all attributes are functionally determined by $alpha$ it is a super key \cite[Chapter 7.4.2]{DBSBook}.
+The closure of functional dependency $\alpha$ denoted $\alpha^+$ describes all attributes that can be logically implied by functional dependencies having $\alpha$ as determinant \cite[Chapter]{DBSBook}. 
+
+Boyce-Cudd Normal Form (BCFN) eliminates all redundancy that can be discovered using functional dependencies \cite[Chapter 7.3.1]{DBSBook}. 
+A relation is BCNF with respect to $F$ if, for all functional dependencies in $F^+$ of the form $\alpha \rightarrow \beta$ if one of the following holds:
+$\alpha \rightarrow \beta$ is trivial ($\alhpa \rightarrow \alpha$) or $\alpha$ is a super key for the relation.
+
+Thus, if a relation $R$ is not in BCNF, there must be a functional dependency $\alpha \rightarrow \beta$ where $\alpha$ is not a super key.
+We can split such relation $R$ into two relations $R1(\alpha \cup \beta)$ and $R2(R-(\beta-\alpha))$ that are both in BCNF.
+
+Third Normal Form (TNF) prevents partial and transitive dependencies \cite{MontayaNormalForms}.
+A relation is in TNF with respect to functional dependencies $F$ is for all dependencies in $F^+$ of the form $\alpha \rightarrow \beta$ if one of the following holds: 
+$\alpha \rightarrow \beta$ is trivial, $\alpha$ is a super key, or each attribute $A \in \beta-\alpha$ is contained in a candidate key for $R$ \cite[Chapter 7.5.2]{DBSBook}.
 
 
 \subsubsection*{Evaluating a database design}
