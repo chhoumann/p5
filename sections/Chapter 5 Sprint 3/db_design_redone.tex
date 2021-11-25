@@ -10,6 +10,91 @@ Instead, we had to model the current database design using C\# classes.
 
 This caused problems as the current design did not translate well into an object-oriented approach.
 To execute what would otherwise be considered a relative simple SQL query, we had to write a ton of code which ultimately defeated the purpose of the Code First approach. 
+The most important method for the database, the POST method, can be seen in code snippet \ref{lst:old_controller} for the old database design.
+
+\begin{lstlisting}[language=CSharp, caption={Old controller}, label={lst:old_controller}]
+[HttpPost]
+public IActionResult Post([FromBody] JsonElement jsonElement)
+{
+    WordCountDbContext dbContext = new();
+    JsonSchemaModel? schema = dbContext.JsonSchemas.ToList()
+        .Find(s => s.SchemaName == WordCountSchemaName);
+
+    string jsonInput = jsonElement.GetRawText();
+    string message = string.Empty;
+
+    int statusCode = 200;
+
+    // Get schema and use for validating
+    if (!new JsonValidator<Article[]>(schema.JsonString)
+        .IsValid(jsonInput, out Article[] articles))
+    {
+        return BadRequest("Wrong body syntax, does not follow schema.");
+    }
+
+    List<AppearsInModel> appearsInModels = new();
+        
+    foreach (Article article in articles)
+    {
+        FileListModel fileListModel = JsonDbUtility
+            .ArticleToFileList(article);
+
+        if (!dbContext.ExternalSources.ToList()
+            .Exists(e => e.SourceName == article.Publication))
+        {
+            dbContext.ExternalSources.Add(new ExternalSourcesModel 
+            { 
+                SourceName = article.Publication 
+            });
+        }
+
+        if (dbContext.FileList.ToList()
+            .Exists(a => a.ArticleTitle == fileListModel.ArticleTitle))
+        {
+            statusCode = 206;
+            message += $"Article with title \"{fileListModel.ArticleTitle}\" already exists in the database.\n";
+        }
+
+        if (dbContext.FileList.ToList()
+            .Exists(a => a.FilePath == fileListModel.FilePath))
+        {
+            statusCode = 206;
+            message += $"Article with file path \"{fileListModel.FilePath}\" already exists in the database.\n";
+        }
+            
+        if (statusCode == 206) continue;
+            
+        List<WordListModel> words = new();
+        appearsInModels = new();
+
+        foreach (WordData articleWord in article.Words)
+        {
+            WordListModel wordListModel = JsonDbUtility
+                .WordDataToWordList(articleWord);
+            AppearsInModel appearsInModel = JsonDbUtility
+                .ArticleWordDataToAppearsIn(article, articleWord);
+
+            if (dbContext.Wordlist.Find(wordListModel.WordName) == null)
+            {
+                words.Add(wordListModel);
+            }
+
+            appearsInModels.Add(appearsInModel);
+        }
+
+        dbContext.Wordlist.AddRange(words);
+        dbContext.FileList.Add(fileListModel);
+    }
+        
+    dbContext.SaveChanges();
+    dbContext.AppearsIn.AddRange(appearsInModels);
+    dbContext.SaveChanges();
+
+    Console.WriteLine($"Added {articles.Length} entries.");
+
+    return Ok(message == string.Empty ? "Ok" : message);
+}
+\end{lstlisting}
 
 It proved difficult to work with and caused more problems than benefits, especially under the aforementioned time constraints. 
 Therefore, we decided to rework the design completely by creating C\# models that would translate to a relational database design using EF Core migrations.
@@ -20,3 +105,41 @@ In our rush to quickly implement the redesign, we unfortunately overlooked how t
 Currently, we just store every single word in the database without regard for duplicates, which takes up way more space than necessary.
 Ideally, we should instead store each word only once with an associated counter for how many times the given appears in an article.
 We realize the issues with the current design and would like to address them in the near-future if time permits it.
+
+\begin{lstlisting}[language=CSharp, caption={New controller}, label={lst:new_controller}]
+[HttpPost]
+public IActionResult Post([FromBody] JsonElement jsonElement)
+{
+    JsonSchemaModel? schema = unitOfWork.SchemaRepository
+        .Find(s => s.SchemaName == WordCountSchemaName);
+    string jsonInput = jsonElement.GetRawText();
+
+    if (schema == null)
+    {
+        return StatusCode(500, $"\"{WordCountSchemaName}\" schema does not exist.");
+    }
+
+    // Get schema and use for validating
+    if (!new JsonValidator<ArticleJsonModel[]>(schema.JsonString)
+            .IsValid(jsonInput, 
+                out ArticleJsonModel[] jsonArticles))
+    {
+        return BadRequest("Wrong body syntax, does not follow schema.");
+    }
+
+    IEnumerable<Article> result = RemoveDuplicates(jsonArticles, out StringBuilder message);
+
+    // Insert article
+    IEnumerable<Article> enumerable = result as Article[] 
+        ?? result.ToArray();
+
+    unitOfWork.ArticleRepository.Insert(enumerable);
+
+    foreach (Article article in enumerable)
+    {
+        Console.WriteLine($"Added {article.Title}");
+    }
+
+    return Ok(message.ToString());
+}
+\end{lstlisting}
