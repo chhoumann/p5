@@ -139,7 +139,7 @@ public IActionResult Post([FromBody] JsonElement jsonElement)
 }
 \end{lstlisting}
     
-By comparing the semantics and overall size of code snippet \ref{lst:old_controller} and \ref{lst:new_controller}, it should be apparent that the redesigned database is much easier to work with and removed a lot of unnecessary complexity in the code.
+By comparing the semantics and overall size of code snippet \ref{lst:old_controller} and \ref{lst:new_controller}, it should be apparent that the redesigned database is much easier to work with using EF Core, as it removed a lot of unnecessary complexity in the code.
 However, despite the many advantages from the redesign, it has a major memory issue.
 In our rush to quickly implement the redesign, we unfortunately overlooked how to effectively store words from articles. 
 
