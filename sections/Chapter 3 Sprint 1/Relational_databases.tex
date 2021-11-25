@@ -209,6 +209,8 @@ Code Snippet \ref{lst:join} shows a simple join operation, returning all book ti
  owns JOIN book ON owns.isbn = book.isbn WHERE owns.owner_id = 10  
 \end{lstlisting}
 
+In relational algebra $\pi_{title}\sigma_{owns.owner\_id = 10}(owns \Join_{book.isbn = book.isbn} book )$.
+
 Having established how one can define a database schemas using SQL as a DLL, as well as query data from the database using SQL as a DML, we will now discuss how one can evaluate a database design.
 
 
