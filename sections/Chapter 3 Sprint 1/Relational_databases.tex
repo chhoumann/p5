@@ -1,18 +1,18 @@
 \subsection{Relational databases}
-The group last year chose to implement the \texttt{WordCount} (see Section \ref{sec:Sprint2And3}) and \texttt{Fuseki} databases using PostgreSQL.
-Postgres is a relational database system \cite{knox2020}.
+The group last year chose to implement the \texttt{WordCount} and \texttt{Fuseki} databases using PostgreSQL.
+PostgreSQL is a relational database system \cite{knox2020}.
 
 
 A relational database consists of several layers.
-The lowest level is the physical layer which describes how the data are stored physically.
+The lowest level is the physical layer which describes how the data is stored physically.
 The purpose of the relational model is to abstract over the physical layer of the database.
 This abstraction is known as the logical layer and allows database administrators to manage the physical storage without directly manipulating the physical data representation.
-The logical layer describes what data are stored and the relationships between the data.
+The logical layer describes what data is stored and the relationships between the data.
 The highest of abstraction is the view layer which describes only part of the database. It exists to simplify the interaction with the system. Many views may exist for the same database.
 \cite[Chapter 1.3]{DBSBook}
 
 Compared to storing data on a regular file system, a database system provides many advantages including atomicity of operations, concurrent access to data, and lowered inconsistency and redundancy of data \cite[Chapter 1.2]{DBSBook}.
-These advantages can be directly seen in the ACID properties that databases adhere to when performing a transaction (see Section \ref{sec:SQL}) \cite[Chapter~17]{DBSBook}.
+These advantages can be directly seen in the ACID properties that databases adhere to when performing a transaction \cite[Chapter~17]{DBSBook}.
 \begin{itemize} \label{ACID}
     \item Atomicity: A transaction must either be fully completed or partial side-effects of a failed transaction must be undone.
     \item Consistency: A transaction in isolation must ensure values remain consistent after a transaction has been completed or terminated.
@@ -21,7 +21,7 @@ These advantages can be directly seen in the ACID properties that databases adhe
 \end{itemize}
 
 In the coming sections, we will describe how one can model and describe a relational database design, both mathematically and with a more graphic design.
-After doing this, we will examine how operations on these models can be described using SQL (Section~\ref{sec:SQL}) and relational algebra (Section~\ref{sec:relationalAlgebra}).
+After doing this, we will examine how operations on these models can be described using SQL and relational algebra.
 
 \subsubsection*{Relational model}
 Relational database systems can be mathematically described using relations and sets, mapping a unique key to a tuple of information \cite[Chapter~2.3]{DBSBook}.
@@ -55,8 +55,8 @@ There, primary keys from other relations are used to reference unique tuples. Th
 
 Instead of describing the data structures of the database in these relations, one can use a different model that represents the logic of the relational schemas.
 
-\subsubsection{Entity relation model}\label{sec:EntityRelationModel}
-The entity relation model is a graphical representation of how database relations are structured.
+\subsubsection{Entity relationship model}\label{sec:EntityRelationModel}
+The entity relationship model is a graphical representation of how database relations are structured.
 This is done in a \textit{E-R diagram}, and is commonly used facilitate database design from specifications of enterprise schemas \cite*[Chapter 6.2]{DBSBook}.
 However, in the E-R model we differentiate between \textit{relationships sets} connecting relations and \textit{entity sets} representing domain elements. 
 The entity sets are represented graphically with a rectangle and relationship sets connecting the entity sets with a diamond \cite[Chapter 6.2]{DBSBook}.
@@ -154,8 +154,8 @@ Collectively, the resulting set of operations is known as a transaction.
 In PostgreSQL, all queries, both to define and to manipulate data, are executed as transactions \cite{postgres_transactions}.
 As a DDL, SQL provides queries to define and modify relation schemas, as well as provide constraints for the attributes of the schema, such that data in the relation satisfies the constraint.  
 
-
 \begin{lstlisting}[
+    label=lst:CreatingTablesInSQL,
     language=SQL,
     caption=Implementing the relations from in equation \ref{eq:bookOwnerExample} and \ref{eq:relational_schema},
     showspaces=false,
@@ -164,7 +164,7 @@ As a DDL, SQL provides queries to define and modify relation schemas, as well as
     numberstyle=\tiny,
     commentstyle=\color{gray},
     escapechar=|
- ]\label{lst:CreatingTablesInSQL}
+ ]
     CREATE TABLE book (
         author_name varchar(250) not null,
         title varchar(250) NOT NULL,
@@ -192,6 +192,7 @@ Many of the operators presented in the previous section is predefined in SQL and
 Code Snippet \ref{lst:join} shows a simple join operation, returning all book titles of books that are owned by the book\_owner with owner\_id 10.
 
 \begin{lstlisting}[
+    label=lst:join,
     language=SQL,
     caption=Query returning the title of all books owned by book\_owner with owner\_id = 10,
     showspaces=false,
@@ -200,7 +201,7 @@ Code Snippet \ref{lst:join} shows a simple join operation, returning all book ti
     numberstyle=\tiny,
     commentstyle=\color{gray},
     escapechar=|
- ]\label{lst:CreatingTablesInSQL}
+ ]
     SELECT title FROM book_owner JOIN book ON owner_id = 10;   
 \end{lstlisting}
 
