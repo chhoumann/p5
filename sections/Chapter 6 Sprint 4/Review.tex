@@ -1,32 +1,11 @@
 \section{Review}
-The goal for this sprint was primarily to catch up on documenting progress and previous sprints. As a side-goal, we needed to gather information about our next sprints, now that the Knox goal of implementing the search engine has concluded.
+The goal for this sprint was initially to set up up Virtuoso and a C\# API end-point for Virtuoso in a development environment in Docker. Additionally we also wanted to finish writing the report sections related to the first sprint of the \knox{} project. Due to changes in the goal specification during the sprint our goals changed to setting up the WordCount database in Docker, as well as creating an API end-point for this, also contained in Docker.
 
 \subsubsection*{What has been accomplished?}
-We managed to catch up on writing the documentation for the previous sprints. During our internal review, we found many areas which we are looking to improve in future sprints. These areas were discovered by performing a Premortem review of the documentation, which we found to be a great way to get a sense of what we were missing. A Premortem is a method in which you imagine failure before you actually deliver the product, and you try to learn from those failures\cite{PremortemSadanForbedrer}.
-
-We asked the Knox product owner for user stories, and as a result, we received three user stories which we can work on in the next sprints.
+As a result of the changes seen throughout the sprint, a large part of this sprint became a combination of research and replanning. Unfortunately most of the initial research into Virtuoso quickly became redundant, and as such, effort had to be put into planning what actions to make based on the new requirements. Therefore the only actually accomplishment this sprint was finishing the aforementioned sections for the first sprint of the \knox{} project.  
 
 \subsubsection*{What has changed in the environment?}
-Due to feedback, meetings have been shortened in duration and reduced in scope. 
-
-As mentioned, we now have user stories which we can work on in the next sprints. This means we now have a clearer direction for the remainder of the sprints.
+Rather large changes were seen in the environment during this sprint. As mentioned in \ref{ssec:newRequirements} the inital goal set by the product owner of the \know{} project had been vague in their definition. This meant that the goals that we had planned initially were irrelevant, as a better specified goal from \knox{} was presented over half way through the sprint. 
 
 \subsubsection*{What next?}
-The user stories we received from the Knox product owner are included below. The first three are directed at us, and the last one is for all Knox layer.
-
-\begin{itemize}
-    \item As the Knowledge Layer, I want to be able to insert Triples into a storage, so that others can access it later.
-    \item As the Functionality Layer, I want to be able to query an RDF graph, so that I can use it in search results, fact checking and virtual assistant applications.
-    \item As the Functionality Layer, I want to be able to query an RDF graph in a standardized way, so that I do not have to worry about changes to the database.
-    \item \textbf{All layers:} As an administrator, I want to see the various progresses, processes, statistics and more on a website, so that I can get an overview of the pipeline. 
-\end{itemize} 
-
-At this time, we also know that there are other issues that we need to address. To this, we will need to add more user stories for our internal group.
-
-\begin{itemize}
-    \item Granulate product owner's user stories with the other \knox groups to increase the accuracy of the sprint planning.
-    \item Prepare for tasks related to implementing a RDF database, which the user stories from the Knox product owner imply a need for.
-    \item Prepare for UI related tasks.
-\end{itemize}
-
-These tasks will be processed accordingly during sprint planning in the next sprint.
+Based on the time constraint that we experienced due to the change in environment, all of the work related to developing an API end-point for the WordCount database in C\# as well as containerizing both the API and the database had to be pushed into the third sprint.
