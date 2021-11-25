@@ -1,7 +1,14 @@
 \section{Virtuoso}
+In this sprint we had planned to research and implement Virtuoso as per our supervisors recomendation.
+The research and imlementation did get cut a bit short because the priorities of the knox project changed on request of the PO.
 
-% our supervisor recomended we use virtuoso
+During our research we found that Virtuoso is a high-performance object-relational SQL database, which is highly effective at storing and querying RDF data. It supports SPARQL queries embedded in SQL queries. SPARQL is an acronym for SPARQL Protocol and RDF Query Language, which is an RDF query language.
 
-% Virtual database engine
-% can be accessed using sparql
-% uses
+% supports ado.net to access database
+Virtuoso supports access to the database through Open DataBase Connectivity (ODBC).
+ADO.NET is an older framework for C\# which can give database access to databases that are ODBC complient.
+
+% to a partial success we ran a Virtuoso server
+After the initial research we attempted to set up a Virtuoso server on a Virtual machine. This was a partial success, we created a database and were able to access it through the GUI in a browser, but we were not able to make HTTP requests to the server.
+
+% then we tried to set up virtuoso using docker
