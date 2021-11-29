@@ -229,9 +229,9 @@ The closure of functional dependency $\alpha$ denoted $\alpha^+$ describes all a
 
 Boyce-Cudd Normal Form (BCFN) eliminates all redundancy that can be discovered using functional dependencies \cite[Chapter 7.3.1]{DBSBook}. 
 A relation is BCNF with respect to $F$ if, for all functional dependencies in $F^+$ of the form $\alpha \rightarrow \beta$ if one of the following holds:
-$\alpha \rightarrow \beta$ is trivial ($\alhpa \rightarrow \alpha$) or $\alpha$ is a super key for the relation.
+$\alpha \rightarrow \beta$ is trivial ($\alpha \rightarrow \alpha$) or $\alpha$ is a super key for the relation.
 
-Thus, if a relation $R$ is not in BCNF, there must be a functional dependency $\alpha \rightarrow \beta$ where $\alpha$ is not a super key.
+Thus, if a relation $R$ is not in BCNF, there must be a functional dependency $\alpha \rightarrow \beta$ where $\alpha$ is not a super key. 
 We can split such relation $R$ into two relations $R1(\alpha \cup \beta)$ and $R2(R-(\beta-\alpha))$ that are both in BCNF.
 
 Third Normal Form (TNF) prevents partial and transitive dependencies \cite{MontayaNormalForms}.
@@ -254,7 +254,7 @@ The closure of functional dependency $\alpha$ denoted $\alpha^+$ describes all a
 
 Boyce-Cudd Normal Form (BCFN) eliminates all redundancy that can be discovered using functional dependencies \cite[Chapter 7.3.1]{DBSBook}. 
 A relation is BCNF with respect to $F$ if, for all functional dependencies in $F^+$ of the form $\alpha \rightarrow \beta$ if one of the following holds:
-$\alpha \rightarrow \beta$ is trivial ($\alhpa \rightarrow \alpha$) or $\alpha$ is a super key for the relation.
+$\alpha \rightarrow \beta$ is trivial ($\alpha \rightarrow \alpha$) or $\alpha$ is a super key for the relation.
 
 Thus, if a relation $R$ is not in BCNF, there must be a functional dependency $\alpha \rightarrow \beta$ where $\alpha$ is not a super key.
 We can split such relation $R$ into two relations $R1(\alpha \cup \beta)$ and $R2(R-(\beta-\alpha))$ that are both in BCNF.
