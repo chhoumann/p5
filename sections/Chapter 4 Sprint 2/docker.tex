@@ -1,5 +1,5 @@
-\subsection{Containerization}
-To deploy our application in production and for setting up the development environment, we use Docker, an open source containerization platform.
+\section{Docker}
+To set up our development environment for an API and Virtuoso, we decided to use Docker, which is an open source containerization platform.
 
 Docker allows for a simplification of deliveries in distributed applications through the usage of containers \cite{Container_Docker}. 
 Before giving a more detailed description of Docker, an overview of what a container is and how it is used is needed. 
@@ -12,8 +12,7 @@ Moving around a prepackaged application with all its dependencies ensures that t
 
 A container image is a lightweight version encapsulating everything needed to run that application. These images are then turned into containers at runtime. 
 This is made possible by the build process isolation and virtualization capabilities in the Linux kernel. 
-These capabilities allow for multiple application components to share the resources of single host operating system, 
-in much the same way a hypervisor allows multiple virtual machines to share the same hardware resources of a single computer \cite{Container_Docker}.
+These capabilities allow for multiple application components to share the resources of a single host operating system, in much the same way, a hypervisor allows multiple virtual machines to share the same hardware resources of a single computer \cite{Container_Docker}.
 
 
 Using Docker rather than a virtual machine provides the following advantages:
@@ -24,4 +23,4 @@ Using Docker rather than a virtual machine provides the following advantages:
     \item Improved developer productivity
 \end{itemize}
 
-Docker itself is then used to enhance these native Linux features allowing us to automate container creation and easily move the containers between environments \cite{Docker_IBM}.
+Docker itself is then used to enhance these native Linux features, allowing us to automate container creation and easily move the containers between environments \cite{Docker_IBM}.
