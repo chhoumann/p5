@@ -239,26 +239,3 @@ A relation is in TNF with respect to functional dependencies $F$ is for all depe
 $\alpha \rightarrow \beta$ is trivial, $\alpha$ is a super key, or each attribute $A \in \beta-\alpha$ is contained in a candidate key for $R$ \cite[Chapter 7.5.2]{DBSBook}.
 
 
-\subsubsection*{Evaluating a database design}
-When evaluating the design of relational database schemas, we want to avoid redundant data duplication, loss by decomposition, change of dependencies \cite[Chapter 7, Chapter 7.3.3]{DBSBook}.
-One approach to ensure this, is to use normalization theory \cite[Chapter 7.1.3]{DBSBook}. This approach examines the functional dependencies of the relations and evaluate them based on their \textit{normal form}.
-When a relation is of a normal form, it adheres to certain design criteria. These criteria are defined using \textit{functional dependencies}.
-
-A functional dependency describes the relationship between two sets of attributes. 
-Functional dependency between $\alpha$ and $\beta$ written as $\alpha \rightarrow \beta$ defines that a value for $\alpha$ is sufficient to identify unique values for $\beta$ \cite[Chapter 7.4]{DBSBook}.
-In this case, we say that $\alpha$ is the determinant and $\beta$ is the dependant. 
-We say that $\beta$ is functionally determined by $\alpha$ if $\alpha \rightarrow \beta$.
-It is logically implied that if $\alpha \rightarrow \beta$ and $\beta \rightarrow \gamma$ then $\gamma$ is functionally determined by $\alpha$.
-If all attributes are functionally determined by $alpha$ it is a super key \cite[Chapter 7.4.2]{DBSBook}.
-The closure of functional dependency $\alpha$ denoted $\alpha^+$ describes all attributes that can be logically implied by functional dependencies having $\alpha$ as determinant \cite[Chapter]{DBSBook}. 
-
-Boyce-Codd Normal Form (BCFN) eliminates all redundancy that can be discovered using functional dependencies \cite[Chapter 7.3.1]{DBSBook}. 
-A relation is BCNF with respect to $F$ if, for all functional dependencies in $F^+$ of the form $\alpha \rightarrow \beta$ if one of the following holds:
-$\alpha \rightarrow \beta$ is trivial ($\alpha \rightarrow \alpha$) or $\alpha$ is a super key for the relation.
-
-Thus, if a relation $R$ is not in BCNF, there must be a functional dependency $\alpha \rightarrow \beta$ where $\alpha$ is not a super key.
-We can split such relation $R$ into two relations $R1(\alpha \cup \beta)$ and $R2(R-(\beta-\alpha))$ that are both in BCNF.
-
-Third Normal Form (TNF) prevents partial and transitive dependencies \cite{MontayaNormalForms}.
-A relation is in TNF with respect to functional dependencies $F$ is for all dependencies in $F^+$ of the form $\alpha \rightarrow \beta$ if one of the following holds: 
-$\alpha \rightarrow \beta$ is trivial, $\alpha$ is a super key, or each attribute $A \in \beta-\alpha$ is contained in a candidate key for $R$ \cite[Chapter 7.5.2]{DBSBook}.
