@@ -1,20 +1,23 @@
 \section{Review}
+This section will review the accomplishment for the 5th sprint as well as changes in the \knox{} environment. 
+
 The goal for this sprint was to implement functionality to support the user stories defined in section \ref{userstories}. 
 
 \subsubsection*{What has been accomplished?}
-Two of the three user stories have been implemented, but none of them have yet to be deployed to the \knox pipeline.
-We have implemented functionality to fetch from Virtuoso through an API endpoint. The endpoint is written in C\#, and takes a query in SPARQL format. 
+The user stories which refers to the RDF database has been implemented but are all yet to be deployed to the \knux{} pipeline. This means the acceptance criteria proposed in section \ref{acceptCriteriaSprint5} are fulfilled but since the features was not deployed to the pipeline the primary goal for the sprint has not been accomplished. 
 
-\subsubsection{What has changed in the environment?}
+\subsubsection*{What has changed in the environment?}
 During the sprint, we discovered that many better solutions for RDF data storage exists. Therefore, the group chose to not implement an endpoint to the Fuseki service, but implement Virtuoso instead. 
 
 \subsubsection*{What next?}
-The PO has informed us that he will not give any of the \knox groups more assignments regarding the pipeline. 
+The PO has informed us that he will not give any of the \knox{} groups more assignments regarding the pipeline. 
 For the next sprint, we will continue on the remaining user story, and deploy the endpoint for the database, as to complete the user stories. 
-However, each of the knox groups must implement a UI element, and we would like to restructure the database design in the WordCount database, as discussed in section \ref{DatabaseRedesign}.
+However, each of the \knox{} groups must implement a UI element, and we would like to restructure the database design in the WordCount database, as discussed in section \ref{DatabaseRedesign}.
 
 \begin{itemize}
-    \item Create a simple UI element for the \knox website.
-    \item Finish implementation of the last user story.
+    \item Create a simple UI element for the \knox{} website.
+    \item Redesign the database schema for WordCount.
     \item Deploy the API endpoint for the RDF database.
+    \item Film a video the shows the individual components working to give an overview of the pipeline.
 \end{itemize}
+
