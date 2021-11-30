@@ -1,0 +1,44 @@
+\section{Why use a database system?}
+For this project, we need to store a large amount of data. 
+There are different options for storing data.
+
+One option for storing data is storing it in a file such as an Excel file which can be opened using the Excel program. Like a relational database, Excel stores data in tables with rows and columns. Excel has the advantage that it is easy to learn, but it is not meant for large amounts of data accessed by concurrent users. 
+The disadvantages of using an Excel file for data storage are:
+
+\begin{itemize}
+    \item It can only store a limited amount of rows. 
+    \item It can not be updated by multiple users at the same time. 
+    \item It is not very efficient to query
+    \item It is not very space efficient
+    \item Time consuming to maintain
+\end{itemize}
+
+Even if initially storing data in a file is sufficient, if the amount of data grows over time there's a high probability that it will run into issues, such as performance, space, duplicates or inconsistent data.
+\cite{ExcelDatabase}
+
+Another better alternative is to use a database system. A database system is built for the purpose of storing large amounts of data, querying the data and handling concurrent users.
+
+The advantages of using a database system are:
+\begin{itemize}
+    \item can store large amounts of data
+    \item can be efficiently queried and manipulated
+    \item space efficient
+    \item concurrent users
+    \item security of data
+    \item follows ACID properties
+\end{itemize}
+
+A database system is not limited by what can be stored in memory, and is still able to effectively query on large databases. The data in a database system is also more secure, since a user must first log in, and have permission to query and manipulate data. 
+\cite{WhyDatabase}
+
+ACID stands for Atomicity, Consistency, Isolation and Durability.
+
+\begin{itemize}
+    \item Atomicity means that a transaction must be committed in its entirety, or not at all. In case of crashes, to ensure that there is no incomplete data, a transaction that has not been committed can be rolled back.
+    \item Consistency means that inserted data will not violate integrity constraints. If the integrity constraints are violated by a process, it will be rolled back to a legal state. 
+    \item Isolation means that any reads or writes to the database, will not be impacted by another transaction. If two transactions impact the result of each other, the transactions must be aborted.
+    \item Durability ensures that data, which has been successfully committed, will remain intact in case of system crashes or outages. This is achieved using changelogs, which are checked when the database is restarted.
+\end{itemize}
+\cite{ACID}
+
+Because of these advantages of database systems, it will be a great asset to use in this project.

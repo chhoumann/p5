@@ -1,13 +1,25 @@
-\section{The current state of \knox{}}
+\section{The current state of \knox{}} \label{currentState}
 \input{sections/Chapter 3 Sprint 1/Server_specifications.tex}
-\input{sections/Chapter 3 Sprint 1/PostgreSQL.tex}
-\subsection{The \knox{} databases}
-\subsubsection*{Postgres database}
-\subsubsection*{Fuseki database}
-\subsection{Database endpoints and implemented applications}
+\input{sections/Chapter 3 Sprint 1/Relational_databases.tex}
+\subsection{The current \knox{} databases}
+\subsubsection*{Relational databases}
+To summarize, the previous group set up a PostgreSQL database on \texttt{node02}.
 
-As previously mentioned, \knox{} was initially started in 2020.
-The previous group chose to develop this layer using Java.
+Figure \ref{olddatabase} shows an ER diagram of the database as we received it from the previous group.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\linewidth]{Images/old_db_er_diagram.png}
+    \caption{ER diagram of the relational database from last year.}
+    \label{olddatabase}
+\end{figure}
+
+\subsubsection*{Fuseki database}
+The previous group set Apache Jena Fuseki on \texttt{node01}. They chose to use HDT format, claiming that it is faster for querying than TDP\cite{knox2020}.
+
+The setup is used to store the knowledge graph used in \knox{}.
+
+\subsection{Database endpoints and implemented applications}
 
 As previously mentioned, \knox{} was initially started in 2020.
 The previous group chose to develop API endpoints using Java.
@@ -19,10 +31,10 @@ Second, it contains a prototype for counting the number of words in an article.
 There is no API for reading this data, only for writing. 
 In addition, at least one of other layers are directly connected to the database.
 
-Overall, not much code was written and its quality is unknown due to a lack of testing and documentation.
+Overall, not much code was written, and its quality is unknown due to a lack of testing and documentation.
 The Java language convention was also not followed \cite{java_convention}, making it difficult to comprehend.
 It appears as though no structure was established, making it difficult to navigate the code. 
-Furthermore, the database is set up such that is must be restarted every time new data is written to it - otherwise, the data cannot be fetched by the other layers.
+Furthermore, the database is set up such that it must be restarted every time new data is written to it - otherwise, the data cannot be fetched by the other layers.
 
 Based on this, we have discussed what work to do and in what order.
 After having read and understood the current code, we will have to start by cleaning up the inconsistencies and structure.

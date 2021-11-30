@@ -1,9 +1,9 @@
 \section{Sprint Planning}
-%The sprint goal for this group
-%How does our sprint goal help with the overall sprint goal
-%The purpose and priority for each increment
-%Show the available backlog
-\subsection{User stories}
+In this sprint, we will be working on the RDF database seeing as the WordCount database is now finished.
+We will focus on creating user stories from epics, and these epics will then be granulated into tasks.
+This will ultimately result in the backlog for this sprint.
+
+\subsection*{User stories}
 The \knox{} product owner have given us three user stories, which we can use to detail the coming tasks for the sprint.
 Our own product owner will split these user stories, which we consider to be \textit{epics}, together with the involving layer \cite{Epics}.
 This will help us understand how to accommodate the needs of the involving layer and prioritize the stories.
@@ -14,11 +14,36 @@ This in turn will help us generate as much value to the pipeline as quickly as p
 \userStory{the functionality layer}{query an RDF graph in a standardized way}{do not have to worry about changes to the database}
 
 \subsubsection*{Granulating the epics}
-After talking to the functionality layer, we found out details about how they want database access to work. 
+After talking to the functionality layer, we found out some of the details about how they want database access to work. These requirements are specified below.
+
 \begin{enumerate}
+    \item It should be possible to write RDF data to the Fuseki database using the Terse RDF Triple Language (Turtle) syntax and file format \cite{TurtleFormat}.
     \item They want to be able to send SPARQL queries directly to an endpoint to fetch the data.
     \item They would prefer if the response was in XML format. They have given us an example.
     \item They do not know the size of the data they will be querying.
     \item The route for GET request should have a string parameter called "query" containing the SPARQL query as a string.
     The query will be in URL-coded format.
 \end{enumerate}
+
+We have gotten enough insight to begin work on the database, however due to the other groups not knowing exactly what they want, there is a possibility of discovered work taking precedence during the sprint.
+
+From the epics, we created a backlog. As mentioned in section \ref{Whatwelearnedsprint3}, we decided to work with a different unit of measurement for determining the size of a task.
+Instead of using hours, we now estimate tasks by relative sizing - but we will keep using the Fibonacci numbers for points.
+
+We partook in a game of Inversion \cite{InversionThinking} where we tried to find issues with our prioitization by imagining what would happen if we did not work on the given tasks.
+We took the items from the backlog that we defined as fulfilling our sprint goal, and tried to think about what would happen if we failed to fulfill them. 
+This was done to validate the implementation tasks, as they have the most significant impact on \knox{} as a whole, making sure that they are absolutely necessary. 
+
+\subsection*{Release planning}
+The \textbf{functional requirements} include reading from and writing to the RDF database. 
+The read operation should be done through an endpoint which returns the data in the XML format.
+Likewise, writing should be facilitated through an endpoint which receives data in the aforementioned Turtle format.
+
+
+The \textbf{non-functional requirement} for this sprint is simply that the reading and writing operations should be reasonably fast such that an acceptable amount of tuples can be queried within a feasible amount of time.
+
+
+The \textbf{acceptance criteria} is that the aforementioned functional and non-functional requirements must be met before this feature is deemed acceptable. 
+
+
+With the planning phase completed, we now have a backlog and a MVP to which we will now begin implementing.
