@@ -1,1 +1,58 @@
 \section{Validation}
+
+As previously mentioned in \ref{}, the knowledge layer posts data to the database that the functionality need to use. 
+In order to ensure that the data being posted is correct, we have developed a validation method in collaboration with the knowledge layer.
+
+The knowledge layer posts their data in the JSON format. 
+To validate JSON files, one must develop a JSON schema that specifies a structure that a JSON file can be checked against.
+
+We created a new controller \texttt{SchemaController} which can be used to post JSON schemas to the database. 
+Currently, only one schema is stored in the database, however the system is developed such that it is scalable and easily expandable.
+
+In the WordCount controller, the \texttt{POST} method first fetches the JSON schema from the database.
+A new object of type \texttt{JsonValidator} is then instantiated, and its \texttt{IsValid} method is then called to determine whether the input conforms to the structure defined within the given schema. 
+The method returns true if the JSON object follows the schema, and false if it does not
+The class is generic, allowing for reusability for multiple classes, and it is implemented using the Newtonsoft JSON framework. 
+
+This can be seen in code snippet \ref{lst:json_post}.
+
+\begin{lstlisting}[language=CSharp, caption={Snippet from the \texttt{POST} method showing validation of the input JSON.}, label={lst:json_post}]
+[HttpPost]
+public IActionResult Post([FromBody] JsonElement jsonElement)
+{
+	JsonSchemaModel? schema = unitOfWork.SchemaRepository.Find(s => s.SchemaName == WordCountSchemaName);
+	
+	\dots
+
+	// Get schema and use for validating
+	if (!new JsonValidator<ArticleJsonModel[]>(schema.JsonString)
+		.IsValid(jsonInput, out ArticleJsonModel[] jsonArticles))
+	{
+		return BadRequest("Wrong body syntax, does not follow schema.");
+	}
+}
+\end{lstlisting}
+
+The \texttt{IsValid} method first checks whether the provided JSON string matches the provided JSON schema.
+If so, it simply deserializes the JSON string into the class provided by the generic constraint.
+This is captured in code snippet \ref{jsonIsValid}.
+
+\begin{lstlisting}[language=CSharp, caption={The \texttt{IsValid} method from the \texttt{JsonValidator} class.}, label={lst:jsonIsValid}]
+public bool IsValid(string jsonString, out T data)
+{
+	JToken jToken = JToken.Parse(jsonString);
+
+	data = null;
+
+	if (!jToken.IsValid(schema))
+	{
+		return false;
+	}
+
+	data = DeserializeJsonString(jsonString);
+
+	return true;
+}
+\end{lstlisting}
+
+If the result is valid, the deserialized object is returned as an \texttt{out} parameter for use by the caller.
