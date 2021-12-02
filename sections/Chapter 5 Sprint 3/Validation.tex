@@ -4,7 +4,7 @@ As previously mentioned in section \ref{databaseResponsibility}, the knowledge l
 
 To ensure that the data being posted is correct, we have developed a validation method in collaboration with the knowledge layer.
 To validate the JSON files received from the knowledge layer, we created a JSON schema that specifies the structure that the JSON files can be checked against. 
-Code snippet \ref{jsonSchemaExample} shows an example of a JSON schema that validates JSON objects modelling a simple product in a store. In this example, it is worth noting that the properties \texttt{name} and \texttt{price} are required. Any JSON objects that do not have these properties are invalid when checked against this schema. The \texttt{\$schema} field specifies the standard that the schema is written according to; in this case, the draft v4 specification.
+Code snippet \ref{jsonSchemaExample} shows an example of a JSON schema that validates JSON objects modelling a simple product in a store. In this example, it is worth noting that the properties \texttt{name} and \texttt{price} are required. Any JSON objects that do not have these properties are invalid when checked against this schema. The \texttt{\$schema} field specifies the standard that the schema is written according to; in this case, the draft v4 specification \cite{tutorialspoint_jsonschema}.
 
 \begin{lstlisting}[language=CSharp, caption={An example of a basic JSON schema.}, label={lst:jsonSchemaExample}]
 {
@@ -34,7 +34,7 @@ JSON schemas are stored in the compressed \texttt{jsonb} format which is more sp
 When the \texttt{POST} method in the WordCount controller is invoked, it first fetches the JSON schema from the database.
 A new object of type \texttt{JsonValidator} is then instantiated, and its \texttt{IsValid} method is then used to determine whether the input conforms to the structure defined within the given schema. 
 The method returns true if the JSON object follows the schema, and false if it does not.
-The class is generic, allowing reusability for all types, and it is implemented using the Newtonsoft JSON framework. 
+The class is generic, allowing reusability for all types, and it is implemented using the Newtonsoft JSON framework \cite{Json.NET}. 
 
 This can be seen in code snippet \ref{lst:json_post}.
 
