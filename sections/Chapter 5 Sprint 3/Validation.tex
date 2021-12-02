@@ -42,7 +42,8 @@ This can be seen in code snippet \ref{lst:json_post}.
 [HttpPost]
 public IActionResult Post([FromBody] JsonElement jsonElement)
 {
-	JsonSchemaModel? schema = unitOfWork.SchemaRepository.Find(s => s.SchemaName == WordCountSchemaName);
+	JsonSchemaModel? schema = unitOfWork.SchemaRepository
+		.Find(s => s.SchemaName == WordCountSchemaName);
 	
 	...
 
