@@ -44,7 +44,7 @@ public IActionResult Post([FromBody] JsonElement jsonElement)
 {
 	JsonSchemaModel? schema = unitOfWork.SchemaRepository.Find(s => s.SchemaName == WordCountSchemaName);
 	
-	\dots
+	...
 
 	// Get schema and use for validating
 	if (!new JsonValidator<ArticleJsonModel[]>(schema.JsonString)
