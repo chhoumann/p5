@@ -12,7 +12,7 @@ Currently, only one schema is stored in the database, however the system is deve
 In the WordCount controller, the \texttt{POST} method first fetches the JSON schema from the database.
 A new object of type \texttt{JsonValidator} is then instantiated, and its \texttt{IsValid} method is then used to determine whether the input conforms to the structure defined within the given schema. 
 The method returns true if the JSON object follows the schema, and false if it does not.
-The class is generic, allowing reusability for multiple classes, and it is implemented using the Newtonsoft JSON framework. 
+The class is generic, allowing reusability for all types, and it is implemented using the Newtonsoft JSON framework. 
 
 This can be seen in code snippet \ref{lst:json_post}.
 
