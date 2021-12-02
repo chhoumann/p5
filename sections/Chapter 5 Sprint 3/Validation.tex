@@ -3,8 +3,7 @@
 As previously mentioned in section \ref{databaseResponsibility}, the knowledge layer posts data to the database that later need to be fetched by the functionality layer.
 
 To ensure that the data being posted is correct, we have developed a validation method in collaboration with the knowledge layer.
-The knowledge layer posts its data in the JSON format. 
-To validate JSON files, one must develop a JSON schema that specifies a structure that a JSON file can be checked against.
+To validate JSON files recieved from the knowledge layer, one must develop a JSON schema that specifies a structure that a JSON file can be checked against.
 
 We created a new controller called \texttt{SchemaController} which is responsible for posting JSON schemas to the database. 
 Currently, only one schema is stored in the database, however the system is developed such that it is scalable and expandable.
