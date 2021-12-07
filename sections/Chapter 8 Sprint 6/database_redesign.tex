@@ -1,0 +1,17 @@
+\section{Redesigning the wordcount database}
+In section \ref{InitialDesign} we established that the design would lead to duplicate values in the wordcount database.
+Namely, the terms occurring in the Term entity set (see \ref{newdatabaseER}) will not be unique. 
+Thus, the database will contain duplicate values.
+ 
+To address this issue, we will create relations using the relational model (see section \ref{relational_databases}) and ensure they are in Boyce-Codd Normal Form.
+After ensuring that the normal form is reached, we will create the relations using SQL as a DDL.
+We will also need to adjust the data access models as to ensure access using EF core. However, when implementing the new database structures, we need to ensure that the functionality of the pipeline is functional. 
+Therefore, we have to ensure we can always roll back changes to the code and database structures.
+As described in section \ref{CI/CD}, we can easily deploy versions of our code. By reverting the changes back to the old implementation of the models, we can ensure a quick response, should the new implementation fail.
+We need to ensure that this is also the case for the database structures. 
+This is done by taking a dump (backup) of the database, and verifying that no database relations are deleted during the data migration.
+
+\input{sections/Chapter 8 Sprint 6/CreatingNewModels.tex}
+\input{sections/Chapter 8 Sprint 6/BCNF.tex}
+
+\subsection{Result}
