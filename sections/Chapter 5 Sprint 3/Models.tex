@@ -3,7 +3,7 @@ To implement an API for the WordCount database, we needed models for the objects
 We also needed models corresponding to the database tables to access it through EF Core. The models we have created for communication with other layers and for data access will be described in the following sections.
 
 \subsubsection*{Communication models}
-For communication between our layer and the other layers, we have made 3 input, and 1 response model. 
+For communication between our layer and the other layers, we have made three input models and one response model. 
 These models correspond to the JSON objects we expect to send or recieve from other layers when they attempt to insert or retrive data from the database. 
 When a JSON object is recieved it is parsed into an object from our model, which can then be used to add data to the database.
 \\
