@@ -1,15 +1,20 @@
 \subsection{Models}
-To implement an API for the WordCount database we needed models for the objects we would be sending and recieving from the other layers. We also needed models corresponding to the database tables to access it through EF Core. The models we have created for communication with other layers and for data access will be described in the following sections.
+To implement an API for the WordCount database we needed models for the objects we would be sending and recieving from the other layers. 
+We also needed models corresponding to the database tables to access it through EF Core. The models we have created for communication with other layers and for data access will be described in the following sections.
 
 \subsubsection*{Communication models}
-For communication between our layer and the other layers, we have made 3 input, and 1 response model. These models correspond to the JSON objects we expect to send or recieve from other layers when they attempt to insert or retrive data from the database. When a JSON object is recieved it is parsed into an object from our model, which can then be used to add data to the database.
+For communication between our layer and the other layers, we have made 3 input, and 1 response model. 
+These models correspond to the JSON objects we expect to send or recieve from other layers when they attempt to insert or retrive data from the database. 
+When a JSON object is recieved it is parsed into an object from our model, which can then be used to add data to the database.
 \\
 
 \textbf{Input models}\\
 % ArticleJsonModel
 % TermJsonModel
-The first input model is the ArticleJsonModel which can be seen in figure \ref{ArticlJsonModel}. An article consistst of a title, a publisher, a filepath, the number of words in an article, and an array containing all the words in the article. The words are of the type \texttt{TermJsonModel} which has the word itself and how many times it occurs in the article.
-This model is used when the database recieves a JSON object through our endpoint, which corresponds to the ArticleJsonModel. after the JSON object has been converted to a \texttt{ArticleJsonModel}, the data from the article can be inserted into the \texttt{WordCount} database using EF Core.
+The first input model is the ArticleJsonModel which can be seen in figure \ref{ArticlJsonModel}. An article consistst of a title, a publisher, a filepath, the number of words in an article, and an array containing all the words in the article. 
+The words are of the type \texttt{TermJsonModel} which has the word itself and how many times it occurs in the article.
+This model is used when the database recieves a JSON object through our endpoint, which corresponds to the ArticleJsonModel. 
+After the JSON object has been converted to a \texttt{ArticleJsonModel}, the data from the article can be inserted into the \texttt{WordCount} database using EF Core.
 
 \begin{figure}[H]
     \centering
@@ -17,8 +22,11 @@ This model is used when the database recieves a JSON object through our endpoint
     \caption{Diagram of the \texttt{ArticlJsonModel} and the \texttt{TermJsonModel}}
     \label{ArticlJsonModel}
 \end{figure}
+
 % JsonSchemaInputModel
-The second input model is the \texttt{JsonSchemaInputModel} which can be seen in figure \ref*{JsonSchemaInputModel}. The \texttt{JsonSchemaInputModel} contains a name of the JSON schema, and a body which is the JSON schema itself. The \texttt{JsonSchemaInputModel} is used when the other layers tries to add JSON schemas to the \texttt{WordCount} database which is then later used to validate their future input. How the validation is done will be described in section \ref*{}. \todo{insert ref to validation section}.
+The second input model is the \texttt{JsonSchemaInputModel} which can be seen in figure \ref*{JsonSchemaInputModel}. The \texttt{JsonSchemaInputModel} contains a name of the JSON schema, and a body which is the JSON schema itself. 
+The \texttt{JsonSchemaInputModel} is used when the other layers tries to add JSON schemas to the \texttt{WordCount} database which is then later used to validate their future input. 
+How the validation is done will be described in section \ref*{}. \todo{insert ref to validation section}.
 
 \begin{figure}[H]
     \centering
@@ -29,7 +37,8 @@ The second input model is the \texttt{JsonSchemaInputModel} which can be seen in
 
 \textbf{Response Models}\\
 % FileIdResponse
-The response model \texttt{FileIdResponse} which can be seen in figure \ref*{FileIdResponse}is used when a request for the location of an article is made. After the location has been queried on the \texttt{WordCount} database, it is put into the response model which is returned as a JSON object.
+The response model \texttt{FileIdResponse} which can be seen in figure \ref*{FileIdResponse}is used when a request for the location of an article is made. 
+After the location has been queried on the \texttt{WordCount} database, it is put into the response model which is returned as a JSON object.
 
 \begin{figure}[H]
     \centering
@@ -39,33 +48,18 @@ The response model \texttt{FileIdResponse} which can be seen in figure \ref*{Fil
 \end{figure}
 
 \subsubsection*{Data access models}
-To use EF Core for data access we also had to implement models of the tables in the database, which can then be used to insert and query data on the database.
-
+To use EF Core for data access we also had to implement models of the tables in the database, which can then be used to insert and query data on the database. 
+All of these models must be identical to what is on the database, and they are all used the same way by EF Core to manipulate data.
+\\
 % Article
 % publisher
 % Term
-
+The model of the \texttt{Article} table along with a \texttt{Term} and a \texttt{Publisher} can be seen in figure \ref*{Article}. 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.25]{Images/ArticleModel.PNG}
     \caption{Article}
     \label{Article}
 \end{figure}
-
-% JsonSchemaModel
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.25]{Images/JsonSchemaModel.png}
-    \caption{JsonSchemaModel}
-    \label{JsonSchemaModel}
-\end{figure}
-
-% WordRatio
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.25]{Images/WordRatioModel.png}
-    \caption{WordRatioModel}
-    \label{WordRatioModel}
-\end{figure}
+The other models used for database access have have  similarly been created to replicate the structure of the database. 
+The other models can be seen in appendix \ref*{AppDataAccess}.
