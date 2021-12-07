@@ -13,7 +13,7 @@ When a JSON object is received, it is parsed into an object from our model, whic
 % TermJsonModel
 The first input model is \texttt{ArticleJsonModel} which can be seen in figure \ref{ArticlJsonModel}. An article consists of a title, a publisher, a file path, the number of words in the article and an array containing all the words in the article. 
 The words are of type \texttt{TermJsonModel} which is a separate model containing the word itself and a number denoting how many times it occurs in the given article.
-This model is used when the database receives a JSON object through our endpoint, which corresponds to the ArticleJsonModel. 
+This model is used when the database receives a JSON object through our endpoint, which corresponds to the \texttt{ArticleJsonModel}. 
 After the JSON object has been converted to a \texttt{ArticleJsonModel}, the data from the article can be inserted into the \texttt{WordCount} database using EF Core.
 
 \begin{figure}[H]
