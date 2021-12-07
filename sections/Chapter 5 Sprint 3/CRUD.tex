@@ -1,6 +1,6 @@
 \subsection{CRUD}
 
-As mentioned, the main focus of this sprint was to get the server up and running for the other layers. 
+As outlined in the planning for this sprint, the main focus of this sprint was to implement API end-points for the database.
 As we already had a working database, the goal of this increment was to write a CRUD API in C\# such that the other layers could use to access the database via HTTP requests.
 The CRUD operations we implemented are based on requests from the other layers, and what they thought they needed to retrieve from the database.
 To implement this, we split the CRUD operations into three different Routes handling different aspects of the database. The routes are called: WordCount, WordRatio and Schema. Each route has its own endpoints and can access different tables in the database. The API has been split into three routes that each cover a section of the database. Wordcount is for inserting articles into the database, WordRatio is used as an absbraction over the WordRatio table in the database, and the Schema route is used to add JSON Schemas to the database.
@@ -57,7 +57,7 @@ The Rows of the table matching the terms and sources.
 
 \subsubsection{Schema}
 The last route we implemented in this iteration is the Schema route which is used to post and retrieve a JSON schema from the database. These are later used to verify JSON objects as input on other endpoints. 
-This Schema concists of two \texttt{GET} methods and a single \texttt{POST} method.
+This Schema consists of two \texttt{GET} methods and a single \texttt{POST} method.
 By creating a route for fetching the validation schemas, we enable easy validation and a common understanding of the structure of input data from the knowledge layer.
 \begin{table}[h]
     \begin{tabular}{|llll|}
