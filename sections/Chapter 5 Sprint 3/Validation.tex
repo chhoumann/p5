@@ -28,7 +28,7 @@ Code snippet \ref{lst:jsonSchemaExample} shows an example of a JSON schema that 
 \end{lstlisting}
 
 We first created a new controller called \texttt{SchemaController} which is responsible for posting JSON schemas to the database. 
-Currently, only one schema is stored in the database, however the system is developed such that it is scalable and expandable.
+Currently, only one schema is stored in the database, however the system is developed to be scalable as more schemas could be added in the database and validation for these could be created in the \texttt{SchemaController}.
 JSON schemas are stored in the compressed \texttt{jsonb} format which is more space efficient than storing the full string.
 
 When the \texttt{POST} method in the WordCount controller is invoked, it first fetches the JSON schema from the database.
