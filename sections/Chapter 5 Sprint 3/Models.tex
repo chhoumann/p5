@@ -49,7 +49,8 @@ After the path has been queried in the WordCount database, it is put into the re
 
 \subsubsection*{Data access models}
 To use EF Core for data access, we also had to implement models of the relations in the database, which are be used to insert and query data. 
-All of these models must be identical to what is on the database, and they are all used the same way by EF Core to manipulate data.
+All of these models must be contain exactly the same fields as the relations in the database.
+EF Core then maps these models to the relations such that they can be used to manipulate data.
 \\
 % Article
 % publisher
