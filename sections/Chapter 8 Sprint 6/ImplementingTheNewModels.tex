@@ -61,7 +61,9 @@ ALTER TABLE "OccursIn"
 \end{lstlisting}
 
 Having implemented the new database structures, we can redefine the WordRatio view.
-Notice that the view is replaceable without loss of data since it is an abstraction over a \texttt{SELECT} statement.
+Notice that the view is an abstraction over a \texttt{SELECT} statement, thus it is replaceable without loss of data.
+
+
 \begin{lstlisting}[
     label=lst:DefiningNewView,
     language=SQL,
