@@ -3,37 +3,38 @@ We will now create relations describing the new models for the database.
 Other groups of the \knox{} pipeline have requested that entities representing articles have a unique Id field, regardless of what is considered good database design.
 Similarly, they want a field denoting the total words appearing in the article.
 Equation \ref{eq:newDatabaseRelationalModel} shows relations representing the new database structures.
+Notice that the existing $publisher$ relation in the database have exactly the same attributes as the new one.
 
 \begin{equation}\label{eq:newDatabaseRelationalModel}
     \begin{split}
-        article(\underline{article\_id: \mathbb{Z^+}} title:text,\\ totalwords:\mathbb{Z^+}, publisher\_name \rightarrow publisher), \\
+        article(\underline{article\_id: \mathbb{Z^+}} title:text,\\ total\_words:\mathbb{Z^+}, publisher\_name \rightarrow publisher, file\_path:text), \\
         word(\underline{text:text}),\\
         publisher(\underline{publisher\_name:text}),\\
         occursIn(\underline{text \rightarrow word}, \underline{article\_id \rightarrow article}, count:\mathbb{Z^+})\\
     \end{split}
 \end{equation}
 
-We also have to ensure that the wordratio view still contains the same information as before.
+We also have to ensure that the wordRatio view still contains the same information as before.
 Since the view is an abstraction over a \texttt{SELECT} query, we describe it using relational algebra. 
 
 \begin{equation}\label{create_new_view_rel_alg_structure}
-    wordratio(article\_id, text, count,title, filePath, totalwords, publisher\_name, percent)
+    wordRatio(article\_id\mathbb{Z^+}, text:text, count:\mathbb{Z^+},title:text, file\_path:text, total\_words:\mathbb{Z^+}, publisher\_name:text, percent:\mathbb{R^+})
 \end{equation}
 
-The query of the view is seen in equation \ref{create_new_view_rel_alg}.
+The query of the view is seen in equation \ref{create_new_view_rel_alg}.s
 The resulting relation structure is seen in equation \ref{create_new_view_rel_alg_structure}
 
 \begin{equation}\label{create_new_view_rel_alg}
     \begin{split}
-        \sigma_{article\_id, text, count,title, filePath, totalwords, publisher\_name, percent} \\
+        \sigma_{article\_id, text, count,title, file\_path, total\_words, publisher\_name, percent} \\
         ((article \Join_{article.article\_id = occursIn.article\_id} occursIn) \\
         \Join_{article.publisher\_name = publisher.publisher\_name} publisher\\
-        \Join \gamma_{article, occursIn;percent(count, totalwords)})
+        \Join \gamma_{article, occursIn;percent(count, total\_words)})
     \end{split}
 \end{equation}
 
 Having established the new structures for the database using the relational model and relational algebra, we can develop a corresponding the E-R model to document the design. 
-The model is seen on figure \ref{fig:newdatabaseRedesignER}. Notice that the ER model does not depict the wordratio view.
+The model is seen on figure \ref{fig:newdatabaseRedesignER}. Notice that the ER model does not depict the wordRatio view.
 
 \begin{figure}[H]
     \centering

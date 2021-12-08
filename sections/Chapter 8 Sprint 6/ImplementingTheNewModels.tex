@@ -1,7 +1,6 @@
 \subsubsection*{Implementing the models}
 
-Having established the quality of the design of the database structures, we will now how they are implemented. 
-Since the relation representing a publisher has not been changed, we will not implement any new designs to it. 
+Having established the quality of the design of the database structures, we will now implement them.
 When creating the new tables, we ensure that no loss of data occurs, simply by not dropping the old tables, and renaming them instead. 
 The tables can then be dropped later after the full implementations of the new design have been performed.
 The renaming of the tables can be seen in Code Snippet \ref{lst:RenamingOldModelsSQL}.
@@ -23,7 +22,7 @@ ALTER TABLE "Term"
 \end{lstlisting}
 
 When implementing the new tables, we base them on the just-renamed tables from the old database design.
-By doing this, we ensure that all data from the old tables are correctly transferred to the new ones since each of the commands is a transaction. (see section \ref{relational_databases}).
+By doing this, we ensure that all data from the old tables are correctly transferred to the new ones since each of the commands is a transaction (see section \ref{relational_databases}).
 After all data have been transferred to a new table, constraints, foreign- and primary keys are added to the tables. 
 This is seen on Code Snippet \ref{lst:CreatingTheNewDBModelsSQL}.
 We have ensured that the changes are reversible by creating a script dropping the new tables, and restoring the structure of the old tables.

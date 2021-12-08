@@ -1,7 +1,7 @@
 \section{Redesigning the wordcount database}
-In section \ref{InitialDesign} we established that the design would lead to duplicate values in the wordcount database.
+In section \ref{InitialDesign} we established that the design would lead to duplicate or redundant data in the wordcount database.
 Namely, the terms occurring in the Term entity set (see \ref{newdatabaseER}) will not be unique. 
-Thus, the database will contain duplicate values.
+Thus, the database can contain duplicate values.
  
 To address this issue, we will create relations using the relational model (see section \ref{relational_databases}) and ensure they are well-designed.
 After ensuring that a normal form is reached, we will create the relations using SQL as a DDL.
