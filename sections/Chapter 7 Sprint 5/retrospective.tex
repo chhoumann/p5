@@ -1,1 +1,32 @@
 \section{Retrospective}
+We have received three user stories from the PO, but have not deployed functionality that satisfies any of them to the \knox{} pipeline. Thus, we have not completed the sprint goal.
+
+\subsection{Sprint goal}
+The goal of this sprint was to provide endpoints for an RDF database, such that the \knox{} pipeline could fetch data using a SPARQL query, and input data in turtle format.
+Since none of these features are deployed, we do not meet the acceptance criteria (see section \ref{acceptCriteriaSprint5}).
+
+\subsection{Reflection on the sprint}
+During the sprint, we were made aware that the report needed more theory on databases. 
+Therefore some of the tasks regarding report writing grew to an almost unmanageable size. This in turn meant that more time was spend on writing than was originally planned for.
+The decision to switch from Fuseki to Virtuoso happened early enough in the sprint that the impact was fairly minor. The time spend researching how to use Fuseki is however wasted due to it no longer being needed.
+
+During the first sprints of the project, our PO did not give us any user stories (epics). Having user stories for this sprint greatly improved our focus when grooming the backlog, and also help give us a concrete idea of when a task was done. 
+The user stories for the sprint planning allowed us to granulate them with the other involved layers, which in turn allowed us to remove an unnecessary task. Originally the PO did not want the endpoints to take SPARQL requests as their input.
+The knowledge layer, who needed the endpoints, disagreed, and after a conversation with the PO, it was established that endpoints receiving SPARQL queries as a string would be sufficient.
+
+\subsection{What we learned}
+We have learned that writing report in pairs improves the quality of the report written. This also has the pro minimizing the time spend on reviews due to the initial versions being of a higher quality.
+It was also realized that using GitHubs feature which allows us to request specific people to do a review would greatly optimize our time usage. This is due to it minimize the amount of people that reviews the same requests in case changes are needed while also allowing us to requests reviews from team members with expertize in the subject area that is being reviewed. This allows for better time usage and a higher product quality. 
+
+\subsection{How can we improve in the next sprint}
+\subsubsection{Start doing}
+\begin{itemize}
+    \item Request reviews from specific people on GitHub.
+    \item Start referencing the data written database theory
+\end{itemize}
+\subsubsection{Continue doing}
+\begin{itemize}
+    \item Pair writing
+\end{itemize}
+
+With the retrospective for sprint 5 completed the sprint planning for the next sprint can now begin. 
