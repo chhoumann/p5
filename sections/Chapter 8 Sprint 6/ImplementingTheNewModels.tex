@@ -21,7 +21,7 @@ ALTER TABLE "Term"
 \end{lstlisting}
 
 When implementing the new tables, we base them on the just-renamed tables from the old database design.
-By doing this, we ensure that all data from the old tables are correctly transferred to the new ones since each of the commands is a transaction (see section \ref{relational_databases}).
+By doing this, we ensure that all data from the old tables are correctly transferred to the new ones, since each of the commands is a transaction (see section \ref{relational_databases}).
 After all data have been transferred to a new table, constraints, foreign- and primary keys are added to the tables. 
 This is seen on Code Snippet \ref{lst:CreatingTheNewDBModelsSQL}.
 We have ensured that the changes are reversible by creating a script dropping the new tables, and restoring the structure of the old tables.
