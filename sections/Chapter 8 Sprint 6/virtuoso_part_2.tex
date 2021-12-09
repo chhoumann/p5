@@ -16,9 +16,10 @@ Virtuoso supports both, which made it a good choice for \knox{} --- specificatio
 
 When we first looked at Virtuoso, we found some frameworks that would help us facilitate data insertion and retrieval. However, during implementation, none of these frameworks proved useful.
 
-As for our implementation, we set up a web API in C\#. This API is connected to Virtuoso, and both run in a dockerized environment. They run on the same network, so that they can communicate with each other.
+As for our implementation, we did not choose to publish the SPARQL endpoint for \knox{} usage directly. Instead, we set up a web API in C\#.
+Our reason for doing this is to encapsulate database access, such that we can change the database in the future without affecting the API.
+This API is connected to Virtuoso, and both run in a dockerized environment. They run on the same network, so that they can communicate with each other.
 
 As mentioned, Virtuoso supports insertion of data in Turtle format, and retrieval of data in RDF/XML format. Inserting and querying data is done through the Virtuoso SPARQL endpoint. The C\# API we have set up relies on this endpoint to do the actual work. We pass on the queries and data, acting as a proxy between the user and the Virtuoso endpoint. At least, this is the case when users send SPARQL queries to the API. When users send Turtle data to the API, we wrap it in a SPARQL query with some preset parameters, and then send it to Virtuoso. For example, we have specified a default graph, in case the user does not specify one.
 
-One might wonder why we did not use the SPARQL endpoint directly. One reason is, as written before, we add certain parameters to the queries, which help users. We have also implemented chunking logic for data insertion, such that users do not get an error when sending a large amount of data. This was done because we, during our tests, experienced that Virtuoso would error out when sending a large amount of data --- it could not execute such large amounts of generated SQL code.
-Another reason is to encapsulate database access, such that we can change the database in the future without affecting the API.
+We have also implemented chunking logic for data insertion, such that users do not get an error when sending a large amount of data. This was done because we, during our tests, experienced that Virtuoso would error out when sending a large amount of data --- it could not execute such large amounts of generated SQL code.
