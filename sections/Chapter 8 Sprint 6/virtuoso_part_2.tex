@@ -10,7 +10,7 @@ For this reason, we decided to invest time in implementing OpenLink Virtuoso for
 
 Before starting the implementation, we decided to do some examine whether Virtuoso should still be our choice.
 We attempted to gather feedback from the other groups in the \knox{} project, but they had very few requirements for the RDF database. All they wanted to do was store and retrieve RDF data.
-They did ask for this to be facilitated through SPARQL queries to a given endpoint, and that they could insert data in turtle format. Our implementation of those specifications will be discussed shortly.
+They did ask for this to be facilitated through SPARQL queries to a given endpoint, and that they could insert data in Turtle format. Our implementation of those specifications will be discussed shortly.
 
 Virtuoso supports both, which made it a good choice for \knox{} --- specification-wise. We also did some research on the performance of Virtuoso, and it seemed to do fine in various benchmarks\cite{addleseeComparingLinkedData2019}\cite{jovanovikBenchmarkingVirtuosoMighty2018}.
 
@@ -18,7 +18,7 @@ When we first looked at Virtuoso, we found some frameworks that would help us fa
 
 As for our implementation, we set up a web API in C\#. This API is connected to Virtuoso, and both run in a dockerized environment. They run on the same network, so that they can communicate with each other.
 
-As mentioned, Virtuoso supports insertion of data in turtle format, and retrieval of data in RDF/XML format. Inserting and querying data is done through the Virtuoso SPARQL endpoint. The C\# API we have set up relies on this endpoint to do the actual work --- we simply pass on the queries and data, acting as a proxy between the user and the Virtuoso endpoint. At least, this is the case for when users send SPARQL queries to the API. When users send data to the API, we wrap it in a SPARQL query with some preset parameters, and then send it to Virtuoso. For example, we have specified a default graph, in case the user does not specify one.
+As mentioned, Virtuoso supports insertion of data in Turtle format, and retrieval of data in RDF/XML format. Inserting and querying data is done through the Virtuoso SPARQL endpoint. The C\# API we have set up relies on this endpoint to do the actual work. We simply pass on the queries and data, acting as a proxy between the user and the Virtuoso endpoint. At least, this is the case for when users send SPARQL queries to the API. When users send data to the API, we wrap it in a SPARQL query with some preset parameters, and then send it to Virtuoso. For example, we have specified a default graph, in case the user does not specify one.
 
 One might wonder why we did not use the SPARQL endpoint directly. One reason is, as written before, we add certain parameters to the queries, which help users. We have also implemented chunking logic for data insertion, such that users do not get an error when sending a large amount of data. This was done because we, during our tests, experienced that Virtuoso would error out when sending a large amount of data --- it could not execute such large amounts of generated SQL code.
 Another reason is to encapsulate database access, such that we can change the database in the future without affecting the API.
