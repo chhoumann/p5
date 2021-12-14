@@ -123,14 +123,28 @@ Therefore, it is useful to be able to convert an E-R model into an equivalent re
 \textbf{Strong entity sets}\\
 Strong entity sets are converted by taking each attribute of the entity set, and a relation with corresponding attributes. 
 The primary key of the entity set is chosen as primary key for the relation \cite{DBSBook}.\\
-\textbf{Many-to-many relationships}
+As an example of converting a strong entity we can use the book owner example from figure \ref{fig:ER_Book_Example}. In this example \texttt{Book} is a strong entity. The relation created from the book entity can be seen in equation \ref*{eq:bookConversion}. The attributes from the entity are added to the relation and the primary key of the book entity, \texttt{ISBN}, is used as the primary key for the relation.
+
+\begin{equation}\label{eq:bookConversion}
+    \begin{split}
+        Book(\underline{ISBN : text} , title : text , author\_name : text , number\_of\_pages)
+    \end{split}
+\end{equation}
+\\
+% \begin{equation}\label{eq:bookOwnerExample}
+%     \begin{split}
+%         owns(\underline{owner\_id \rightarrow book\_owner}, \underline{ISBN \rightarrow book}), \\
+%         book\_owner(name:text,\underline{owner\_id:\mathbb{Z}^+})
+%     \end{split}
+% \end{equation}
+\textbf{Many-to-many relationships}\\
 When converting many-to-many relationships to a relation, one create a single relation with primary key attributes from the participating entity sets \cite{DBSBook}. These keys are used as foreign key to reference the converted entities participating in the relationship. 
 The remaining attributes of the entity set is similarly mapped to the relation.\\
-\textbf{Many-to-one relationships}
+\textbf{Many-to-one relationships}\\
 If we have a many-to-one relationship between two sets we can combine the relationship set and the relation created from the entity set on the 'many' side into a single relation. This relation will use the primary key of the entity set as its primary key, and have a foreign referencing the relation created from the 'one' side of the relationship.\\
-\textbf{One-to-one relationships}
+\textbf{One-to-one relationships}\\
 When converting one-to-one relationships with total participation, we simply create a union of the attributes of the participating entity sets and the relationship set \cite{DBSBook}. If there is not total participation, two relations are created from the entity set, and a foreign key is placed on one of the sets.\\
-\textbf{Weak entity sets}
+\textbf{Weak entity sets}\\
 When representing weak entity sets, one creates a relation containing the attributes of the weak entity set as well as the attributes of the identifying set's primary key.
 The primary key of the identifying relation will also serve as a foreign key to the identifying relation. \cite{DBSBook}.
 The relationship set is simply ignored, as the relationship set will not have any attributes \cite{DBSBook}. 
@@ -162,6 +176,7 @@ Some of the common operators of in relational algebra can be seen on table \ref{
 \textbf{Select}\\
 The select operator defines a set, $R_{result}\subseteq R$ where all tuples $t \in R_{result}$ satisfies a given predicate \cite{DBSBook}.\\
 That is, $\forall t \in R_{result} \vDash predicate$.\\
+% As an example we can use the book owner example, and try to select all books
 \textbf{Projection}\\
 The projection operator specifies a relation containing only a subset of the attributes of the operand relation \cite{DBSBook}.
 That is, attributes $A_1, ..., A_n$ of relation $R_{result}$ will be a subset or equal to the attributes of the operand.\\
