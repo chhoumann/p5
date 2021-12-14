@@ -19,11 +19,6 @@ Since the view is an abstraction over a \texttt{SELECT} query, we will describe 
 The query of the view can be seen in equation \ref{create_new_view_rel_alg}
 The resulting relation structure is seen in equation \ref{create_new_view_rel_alg_structure}.
 
-\begin{equation}\label{create_new_view_rel_alg_structure}
-    \begin{split}
-        wordRatio(article\_id:\mathbb{Z^+}, text:text, count:\mathbb{Z^+},title:text, file\_path:text,\\ total\_words:\mathbb{Z^+}, publisher\_name:text, percent:\mathbb{R^+})
-    \end{split}
-\end{equation}
 
 \begin{equation}\label{create_new_view_rel_alg}
     \begin{split}
@@ -34,7 +29,12 @@ The resulting relation structure is seen in equation \ref{create_new_view_rel_al
     \end{split}
 \end{equation}
 
-Having established the new structures for the database using the relational model and relational algebra, we can develop a corresponding the E-R model to document the design. 
+\begin{equation}\label{create_new_view_rel_alg_structure}
+    \begin{split}
+        wordRatio(article\_id:\mathbb{Z^+}, text:text, count:\mathbb{Z^+},title:text, file\_path:text,\\ total\_words:\mathbb{Z^+}, publisher\_name:text, percent:\mathbb{R^+})
+    \end{split}
+\end{equation}
+Having established the new structures for the database using the relational model and relational algebra, we can develop a corresponding the ER model to document the design. 
 The model is seen on figure \ref{fig:newdatabaseRedesignER}. Notice that the ER model does not depict the wordRatio view.
 
 \begin{figure}[H]
