@@ -11,21 +11,20 @@ This is verified when examining the functional dependency of its composite prima
 A unique article cannot identify the text and number of times the text occurs in the article.
 Similarly, the number of times the text occurs in the article and the article\_id cannot identify the text of the word.
 
-The \textit{article} relation is in BCNF form. 
+The \textit{article} relation is in BCNF. 
 This is seen when considering the functional dependency of its single, primary key:
 \begin{equation*}
     \{article\_id\} \rightarrow \{title, publisher\_name,total\_words\, file\_path\}
 \end{equation*}
 
-One could consider using only title as key. 
-However, some article titles could occur multiple times; this is realized when considering the domain area of the \knox{} search engine
-\footnote{For instance, the title "The first snow of the season" could be a occurring every year for the same publisher.}.
+One could consider using only \textit{title} as key. 
+However, some article titles could occur multiple times; this is realized when considering the domain area of the \knox{} search engine\footnote{For instance, the title "The first snow of the season" could be a occurring every year for the same publisher.}. Thus, the composite, primary key $\{ publisher,article\_title \}$ would not guaranteee uniqueness.
 One should notice that each of the files in the search engine (represented by the $file\_path$ attribute) can contain multiple articles\footnote{An example of a $file\_path$ could be a path to a newspaper in PDF format, containing many articles about the weather.}.
 Thus, the $file\_path$ attribute cannot uniquely identify articles.
 Similarly, a PDF file might have chapters (articles) with the same name. For instance, "Review" or "Retrospective".
 Thus, using a composite key of \textit{article\_id, file\_path} is not viable. 
 
-The \textit{word} and the \textit{publisher} relation is in BCNF trivially:
+The \textit{word} and the \textit{publisher} relations are in BCNF trivially:
 \begin{equation*}
     \{ text\} \rightarrow \{text\} \textit{\ and\ } \{ publisher\_name \} \rightarrow \{ publisher\_name\}
 \end{equation*}
