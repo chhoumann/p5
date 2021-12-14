@@ -6,11 +6,11 @@ This implementation was, however, not suitable for \knox{}, as it needed to be r
 
 For this reason, we decided to invest time in implementing OpenLink Virtuoso\cite{OpenLinkSoftwareVirtuoso} for the \knox{} database layer. We had already made this decision in sprint 2, as seen in chapter \ref{chapter:sprint2}.
 
-Before starting the implementation, we decided to examine whether Virtuoso should still be our choice.
+Before starting the implementation, we decided to examine whether Virtuoso should still be our choice\todo{Måske hav et afsnit omkring de forskellige muligheder.Eksempelvis hvorfor I ikke bruger LDF (i.e., LDF bruger HDT som har samme problem som det I beskriver ovenfor).}.
 We attempted to gather feedback from the other groups in the \knox{} project, but they had very few requirements for the RDF database. All they wanted to do was store and retrieve RDF data.
-They did ask for this to be facilitated through SPARQL queries to a given endpoint, and that they could insert data in Turtle format. Our implementation of those specifications will be discussed shortly.
+They did ask for this to be facilitated through SPARQL queries to a given endpoint, and that they could insert data in Turtle format. Our implementation\todo{Måske hav et kodeeksempel med her hvor I viser det endpoint der tager imod en turtle fil eller det endpoint der tager imod SPARQL queries (bare et enkelt)} of those specifications will be discussed shortly.
 
-Virtuoso supports both, which made it a good choice for \knox{} --- specification-wise. We also did some research on the performance of Virtuoso, and it seemed to do fine in various benchmarks\cite{addleseeComparingLinkedData2019}\cite{jovanovikBenchmarkingVirtuosoMighty2018}.
+Virtuoso supports both, which made it a good choice for \knox{} --- specification-wise. We also did some research on the performance of Virtuoso, and it seemed to do fine in various benchmarks\cite{addleseeComparingLinkedData2019}\cite{jovanovikBenchmarkingVirtuosoMighty2018}\todo{Det kommer an på hvor meget load der er på serveren. For eksempel, hvis der er meget load på serveren fungerer en centralt endpoint ikke lige så godt som et decentraliseret system (men I har alligevel ikke nok load til at retfærdiggøre noget andet).}.
 
 When we first looked at Virtuoso, we found some frameworks that would help us facilitate data insertion and retrieval.  However, during implementation, none of these frameworks proved useful. Multiple frameworks, like \textit{dotNetRDF} (C\#) and \textit{RDFLib} (Python), were attempted to be used, in order to reduce complexity of the implementation. However, we were unable to establish a connection to the database with any of the frameworks, so the efforts were abandoned. Instead, we decided to use the Virtuoso SPARQL endpoint directly, which worked well for our needs.
 
@@ -18,7 +18,67 @@ As for our implementation, we did not choose to publish the SPARQL endpoint for 
 Our reason for doing this is to encapsulate database access, such that we can change the database in the future without affecting the API.
 This API is connected to Virtuoso, and both run in a dockerized environment. They run on the same network, so that they can communicate with each other.
 
-As mentioned, Virtuoso supports insertion of data in Turtle format, and retrieval of data in RDF/XML format. Inserting and querying data is done through the Virtuoso SPARQL endpoint. The C\# API we have set up relies on this endpoint to do the actual work. We pass on the queries and data, acting as a proxy between the user and the Virtuoso endpoint. At least, this is the case when users send SPARQL queries to the API. When users send Turtle data to the API, we wrap it in a SPARQL query with some preset parameters, and then send it to Virtuoso. For example, we have specified a default graph, in case the user does not specify one.
+As mentioned, Virtuoso supports insertion of data in Turtle format, and retrieval of data in RDF/XML format. Inserting and querying data is done through the Virtuoso SPARQL endpoint. The C\# API we have set up relies on this endpoint to do the actual work. We pass on the queries and data, acting as a proxy between the user and the Virtuoso endpoint\todo{Det kan være I skal inkludere en figur hvor I viser den her arkitektur - for at give et bedre overblik over hvordan det fungerer.}. At least, this is the case when users send SPARQL queries to the API. When users send Turtle data to the API, we wrap it in a SPARQL query with some preset parameters, and then send it to Virtuoso. For example, we have specified a default graph, in case the user does not specify one.
+
+\todo{Explain the code snippet below.}
+\todo{Explain that we don't take a Turtle file, but a string containing the data.}
+\todo{Create a figure that explains the architecture of this setup.}
+\todo{Create a section that explains why we didn't go for something else than Virtuoso. Include why we don't use LDF / HDT (see feedback).}
+
+\begin{lstlisting}[language=CSharp, caption={Data insertion endpoint and data insertion logic}, label={lst:virtuoso_data_insertion}]
+[HttpPost, Route("/[controller]/")]
+public async Task<IActionResult> Insert(string turtle, string? graph)
+{
+    string? virtuosoEndpoint = Environment.GetEnvironmentVariable("VIRTUOSO_ENDPOINT");
+    if (virtuosoEndpoint == null)
+    {
+        return StatusCode((int)HttpStatusCode.InternalServerError, "VIRTUOSO_ENDPOINT environment variable not set");
+    }
+
+    try
+    {
+        string insertResponse = !string.IsNullOrEmpty(graph) ?
+            await new VirtuosoDataStore(virtuosoEndpoint).InsertTurtleGraph(turtle, graph) :
+            await new VirtuosoDataStore(virtuosoEndpoint).InsertTurtleGraph(turtle);
+
+        return Ok(insertResponse);
+    }
+    catch (Exception e)
+    {
+        return StatusCode(503, e.Message);
+    }
+}
+
+public async Task<string> InsertTurtleGraph(string turtle, string? graphName = "knox")
+{
+    IGraph g = new Graph()
+    {
+        BaseUri = uri,
+    };
+    
+    GraphHandler graphHandler = new(g);
+    TurtleParser parser = new();
+    parser.Load(graphHandler, new StringReader(turtle));
+    
+    Console.WriteLine($"Triples in given graph: {g.Triples.Count}");
+
+    string[] chunkedQueries = ChunkRecords(turtle, "\n\n", 50);
+
+    foreach (string chunkedQuery in chunkedQueries)
+    {
+        StringBuilder sb = new();
+        
+        sb.Append("INSERT DATA { GRAPH <" + graphName + "> {");
+        sb.Append(chunkedQuery);
+        sb.Append("} }");
+
+        await Query(sb.ToString());
+    }
+
+    return "OK";
+}
+\end{lstlisting}
+
 
 We have also implemented chunking logic for data insertion, such that users do not get an error when sending a large amount of data. This was done because we, during our tests, experienced that Virtuoso would error out when sending a large amount of data --- it could not execute such large amounts of generated SQL code. The logic for diving chunks of data into smaller chunks is implemented in the \texttt{ChunkRecords} function, which can be seen in code snippet \ref{lst:virtuoso_chunking}. The logic itself is to divide a large string of input data into smaller chunks given some separator and chunk size. This is done by first splitting the string into an array of strings with the separator, and then combining individual strings into chunks with the given size.
 
