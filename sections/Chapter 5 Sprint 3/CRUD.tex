@@ -39,17 +39,30 @@ The articles are then checked for duplicate data on the database, if there is an
 \subsubsection{WordRatio}
 The WordRatio route is used by the functionality layer to fetch specific data from the database.
 As the WordRatio table is a view, it cannot be used to store new data. 
-The primary purpose of WordRatio is to check how many times a given word occours in an article.
+The primary purpose of WordRatio is to check how many times a given word occurs in an article.
 WordRatio consists of one \texttt{GET} method with an optional parameter. 
 \begin{table}[h]
     \begin{tabular}{|llll|}
     \hline
     \multicolumn{4}{|c|}{\textbf{WordRatio}}                                                                                                                                           \\ \hline
-    \multicolumn{1}{|l|}{Name}                      & \multicolumn{1}{l|}{Method} & \multicolumn{1}{l|}{Input}                           & Reponse on success                               \\ \hline
-    \multicolumn{1}{|l|}{\texttt{GetMatches}}       & \multicolumn{1}{l|}{GET}    & \multicolumn{1}{l|}{terms (string []), sources (string[])} & WordRatio for all articles from source with term \\ \hline
-    \multicolumn{1}{|l|}{\texttt{GetMatches}}       & \multicolumn{1}{l|}{GET}    & \multicolumn{1}{l|}{terms (string [])}                   & WordRatio for all articles with term             \\ \hline
+        \multicolumn{1}{|l|}{Name} &
+        \multicolumn{1}{l|}{Method} &
+        \multicolumn{1}{l|}{Input} &
+        Reponse on success \\ 
+    \hline
+        \multicolumn{1}{|l|}{\texttt{GetMatches}} &
+        \multicolumn{1}{l|}{GET} &
+        \multicolumn{1}{l|}{terms (string[]), sources (string[])} &
+        WordRatio for all articles from source with term \\
+    \hline
+        \multicolumn{1}{|l|}{\texttt{GetMatches}} &
+        \multicolumn{1}{l|}{GET} &
+        \multicolumn{1}{l|}{terms (string [])} &
+        WordRatio for all articles with term \\
+    \hline
     \end{tabular}
-    \end{table}
+\end{table}
+
 The \texttt{GetMatches} method is used to query one or more specific words on the WordRatio table.
 One may provide one or more sources in which to search for the specified words.
 If no sources are provided, the database searches for the given words in all sources.
@@ -68,7 +81,7 @@ By creating a route for fetching the validation schemas, we enable easy validati
     \multicolumn{1}{|l|}{\texttt{GetAllSchemas}}   & \multicolumn{1}{l|}{GET}    & \multicolumn{1}{l|}{None}                & All JSON Schemas    \\ \hline
     \multicolumn{1}{|l|}{\texttt{PostJSONSchemas}} & \multicolumn{1}{l|}{POST}   & \multicolumn{1}{l|}{JSON Schema}         & Status message      \\ \hline
     \end{tabular}
-    \end{table}
+\end{table}
 
 The first \texttt{GET} method is called GetSchema which takes a SchemaName as its input and returns a JSON Schema. 
 
@@ -77,5 +90,5 @@ The second \texttt{GET} method is called GetAllSchemas which takes no input and 
 The last method is a \texttt{POST} method called PostJSONSchema and takes a JSON Schema as its input and inserts it into the database.
 The body of the post request must consist of two fields - the schema name, which is its primary key in the database, and the schema content itself. Before the schema is inserted in the database it is checked if it is a duplicate, if that is the case an error message will be sent in response.
 A schema gets stored in the database in the format known as \texttt{jsonb} or JSON binary which is a built-in type provided by \postgres{}.
-This format is used to store a JSON object as binary which uses much less space than a varchar or regular JSON type would.
-Even though \postgres{} may not be the most efficient DBMS for storing JSON data, it is sufficient for this usecase, as posting and fetching Schemas will not be done often. 
+This format is used to store a JSON object as binary which uses much less space than a \texttt{varchar} or regular JSON type would.
+Even though \postgres{} may not be the most efficient DBMS for storing JSON data, it is sufficient for this use case, as posting and fetching Schemas will not be done often. 
