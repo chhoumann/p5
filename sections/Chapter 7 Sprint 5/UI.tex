@@ -26,7 +26,7 @@ On the frontend, these features were implemented using some simple CSS and React
 On the backend server, a timer is set up to ping both the WordCount and RDF servers every ten minutes.
 The most recent ten results are then stored in an array.
 When the frontend requests the status of the databases, the backend calculates the average response time using the stored results which it then includes in its response body.
-If the latest database server pings failed, the backend server instead simply includes a status code in its response body indicating that the database servers are down.
+If the latest database server pings failed, the backend server only includes a status code in its response body indicating that the database servers are down.
 
 
 Figure \ref{dbstatusUI} shows the database status UI assuming a response from both the WordCount server and database, and no response from the RDF server.
