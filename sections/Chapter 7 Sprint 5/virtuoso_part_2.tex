@@ -20,6 +20,28 @@ This API is connected to Virtuoso, and both run in a dockerized environment. The
 
 As mentioned, Virtuoso supports insertion of data in Turtle format, and retrieval of data in RDF/XML format. Inserting and querying data is done through the Virtuoso SPARQL endpoint. The C\# API we have set up relies on this endpoint to do the actual work. We pass on the queries and data, acting as a proxy between the user and the Virtuoso endpoint. At least, this is the case when users send SPARQL queries to the API. When users send Turtle data to the API, we wrap it in a SPARQL query with some preset parameters, and then send it to Virtuoso. For example, we have specified a default graph, in case the user does not specify one.
 
-We have also implemented chunking logic for data insertion, such that users do not get an error when sending a large amount of data. This was done because we, during our tests, experienced that Virtuoso would error out when sending a large amount of data --- it could not execute such large amounts of generated SQL code.
+We have also implemented chunking logic for data insertion, such that users do not get an error when sending a large amount of data. This was done because we, during our tests, experienced that Virtuoso would error out when sending a large amount of data --- it could not execute such large amounts of generated SQL code. The logic for diving chunks of data into smaller chunks is implemented in the \texttt{ChunkRecords} function, which can be seen in code snippet \ref{lst:virtuoso_chunking}. The logic itself is to divide a large string of input data into smaller chunks given some separator and chunk size. This is done by first splitting the string into an array of strings with the separator, and then combining individual strings into chunks with the given size.
+
+\begin{lstlisting}[language=CSharp, caption={Chunking logic for large queries}, label={lst:virtuoso_chunking}]
+private string[] ChunkRecords(string input, string separator, int chunkSize = 10)
+{
+    List<string> chunks = new();
+    string[] strings = input.Split(separator);
+    
+    for (int i = 0; i < strings.Length / chunkSize; i++)
+    {
+        string[] chunk = strings.Skip(i * chunkSize).Take(chunkSize).ToArray();
+        chunks.Add(string.Join(separator, chunk));
+    }
+
+    int remainder = strings.Length % chunkSize;
+    int taken = chunks.Count * chunkSize;
+
+    string[] lastChunk = strings.Skip(taken).Take(remainder).ToArray();
+    chunks.Add(string.Join(separator, lastChunk));
+    
+    return chunks.ToArray();
+}
+\end{lstlisting}
 
 We have not had time to deploy the API to the production environment. Therefore, deployment will be pushed to the next sprint.
