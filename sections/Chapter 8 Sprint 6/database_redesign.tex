@@ -18,6 +18,7 @@ This is done by taking a dump (backup) of the database, and verifying that no da
 \input{sections/Chapter 8 Sprint 6/ImplementingTheNewModels.tex}
 \subsection{Result}
 Having implemented the new database structure, we can assess the changes to the database. 
-The number of words stored in the old \texttt{Term} relation was almost 6,900,000.
 The number of words in the just implemented \texttt{Word} relation is 260,000.
+The number of unique tuples in the just implemented \texttt{WordOccurance} table is the 6,900,000, the same as the number of words stored in the old \texttt{Term} relation.
+Thus, the number of tuples in the new relation is the same, but the number of duplicate words have been reduced greatly.
 
