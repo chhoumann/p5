@@ -2,8 +2,15 @@
 \subsection{Database Design}
 We suggest that next semesters' database group(s) restructure the WordCount database, making it BCNF. 
 This can be done by creating tables for file paths, and have the articles reference the table using a foreign key.
+
 \subsection{Server and Database Structure}
 We strongly suggest that the various databases of Knox migrate to a single, dedicated server.
+This will greatly ease new implementations and management of both new and current of database structures.
+Many of the layers will create, and need storage for, new data structures by analyzing currently stored data.
+By creating centralizing the \knox{} databases, one could easily implement views or relationships connecting these new data structures.
 
 \subsection{Analysis of Performance}
+Coming groups could also consider performance analysis for the methods of the API controllers. 
+By doing this, the coming database group could ensure a stable response time for all endpoints. Combining this with the UI component described in  
 Benchmarking of databases (or papers documenting performance), controllers etc. 
+
