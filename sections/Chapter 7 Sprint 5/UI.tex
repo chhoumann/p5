@@ -1,15 +1,10 @@
 \section{UI}
-% knox groups were given the task to create UI
-% every group had to 
-% committes decided it must be made in react and backend in node-js
-% database UI was decided in the group that it should be a status for word count and RDF
-% describe implementation briefly
-% show a picture of the result
-
 Every group was given the task to contribute to the \knox{} UI in some way. 
 A UI committee was created to manage decisions relating to the UI. 
 It decided the frontend be created in the React JavaScript library, while the backend server be created in Node.js \todo{citation needed}.
 Each group then had to decide themselves what they wanted to create. 
+
+
 We decided to create a database and server status component. 
 This component would be responsible for displaying the status of both the RDF and WordCount server and database. 
 Thus, for both databases, there are a few cases that must be handled:
@@ -32,9 +27,12 @@ On the backend server, a timer is set up to ping both the WordCount and RDF serv
 The most recent ten results are then stored in an array.
 When the frontend requests the status of the databases, the backend calculates the average response time using the stored results which it then includes in its response body.
 If the latest database server pings failed, the backend server instead simply includes a status code in its response body indicating that the database servers are down.
+
+
+Figure \ref{dbstatusUI} shows the database status UI assuming a response from both the WordCount server and database, and no response from the RDF server.
 \begin{figure}[htb!]
     \centering
-    \includegraphics[scale=0.6]{Images/dbstatus.png}
+    \includegraphics[scale=0.5]{Images/dbstatus.png}
     \caption{The UI indicating the status of the database servers and the databases themselves.}
     \label{dbstatusUI}
 \end{figure}
