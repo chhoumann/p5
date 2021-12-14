@@ -22,7 +22,7 @@ On the frontend, a status message is displayed along with a colored circle to in
 	\item Green for both servers and databases responding.
 \end{itemize}
 If both the servers and databases respond, the average response time is also displayed.
-On the frontend, these features were implemented using some simple CSS and React JavaScript code where we use the Fetch API to access the backend server.
+On the frontend, these features were implemented using simple CSS and React JavaScript code where we use the Fetch API to access the backend server.
 On the backend server, a timer is set up to ping both the WordCount and RDF servers every ten minutes.
 The most recent ten results are then stored in an array.
 When the frontend requests the status of the databases, the backend calculates the average response time using the stored results which it then includes in its response body.
