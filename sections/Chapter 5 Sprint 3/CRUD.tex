@@ -41,25 +41,19 @@ The WordRatio route is used by the functionality layer to fetch specific data fr
 As the WordRatio table is a view, it cannot be used to store new data. 
 The primary purpose of WordRatio is to check how many times a given word occurs in an article.
 WordRatio consists of one \texttt{GET} method with an optional parameter. 
-\begin{table}[h]
+\begin{table}[]
     \begin{tabular}{|llll|}
     \hline
-    \multicolumn{4}{|c|}{\textbf{WordRatio}}                                                                                                                                           \\ \hline
-        \multicolumn{1}{|l|}{Name} &
-        \multicolumn{1}{l|}{Method} &
-        \multicolumn{1}{l|}{Input} &
-        Reponse on success \\ 
-    \hline
-        \multicolumn{1}{|l|}{\texttt{GetMatches}} &
-        \multicolumn{1}{l|}{GET} &
-        \multicolumn{1}{l|}{terms (string[]), sources (string[])} &
-        WordRatio for all articles from source with term \\
-    \hline
-        \multicolumn{1}{|l|}{\texttt{GetMatches}} &
-        \multicolumn{1}{l|}{GET} &
-        \multicolumn{1}{l|}{terms (string [])} &
-        WordRatio for all articles with term \\
-    \hline
+    \multicolumn{4}{|c|}{WordRatio}                                                                            \\ \hline
+    \multicolumn{1}{|l|}{Name} & \multicolumn{1}{l|}{Method} & \multicolumn{1}{l|}{Input} & Reponse on success \\ \hline
+    \multicolumn{1}{|l|}{GetMatches} &
+      \multicolumn{1}{l|}{GET} &
+      \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}terms (string{[}{]}), \\ sources (string{[}{]})\end{tabular}} &
+      \begin{tabular}[c]{@{}l@{}}WordRatio for all articles \\ from source with term\end{tabular} \\ \hline
+    \multicolumn{1}{|l|}{GetMatches} &
+      \multicolumn{1}{l|}{GET} &
+      \multicolumn{1}{l|}{terms (string {[}{]})} &
+      \begin{tabular}[c]{@{}l@{}}WordRatio for all articles\\  with term\end{tabular} \\ \hline
     \end{tabular}
 \end{table}
 
