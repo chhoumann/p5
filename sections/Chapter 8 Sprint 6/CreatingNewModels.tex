@@ -2,21 +2,32 @@
 We will now create relations describing the new models for the database.
 Other groups of the \knox{} pipeline have requested that entities representing articles have a unique Id field, regardless of what is considered good database design.
 Similarly, they want a field denoting the total words appearing in the article.
-Equation \ref{eq:newDatabaseRelationalModel} shows relations representing the new database structures.
-Notice that the existing $publisher$ relation in the database have exactly the same attributes as the new one.
+
+We wil start by creating an ER-model of the domain, and then describe the entity- and relationship sets using the relational model, using the method described in section \ref{relational_databases}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.35]{Images/new ER.drawio.png}
+    \caption{ER diagram depicting the new model of the database. Notice that the relationship set \textit{Publishes} is not implemented.}
+    \label{fig:newdatabaseRedesignER}
+\end{figure}
+
+Equation \ref{eq:newDatabaseRelationalModel} shows relations representing the new database structures from figure \ref{fig:newdatabaseRedesignER}.
+Notice that the existing $publisher$ relation in the database have exactly the same attributes as the new one. 
 
 \begin{equation}\label{eq:newDatabaseRelationalModel}
     \begin{split}
-        article(\underline{article\_id: \mathbb{Z^+}} title:text,\\ total\_words:\mathbb{Z^+}, publisher\_name \rightarrow publisher, file\_path:text), \\
+        article(\underline{article\_id: \mathbb{Z^+}}, title:text,\\ total\_words:\mathbb{Z^+}, publisher\_name \rightarrow publisher, file\_path:text), \\
         word(\underline{text:text}),\\
         publisher(\underline{publisher\_name:text}),\\
         occursIn(\underline{text \rightarrow word}, \underline{article\_id \rightarrow article}, count:\mathbb{Z^+})\\
     \end{split}
 \end{equation}
 
-We also have to ensure that the wordRatio view still contains the same information as before.
+
+We have to ensure that the wordRatio view, described in section \todo{REFERENCE WORDRATIO VIEW IN SPRINT 3} still contains the same information as before.
 Since the view is an abstraction over a \texttt{SELECT} query, we will describe it using relational algebra.
-The query of the view can be seen in equation \ref{create_new_view_rel_alg}
+The query of the view can be seen in equation \ref{create_new_view_rel_alg}.
 The resulting relation structure is seen in equation \ref{create_new_view_rel_alg_structure}.
 
 
@@ -34,12 +45,5 @@ The resulting relation structure is seen in equation \ref{create_new_view_rel_al
         wordRatio(article\_id:\mathbb{Z^+}, text:text, count:\mathbb{Z^+},title:text, file\_path:text,\\ total\_words:\mathbb{Z^+}, publisher\_name:text, percent:\mathbb{R^+})
     \end{split}
 \end{equation}
-Having established the new structures for the database using the relational model and relational algebra, we can develop a corresponding the ER model to document the design. 
-The model is seen on figure \ref{fig:newdatabaseRedesignER}. Notice that the ER model does not depict the wordRatio view.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.35]{Images/new ER.drawio.png}
-    \caption{ER diagram depicting the new model of the database. Notice that the relationship set \textit{Publishes} is not implemented.}
-    \label{fig:newdatabaseRedesignER}
-\end{figure}
+
