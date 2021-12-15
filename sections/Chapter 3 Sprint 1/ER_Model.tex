@@ -3,7 +3,7 @@ The entity relationship model is a graphical representation of how database rela
 This is done in an \textit{entity relationship} (ER) diagram, and is commonly used facilitate database design from specifications of enterprise schemas\cite{DBSBook}.
 In the ER model, we differentiate between \textit{entity sets} representing domain elements and \textit{relationships sets} representing the connections between the domain elements. 
 The entity sets are represented graphically with a rectangle and relationship sets connecting the entity sets with a diamond\cite{DBSBook}.
-The attributes associated with the entity- and relationship sets can be modelled using ovals\cite{KatjaFirstPP}, however other alternatives exists.\footnote{Our style of choice is presented in Chapter 6.10 of\citetitle{DBSBook} \textit{\citefield[]{DBSBook}[]{edition}}}
+The attributes associated with the entity- and relationship sets can be modelled using ovals\cite{KatjaFirstPP}, however other alternatives exists.\footnote{Our style of choice is presented in Chapter 6.10 of \citetitle{DBSBook} \textit{\citefield[]{DBSBook}[]{edition}}}
 Similar to the relational model, the entities (tuples) must be uniquely identified by one or more attributes. This is denoted by underlining the attributes of the entity sets. 
 
 The ER model has notations that denote the participations each entity has in a connecting relationship\cite{DBSBook}.
@@ -62,7 +62,7 @@ As an example, in the book owner example there is a many-to-many relationship be
 \\
 \textbf{Many-to-one relationships}\\
 If we have a many-to-one relationship between two sets we can combine the relationship set and the relation created from the entity set on the 'many' side into a single relation. This relation will use the primary key of the entity set as its primary key, and have a foreign referencing the relation created from the 'one' side of the relationship.\\
-As an example if we for the book owner example instead assume that a book could have only one owner, it would be a many-to-one relationship. To convert the relationship set to a relation, the relationship set should be merged with the 'many' side of the relations created, which in this case would be the book as it only has one owner, but an owner can have many books. The relation created from this can be seen in \ref*{eq:ManyToOne}, which has the attributes of the initial book relation and a foreign key to the \texttt{book\_owner}.
+As an example if we for the book owner example instead assume that a book could have only one owner, it would be a many-to-one relationship. To convert the relationship set to a relation, the relationship set should be merged with the 'many' side of the relations created, which in this case would be the book as it only has one owner, but an owner can have many books. The relation created from this can be seen in equation \ref*{eq:ManyToOne}, which has the attributes of the initial book relation and a foreign key to the \texttt{book\_owner}.
 
 \begin{equation}\label{eq:ManyToOne}
     \begin{split}

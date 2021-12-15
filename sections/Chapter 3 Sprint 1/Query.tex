@@ -23,7 +23,7 @@ A few of these operations can be seen in table \ref{Relational algebra operators
 \end{table}
 
 We will describe some of the operators of relational algebra, and use them to describe implemented queries later.
-Some of the common operators of in relational algebra can be seen on table \ref{Relational algebra operators}.
+Some of the common operators of in relational algebra can be seen in table \ref{Relational algebra operators}.
 \subsubsection*{Select}
 The select operator defines a set, $R_{result}\subseteq R$ where all tuples $t \in R_{result}$ satisfies a given predicate\cite{DBSBook}.
 That is, $\forall t \in R_{result} \vDash predicate$.
@@ -43,9 +43,8 @@ For instance, we can concatenate the information in the $book\_owner$ and $owns$
 $book\_owner \times owns = r$ will result a relation with the structure as seen in equation \ref{eq:cart_struct}.
 \begin{equation}\label{eq:cart_struct}
     r(owns.owner\_id, owns.ISBN,book\_owner.name,book\_owner.owner\_id, author\_name)
-\end{equation}\\    
+\end{equation}
 \textbf{Join}\\
-
 The join operator defines a relation consisting of tuples from the Cartesian product of the operand, containing only tuples satisfying the given predicate.
 It is defined as $\sigma_{\Theta} (R_1 \times R_2)$ \cite{DBSBook}.
 
