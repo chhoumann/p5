@@ -2,20 +2,21 @@
 Having established how to convert an ER diagram into an equivalent relational model, we can now describe the operations for the relational model.
 
 \subsubsection{Relational Algebra}\label{sec:relationalAlgebra}
-Relational algebra describes a set of unary and binary operations on relations that produce new relations.
-The operations are used to define new relations, often the tuples within the set will satisfy defined predicates.
+Relational algebra describes a set of unary and binary operations on relations.
+The operations are used to define new relations --- often the tuples within the set will satisfy defined predicates.
 The relational operators form the foundations of data manipulation languages (see Section \ref{sec:SQL}) which can be used to define database operations \cite{DBSBook}.
+A few of these operations can be seen in table \ref{Relational algebra operators}.
 
 
 \begin{table}[h]
     \centering
-    \begin{tabular}{|lll|}
+    \begin{tabular}{|ll|}
     \hline 
-    \multicolumn{1}{|l|}{\textbf{Operator}}          & \multicolumn{1}{l|}{\textbf{Example}}   & \multicolumn{1}{l|}{\textbf{Is unary}}      \\ \hline
-    \multicolumn{1}{|l|}{Select}                     & \multicolumn{1}{l|}{$\sigma_{predicate}(R)$}             & \multicolumn{1}{l|}{$\checkmark$}           \\ \hline
-    \multicolumn{1}{|l|}{Projection}                 & \multicolumn{1}{l|}{$\pi_{A_1, A2,...,A_n}(R)$}             & \multicolumn{1}{l|}{$\checkmark$}           \\ \hline
-    \multicolumn{1}{|l|}{Join}                 & \multicolumn{1}{l|}{$r_1 \Join_\Theta r_2$}             & \multicolumn{1}{l|}{$\times$}           \\ \hline
-    \multicolumn{1}{|l|}{Cartesian product}          & \multicolumn{1}{l|}{$r_1\times r_2$}              & \multicolumn{1}{l|}{$\times$}            \\ \hline
+    \multicolumn{1}{|l|}{\textbf{Operator}}          & \multicolumn{1}{l|}{\textbf{Example}}   \\ \hline
+    \multicolumn{1}{|l|}{Select}                     & \multicolumn{1}{l|}{$\sigma_{predicate}(R)$}            \\ \hline
+    \multicolumn{1}{|l|}{Projection}                 & \multicolumn{1}{l|}{$\pi_{A_1, A2,...,A_n}(R)$}           \\ \hline
+    \multicolumn{1}{|l|}{Join}                 & \multicolumn{1}{l|}{$r_1 \Join_\Theta r_2$}             \\ \hline
+    \multicolumn{1}{|l|}{Cartesian product}          & \multicolumn{1}{l|}{$r_1\times r_2$}              \\ \hline
     \end{tabular}
     \caption{Table of operators}
     \label{Relational algebra operators}
@@ -25,18 +26,36 @@ We will describe some of the operators of relational algebra, and use them to de
 Some of the common operators of in relational algebra can be seen on table \ref{Relational algebra operators}.\\
 \textbf{Select}\\
 The select operator defines a set, $R_{result}\subseteq R$ where all tuples $t \in R_{result}$ satisfies a given predicate \cite{DBSBook}.\\
-That is, $\forall t \in R_{result} \vDash predicate$.\\
-% As an example we can use the book owner example, and try to select all books
+That is, $\forall t \in R_{result} \vDash predicate$.
+As an example, we can produce a relation containing all books with the title "Database System Concepts":\\
+$\sigma_{author\_name = "Database System Concepts"}(books)$.\\
 \textbf{Projection}\\
 The projection operator specifies a relation containing only a subset of the attributes of the operand relation \cite{DBSBook}.
-That is, attributes $A_1, ..., A_n$ of relation $R_{result}$ will be a subset or equal to the attributes of the operand.\\
+That is, attributes $A_1, ..., A_n$ of relation $R_{result}$ will be a subset or equal to the attributes of the operand.
+We can use the projection in combination with the select operator operator, to produce a relation containing only the ISBN and title of books titled "Database System Concepts":\\
+$\pi_{ISBN,title} (\sigma_{author\_name = "Database\ System\ Concepts"}(books))$.\\\\
 \textbf{Cartesian product}\\
 The cartesian product of two relations $R_1$ and $R_2$ produces a set containing concatenated tuples of the two operands.
 That is, taking the attributes of the two sets, $A_1,...,A_n \in R_1$ and $A_{n+1},...,A_k \in R_2$ produces a set with attributes $A_1,...,A_k$.
 If the attributes of the operands have the same names we distinguish between them  by denoting their original relation: $R_1.AttributeName$, $R_2.AttributeName$. \cite{DBSBook}\\   
+For instance, we can concatinate the information in the $book\_owner$ and $owns$  relations.
+$book\_owner \times owns = r$ will result a relation with the structure as seen in equation \ref{eq:cart_struct}.
+\begin{equation}\label{eq:cart_struct}
+    r(owns.owner\_id, owns.ISBN,book\_owner.name,book\_owner.owner\_id, author\_name)
+\end{equation}\\    
 \textbf{Join}\\
 The join operator defines a relation consisting of tuples from the cartesian product of the operand, containing only tuples satisfying the given predicate.
-Thus it is defined as $\sigma_{\Theta} (R_1 \times R_2)$ \cite{DBSBook}.\\
+It is defined as $\sigma_{\Theta} (R_1 \times R_2)$ \cite{DBSBook}.
+
+Thus we can express the relation describing the name of all $book\_owner$ entities, that owns the book with $ISBN$ "987-1-...50-4" as both equation \ref{eq:join_s} and equation \ref{eq:join_j}.
+\begin{equation}\label{eq:join_s}
+    \pi_{book\_owner.name} (\sigma_{owns.ISBN = 987-1-...50-4}  (book\_owner \times owns))
+\end{equation}
+\begin{equation}\label{eq:join_j}
+    \pi_{book\_owner.name} (book \Join_{owns.ISBN = 987-1-...50-4} owns) 
+\end{equation}\\
+
+Other variations of the join operation exists \cite{DBSBook}, however these will not be discussed in this report.\\
 \textbf{Aggregate functions}\\
 In conjunction with the basic relational operators Aggregate functions can be used over a set of values.
 Aggregate functions can take a set of values as input and get a single value as output \cite{DBSBook}. Some common aggregate functions are 
