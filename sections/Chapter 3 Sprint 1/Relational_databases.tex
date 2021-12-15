@@ -20,9 +20,8 @@ Attributes describing the super key are underlined.
     book(author\_name:text, title: text, number\_of\_pages:\mathbb{Z}^+, \underline{ISBN: text})
 \end{equation}
 Super keys can be defined as $t_1 \in r,\neq t_2 \in r \implies t_1.K \neq t_2.K$, where $t_1, t_2$ are tuples contained within the relation.
-
-That is, no two tuples $t_1, t_2$ from relation $r$ have same values for all super key attributes $K$. 
-If the super key does not contain extraneous attributes, it is said to be \textit{minimal}. \cite{DBSBook}
+That is, no two tuples $t_1, t_2$ from relation $r$ have the same values for all super key attributes $K$. 
+If the super key does not contain extraneous attributes, it is said to be \textit{minimal} \cite{DBSBook}.
 We will use the term \textit{primary key} to denote a chosen super key of a relation. 
 When describing a database, it is often necessary to specify how various data are connected. 
 To do this, one can use \textit{foreign keys} to denote that tuples in $r_1$ are related to the tuples in $r_2$.
