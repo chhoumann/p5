@@ -2,26 +2,6 @@
 The group last year chose to implement the \texttt{WordCount} and \texttt{Fuseki} databases using PostgreSQL.
 PostgreSQL is a relational database system \cite{knox2020}.
 
-
-A relational database consists of several layers.
-The lowest level is the physical layer which describes how the data is stored physically.
-The purpose of the relational model is to abstract over the physical layer of the database.
-This abstraction is known as the logical layer and allows database administrators to manage the physical storage without directly manipulating the physical data representation.
-The logical layer describes what data is stored and the relationships between the data.
-The highest of abstraction is the view layer which describes only part of the database. It exists to simplify the interaction with the system. Many views may exist for the same database.
-\cite{DBSBook}
-
-Compared to storing data on a regular file system, a database system provides many advantages including atomicity of operations, concurrent access to data, and lowered inconsistency and redundancy of data \cite{DBSBook}.
-These advantages can be directly seen in the ACID properties that databases adhere to when performing a transaction \cite{DBSBook}.
-\begin{itemize} \label{ACID}
-    \item Atomicity: A transaction must either be fully completed or partial side-effects of a failed transaction must be undone.
-    \item Consistency: A transaction in isolation must ensure values remain consistent after a transaction has been completed or terminated.
-    \item Isolation: Transactions are unaware of other transactions being executed concurrently to avoid confusion.
-    \item Durability: Changes caused by a committed transaction persist even in the event of system failures.
-\end{itemize}
-
-A transaction can be considered as a set of operations that is performed on data.
-To a user or connected system, the collection of operations must seem a single, indivisible operation \cite{DBSBook}.
 In the coming sections, we will describe how one can model and describe a relational database design, both mathematically and with a more graphic design.
 After doing this, we will examine how operations on these models can be described using SQL and relational algebra.
 

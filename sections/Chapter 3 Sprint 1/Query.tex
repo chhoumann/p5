@@ -77,6 +77,11 @@ As we have now established both how to model database relations as well fundamen
 SQL is one of the most commonly used data definition language (DDL) and data manipulation languages (DML) \cite{DBSBook}.
 SQL is a declarative query language, where one executes a query to instruct the database system to perform a set of operations to compute a desired result. 
 Collectively, the resulting set of operations is known as a transaction.
+A transaction can be considered as a set of operations that is performed on data.
+To a user or connected system, the collection of operations must seem a single, indivisible operation \cite{DBSBook}.
+We will describe the effect of transactions in section \ref{sec:ACID}.
+
+
 In PostgreSQL, all queries, both to define and to manipulate data, are executed as transactions \cite{postgres_transactions}.
 As a DDL, SQL provides queries to define and modify relation schemas, as well as provide constraints for the attributes of the schema, such that data in the relation satisfies the constraint.  
 
