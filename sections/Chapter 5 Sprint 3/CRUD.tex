@@ -36,9 +36,9 @@ In WordCount, we also implemented a \texttt{POST} method called \texttt{Post} wh
 The JSON object should be valid according to a JSONschema on the database, which determines the required format of the of the JSON object and the fields needed. If the JSON object does not fit the schema, an error message is sent back. 
 The articles are then checked for duplicate data on the database, if there is any it is removed and a message is added to the response that the article already exists. The remaining articles can then be inserted into the database, and a status message is returned with the potential duplicate article names. 
  
-\subsubsection{WordRatio}
+\subsubsection{WordRatio}\label{WordRatioCrud}
 The WordRatio route is used by the functionality layer to fetch specific data from the database.
-As the WordRatio table is a view, it cannot be used to store new data. 
+As the WordRatio table is a view (see appendix \ref{Appendix_WordRatioOld}), it cannot be used to store new data. 
 The primary purpose of WordRatio is to check how many times a given word occurs in an article.
 WordRatio consists of one \texttt{GET} method with an optional parameter. 
 \begin{table}[]
