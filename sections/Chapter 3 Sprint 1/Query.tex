@@ -50,10 +50,10 @@ It is defined as $\sigma_{\Theta} (R_1 \times R_2)$ \cite{DBSBook}.
 
 Thus we can express the relation describing the name of all $book\_owner$ entities, that owns the book with $ISBN$ "987-1-...50-4" as both equation \ref{eq:join_s} and equation \ref{eq:join_j}.
 \begin{equation}\label{eq:join_s}
-    \pi_{book\_owner.name} (\sigma_{owns.ISBN = 987-1-...50-4}  (book\_owner \times owns))
+    \pi_{book\_owner.name} (\sigma_{owns.ISBN = book.ISBN \wedge owns.ISBN = 987-1-...50-4}  (book\_owner \times owns))
 \end{equation}
 \begin{equation}\label{eq:join_j}
-    \pi_{book\_owner.name} (book \Join_{owns.ISBN = 987-1-...50-4} owns) 
+    \pi_{book\_owner.name} (\sigma_{book.ISBN = 987-1-...50-4} (book \Join_{owns.ISBN = book.ISBN} owns))
 \end{equation}\\
 
 
