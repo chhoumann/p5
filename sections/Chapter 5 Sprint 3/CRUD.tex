@@ -27,12 +27,67 @@ In the controller we implemented 2 methods, a \texttt{GET} and a \texttt{POST} m
     \multicolumn{1}{|l|}{\texttt{GetFilepath}} & \multicolumn{1}{l|}{GET}    & \multicolumn{1}{l|}{Integer}     & Article        \\ \hline
     \multicolumn{1}{|l|}{\texttt{Post}}        & \multicolumn{1}{l|}{POST}   & \multicolumn{1}{l|}{JSON Object} & Status message \\ \hline
     \end{tabular}
-    \end{table}
+\end{table}
 
 The \texttt{GET} method called \texttt{GetFilepath}, takes a integer "id" as an argument and finds an article in the database with the given "id" and returns the articles filePath as a JsonResult if it exists, otherwise an error is sent back.
+This method can be seen in code snippet \ref{lst:GetFilepathMethod}.
 
+\begin{lstlisting}[language=CSharp, caption={The \texttt{GetFilepath} method.}, label={lst:GetFilepathMethod}]
+[HttpGet]
+[Route("/[controller]/filelist/{id:int}")]
+public IActionResult GetFilepath(long id)
+{
+    try
+    {
+        string filePath = databaseContext.Articles
+          .First(e => e.Id == id).FilePath;
+        return new JsonResult(new FileIdResponse(filePath));
+    }
+    catch (Exception)
+    {
+        return BadRequest($"No entity with ID {id} exists");
+    }
+}
+\end{lstlisting}
 
 In WordCount, we also implemented a \texttt{POST} method called \texttt{Post} which takes a JSON object from the HTTP body as a parameter which should correspond to an array of articles. 
+This method is shown in code snippet \ref{lst:POSTMethod}.
+
+\begin{lstlisting}[language=CSharp, caption={The \texttt{POST} method.}, label={lst:POSTMethod}]
+[HttpPost]
+public IActionResult Post([FromBody] JsonElement jsonElement)
+{
+    JsonSchema? schema = databaseContext.JsonSchemas
+      .First(s => s.SchemaName == WordCountSchemaName);
+    string jsonInput = jsonElement.GetRawText();
+
+    if (schema == null)
+    {
+        return StatusCode(500, 
+          $"\"{WordCountSchemaName}\" schema does not exist.");
+    }
+
+    // Get schema and use for validating
+    if (!new JsonValidator<ArticleJsonModel[]>(schema.JsonString)
+      .IsValid(jsonInput, out ArticleJsonModel[] jsonArticles))
+    {
+        return BadRequest("Wrong body syntax, does not follow schema.");
+    }
+
+    IEnumerable<Article> result = RemoveDuplicates(jsonArticles,
+      out StringBuilder message);
+
+    // Insert article
+    IEnumerable<Article> enumerable = result as Article[] 
+      ?? result.ToArray();
+
+    databaseContext.Articles.AddRange(enumerable);
+    databaseContext.SaveChanges();
+
+    return Ok(message.ToString());
+}
+\end{lstlisting}
+
 The JSON object should be valid according to a JSONschema on the database, which determines the required format of the of the JSON object and the fields needed. If the JSON object does not fit the schema, an error message is sent back. 
 The articles are then checked for duplicate data on the database, if there is any it is removed and a message is added to the response that the article already exists. The remaining articles can then be inserted into the database, and a status message is returned with the potential duplicate article names. 
  
@@ -41,7 +96,7 @@ The WordRatio route is used by the functionality layer to fetch specific data fr
 As the WordRatio table is a view, it cannot be used to store new data. 
 The primary purpose of WordRatio is to check how many times a given word occurs in an article.
 WordRatio consists of one \texttt{GET} method with an optional parameter. 
-\begin{table}[]
+\begin{table}[h]
     \begin{tabular}{|llll|}
     \hline
     \multicolumn{4}{|c|}{WordRatio}                                                                            \\ \hline
