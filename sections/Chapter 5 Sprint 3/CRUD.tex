@@ -3,7 +3,7 @@
 As outlined in the planning for this sprint, the main focus of this sprint was to implement API end-points for the database.
 As we already had a working database, the goal of this increment was to write a CRUD API in C\# such that the other layers could use to access the database via HTTP requests.
 The CRUD operations we implemented are based on requests from the other layers, and what they thought they needed to retrieve from the database.
-To implement this, we split the CRUD operations into three different Routes handling different aspects of the database. The routes are called: WordCount, WordRatio and Schema. Each route has its own endpoints and can access different tables in the database. The API has been split into three routes that each cover a section of the database. Wordcount is for inserting articles into the database, WordRatio is used as an absbraction over the WordRatio table in the database, and the Schema route is used to add JSON Schemas to the database.
+To implement this, we split the CRUD operations into three different Routes handling different aspects of the database. The routes are called: WordCount, WordRatio and Schema. Each route has its own endpoints and can access different tables in the database. The API has been split into three routes that each cover a section of the database. WordCount is for inserting articles into the database, WordRatio is used as an abstraction over the WordRatio table in the database, and the Schema route is used to add JSON Schemas to the database.
 
 The pipeline for the API is outlined in figure \ref{Node02Sprint3}.
 
@@ -27,29 +27,91 @@ In the controller we implemented 2 methods, a \texttt{GET} and a \texttt{POST} m
     \multicolumn{1}{|l|}{\texttt{GetFilepath}} & \multicolumn{1}{l|}{GET}    & \multicolumn{1}{l|}{Integer}     & Article        \\ \hline
     \multicolumn{1}{|l|}{\texttt{Post}}        & \multicolumn{1}{l|}{POST}   & \multicolumn{1}{l|}{JSON Object} & Status message \\ \hline
     \end{tabular}
-    \end{table}
+\end{table}
 
 The \texttt{GET} method called \texttt{GetFilepath}, takes a integer "id" as an argument and finds an article in the database with the given "id" and returns the articles filePath as a JsonResult if it exists, otherwise an error is sent back.
+This method can be seen in code snippet \ref{lst:GetFilepathMethod}.
 
+\begin{lstlisting}[language=CSharp, caption={The \texttt{GetFilepath} method.}, label={lst:GetFilepathMethod}]
+[HttpGet]
+[Route("/[controller]/filelist/{id:int}")]
+public IActionResult GetFilepath(long id)
+{
+    try
+    {
+        string filePath = databaseContext.Articles
+          .First(e => e.Id == id).FilePath;
+        return new JsonResult(new FileIdResponse(filePath));
+    }
+    catch (Exception)
+    {
+        return BadRequest($"No entity with ID {id} exists");
+    }
+}
+\end{lstlisting}
 
-In WordCount, we also implemented a \texttt{POST} method called \texttt{Post} which takes a JSON object from the HTTP body as a parameter which should correspond to an array of articles. 
-The JSON object should be valid according to a JSONschema on the database, which determines the required format of the of the JSON object and the fields needed. If the JSON object does not fit the schema, an error message is sent back. 
+In WordCount, we also implemented a \texttt{POST} method called \texttt{Post} which takes a JSON object from the HTTP body as a parameter that should correspond to an array of articles. 
+This method is shown in code snippet \ref{lst:POSTMethod}.
+
+\begin{lstlisting}[language=CSharp, caption={The \texttt{POST} method.}, label={lst:POSTMethod}]
+[HttpPost]
+public IActionResult Post([FromBody] JsonElement jsonElement)
+{
+    JsonSchema? schema = databaseContext.JsonSchemas
+      .First(s => s.SchemaName == WordCountSchemaName);
+    string jsonInput = jsonElement.GetRawText();
+
+    if (schema == null)
+    {
+        return StatusCode(500, 
+          $"\"{WordCountSchemaName}\" schema does not exist.");
+    }
+
+    // Get schema and use for validating
+    if (!new JsonValidator<ArticleJsonModel[]>(schema.JsonString)
+      .IsValid(jsonInput, out ArticleJsonModel[] jsonArticles))
+    {
+        return BadRequest("Wrong body syntax, does not follow schema.");
+    }
+
+    IEnumerable<Article> result = RemoveDuplicates(jsonArticles,
+      out StringBuilder message);
+
+    // Insert article
+    IEnumerable<Article> enumerable = result as Article[] 
+      ?? result.ToArray();
+
+    databaseContext.Articles.AddRange(enumerable);
+    databaseContext.SaveChanges();
+
+    return Ok(message.ToString());
+}
+\end{lstlisting}
+
+The JSON object should be valid according to a JSON schema stored in the database. The schema is used to determine whether the required format of the received JSON object is correct. If the JSON object does not fit the schema, an error message is sent back. 
 The articles are then checked for duplicate data on the database, if there is any it is removed and a message is added to the response that the article already exists. The remaining articles can then be inserted into the database, and a status message is returned with the potential duplicate article names. 
  
-\subsubsection{WordRatio}
+\subsubsection{WordRatio}\label{WordRatioCrud}
 The WordRatio route is used by the functionality layer to fetch specific data from the database.
-As the WordRatio table is a view, it cannot be used to store new data. 
-The primary purpose of WordRatio is to check how many times a given word occours in an article.
+As the WordRatio table is a view (see appendix \ref{Appendix_WordRatioOld}), it cannot be used to store new data. 
+The primary purpose of WordRatio is to check how many times a given word occurs in an article.
 WordRatio consists of one \texttt{GET} method with an optional parameter. 
 \begin{table}[h]
     \begin{tabular}{|llll|}
     \hline
-    \multicolumn{4}{|c|}{\textbf{WordRatio}}                                                                                                                                           \\ \hline
-    \multicolumn{1}{|l|}{Name}                      & \multicolumn{1}{l|}{Method} & \multicolumn{1}{l|}{Input}                           & Reponse on success                               \\ \hline
-    \multicolumn{1}{|l|}{\texttt{GetMatches}}       & \multicolumn{1}{l|}{GET}    & \multicolumn{1}{l|}{terms (string []), sources (string[])} & WordRatio for all articles from source with term \\ \hline
-    \multicolumn{1}{|l|}{\texttt{GetMatches}}       & \multicolumn{1}{l|}{GET}    & \multicolumn{1}{l|}{terms (string [])}                   & WordRatio for all articles with term             \\ \hline
+    \multicolumn{4}{|c|}{WordRatio}                                                                            \\ \hline
+    \multicolumn{1}{|l|}{Name} & \multicolumn{1}{l|}{Method} & \multicolumn{1}{l|}{Input} & Response on success \\ \hline
+    \multicolumn{1}{|l|}{GetMatches} &
+      \multicolumn{1}{l|}{GET} &
+      \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}terms (string{[}{]}), \\ sources (string{[}{]})\end{tabular}} &
+      \begin{tabular}[c]{@{}l@{}}WordRatio for all articles \\ from source with term\end{tabular} \\ \hline
+    \multicolumn{1}{|l|}{GetMatches} &
+      \multicolumn{1}{l|}{GET} &
+      \multicolumn{1}{l|}{terms (string {[}{]})} &
+      \begin{tabular}[c]{@{}l@{}}WordRatio for all articles\\  with term\end{tabular} \\ \hline
     \end{tabular}
-    \end{table}
+\end{table}
+
 The \texttt{GetMatches} method is used to query one or more specific words on the WordRatio table.
 One may provide one or more sources in which to search for the specified words.
 If no sources are provided, the database searches for the given words in all sources.
@@ -68,7 +130,7 @@ By creating a route for fetching the validation schemas, we enable easy validati
     \multicolumn{1}{|l|}{\texttt{GetAllSchemas}}   & \multicolumn{1}{l|}{GET}    & \multicolumn{1}{l|}{None}                & All JSON Schemas    \\ \hline
     \multicolumn{1}{|l|}{\texttt{PostJSONSchemas}} & \multicolumn{1}{l|}{POST}   & \multicolumn{1}{l|}{JSON Schema}         & Status message      \\ \hline
     \end{tabular}
-    \end{table}
+\end{table}
 
 The first \texttt{GET} method is called GetSchema which takes a SchemaName as its input and returns a JSON Schema. 
 
@@ -77,5 +139,5 @@ The second \texttt{GET} method is called GetAllSchemas which takes no input and 
 The last method is a \texttt{POST} method called PostJSONSchema and takes a JSON Schema as its input and inserts it into the database.
 The body of the post request must consist of two fields - the schema name, which is its primary key in the database, and the schema content itself. Before the schema is inserted in the database it is checked if it is a duplicate, if that is the case an error message will be sent in response.
 A schema gets stored in the database in the format known as \texttt{jsonb} or JSON binary which is a built-in type provided by \postgres{}.
-This format is used to store a JSON object as binary which uses much less space than a varchar or regular JSON type would.
-Even though \postgres{} may not be the most efficient DBMS for storing JSON data, it is sufficient for this usecase, as posting and fetching Schemas will not be done often. 
+This format is used to store a JSON object as binary which uses much less space than a \texttt{varchar} or regular JSON type would.
+Even though \postgres{} may not be the most efficient DBMS for storing JSON data, it is sufficient for this use case, as posting and fetching Schemas will not be done often. 

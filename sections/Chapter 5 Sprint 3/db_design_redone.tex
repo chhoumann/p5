@@ -10,7 +10,7 @@ Instead, we had to model the current database design using C\# classes.
 
 This caused problems as the current design did not translate well into an object-oriented approach.
 To execute what would otherwise be considered a relatively simple SQL query, we had to write additional code which ultimately defeated the purpose of the Code First approach. 
-The most complex method for the WordCount controller, the POST method, can be seen in code snippet \ref{lst:old_controller} for the old database design.
+An example of how we approached querying with the current database design can be seen in code snippet \ref{lst:old_controller}. The code snippet shows the POST method.
 
 \begin{lstlisting}[language=CSharp, caption={Old controller}, label={lst:old_controller}]
 [HttpPost]
@@ -96,8 +96,8 @@ public IActionResult Post([FromBody] JsonElement jsonElement)
 }
 \end{lstlisting}
 
-It proved difficult to work with and caused more problems than benefits, especially under the aforementioned time constraints. 
-Therefore, we decided to rework the design completely by creating C\# models that would translate to a relational database design using EF Core migrations.
+This approach proved difficult to work with and caused more problems than benefits, especially under the aforementioned time constraints. 
+Therefore, we decided to rework the design of the database completely by creating C\# models that would translate to a relational database design using EF Core migrations.
 The POST method in the WordCount controller for the redesigned database can be seen in code snippet \ref{lst:new_controller}.
 
 
