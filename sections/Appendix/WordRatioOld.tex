@@ -1,14 +1,27 @@
 \section*{WordRatio View}\label{Appendix_WordRatioOld}
-CREATE VIEW "WordRatio" AS
-SELECT "ArticleId", "Word", "Count", "Title", "FilePath", "TotalWords","Article"."PublisherName",
-       round("Count"::numeric / "TotalWords"::numeric * 100::numeric, 2) AS "Percent"
-FROM "Article"
-         JOIN "Term" ON "ArticleId" = "Article"."Id"
-         JOIN "Publisher" ON "Article"."PublisherName" = "Publisher"."PublisherName"
+\begin{lstlisting}[
+    label=lst:RenamingOldModelsSQL,
+    language=SQL,
+    caption=SQL script renaming the existing database structures,
+    showspaces=false,
+    numbers=left,
+    numberstyle=\tiny,
+    commentstyle=\color{gray},
+    escapechar=|
+ ]
+ CREATE VIEW "WordRatio" AS
+ SELECT "ArticleId", "Word", "Count", "Title", "FilePath", "TotalWords","Article"."PublisherName",
+        round("Count"::numeric / "TotalWords"::numeric * 100::numeric, 2) AS "Percent"
+ FROM "Article"
+          JOIN "Term" ON "ArticleId" = "Article"."Id"
+          JOIN "Publisher" ON "Article"."PublisherName" = "Publisher"."PublisherName"
+ 
+ CREATE VIEW "WordRatio" AS
+ SELECT "ArticleId", "Word", "Count", "Title", "FilePath", "TotalWords","Article"."PublisherName",
+        round("Count"::numeric / "TotalWords"::numeric * 100::numeric, 2) AS "Percent"
+ FROM "Article"
+          JOIN "Term" ON "ArticleId" = "Article"."Id"
+          JOIN "Publisher" ON "Article"."PublisherName" = "Publisher"."PublisherName"
+\end{lstlisting}
 
-CREATE VIEW "WordRatio" AS
-SELECT "ArticleId", "Word", "Count", "Title", "FilePath", "TotalWords","Article"."PublisherName",
-       round("Count"::numeric / "TotalWords"::numeric * 100::numeric, 2) AS "Percent"
-FROM "Article"
-         JOIN "Term" ON "ArticleId" = "Article"."Id"
-         JOIN "Publisher" ON "Article"."PublisherName" = "Publisher"."PublisherName"
+
