@@ -2,7 +2,7 @@
 Following the user stories laid out in section \ref{section:sprintPlanningSprint5}, we will look at implementing a database that supports RDF data, as well as SPARQL queries.
 
 The previous group responsible for \knox{} databases implemented a Apache Jena Fuseki database, as described in section \ref{currentState}.
-This implementation was, however, not suitable for \knox{}, as it needed to be restarted periodically to 'save' the data. This was due to their usage of the HDT format for storing the data\cite{knox2020}.
+This implementation was, however, not suitable for \knox{}, as it needed to be restarted periodically to persistently store the data. This was due to their usage of the HDT format for storing the data\cite{knox2020}.
 
 For this reason, we decided to invest time in implementing OpenLink Virtuoso\cite{OpenLinkSoftwareVirtuoso} for the \knox{} database layer. We had already made this decision in sprint 2, as seen in chapter \ref{chapter:sprint2}.
 
