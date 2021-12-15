@@ -88,7 +88,7 @@ public IActionResult Post([FromBody] JsonElement jsonElement)
 }
 \end{lstlisting}
 
-The JSON object should be valid according to a JSON schema on the database, which determines the required format of the of the JSON object and the fields needed. If the JSON object does not fit the schema, an error message is sent back. 
+The JSON object should be valid according to a JSON schema stored in the database. The schema is used to determine whether the required format of the received JSON object is correct. If the JSON object does not fit the schema, an error message is sent back. 
 The articles are then checked for duplicate data on the database, if there is any it is removed and a message is added to the response that the article already exists. The remaining articles can then be inserted into the database, and a status message is returned with the potential duplicate article names. 
  
 \subsubsection{WordRatio}
