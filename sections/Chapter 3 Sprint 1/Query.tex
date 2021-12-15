@@ -5,6 +5,7 @@ Having established how to convert an ER diagram into an equivalent relational mo
 Relational algebra describes a set of unary and binary operations on relations.
 The operations are used to define new relations --- often the tuples within the set will satisfy defined predicates.
 The relational operators form the foundations of data manipulation languages (see Section \ref{sec:SQL}) which can be used to define database operations \cite{DBSBook}.
+A few of these operations can be seen in table \ref{Relational algebra operators}.
 
 
 \begin{table}[h]
@@ -48,13 +49,15 @@ $book\_owner \times owns = r$ will result a relation with the structure as seen 
 The join operator defines a relation consisting of tuples from the cartesian product of the operand, containing only tuples satisfying the given predicate.
 It is defined as $\sigma_{\Theta} (R_1 \times R_2)$ \cite{DBSBook}.
 
-Thus we can express the relation describing the name of all $book\_owner$ entities, that owns thew book with $ISBN$ "987-1-...50-4" as both equation \ref{eq:join_s} and equation \ref{eq:join_j}.
+Thus we can express the relation describing the name of all $book\_owner$ entities, that owns the book with $ISBN$ "987-1-...50-4" as both equation \ref{eq:join_s} and equation \ref{eq:join_j}.
 \begin{equation}\label{eq:join_s}
     \pi_{book\_owner.name} (\sigma_{owns.ISBN = 987-1-...50-4}  (book\_owner \times owns))
 \end{equation}
 \begin{equation}\label{eq:join_j}
     \pi_{book\_owner.name} (book \Join_{owns.ISBN = 987-1-...50-4} owns) 
 \end{equation}\\
+
+Other variations of the join operation exists \cite{DBSBook}, however these will not be discussed in this report.
 
 \textbf{Aggregate functions}\\
 In conjunction with the basic relational operators Aggregate functions can be used over a set of values.
