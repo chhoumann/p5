@@ -2,7 +2,7 @@
 Having established the structure of the new database schemas, we can now examine whether they live up to TNF or BCNF (see section \ref{relational_databases}).
 This is done by examining the functional dependencies of the relations seen in equation \ref{eq:newDatabaseRelationalModel}.
 
-The \textit{occursIn} relation is in BCNF. 
+The \textit{occursIn} relation is in TNF. 
 This is verified when examining the functional dependency of its composite primary key:
 \begin{equation*}
  \{text,article\_id\}\rightarrow \{count\}   
@@ -11,7 +11,7 @@ This is verified when examining the functional dependency of its composite prima
 A unique article cannot identify the text and number of times the text occurs in the article.
 Similarly, the number of times the text occurs in the article and the article\_id cannot identify the text of the word.
 
-The \textit{article} relation is in BCNF. 
+The \textit{article} relation is in TNF. 
 This is seen when considering the functional dependency of its single, primary key:
 \begin{equation*}
     \{article\_id\} \rightarrow \{title, publisher\_name,total\_words\, file\_path\}
