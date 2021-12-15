@@ -39,11 +39,13 @@ The Cartesian product of two relations $R_1$ and $R_2$ produces a set containing
 That is, taking the attributes of the two sets, $A_1,...,A_n \in R_1$ and $A_{n+1},...,A_k \in R_2$ produces a set with attributes $A_1,...,A_k$.
 If the attributes of the operands have the same names we distinguish between them  by denoting their original relation: $R_1.AttributeName$, $R_2.AttributeName$. \cite{DBSBook}
 For instance, we can concatenate the information in the $book\_owner$ and $owns$  relations.
+
 $book\_owner \times owns = r$ will result a relation with the structure as seen in equation \ref{eq:cart_struct}.
 \begin{equation}\label{eq:cart_struct}
     r(owns.owner\_id, owns.ISBN,book\_owner.name,book\_owner.owner\_id, author\_name)
 \end{equation}\\    
 \textbf{Join}\\
+
 The join operator defines a relation consisting of tuples from the Cartesian product of the operand, containing only tuples satisfying the given predicate.
 It is defined as $\sigma_{\Theta} (R_1 \times R_2)$ \cite{DBSBook}.
 
@@ -55,7 +57,8 @@ Thus we can express the relation describing the name of all $book\_owner$ entiti
     \pi_{book\_owner.name} (book \Join_{owns.ISBN = 987-1-...50-4} owns) 
 \end{equation}\\
 
-Other variations of the join operation exists \cite{DBSBook}, however these will not be discussed in this report.
+
+Other variations of the join operation exists \cite{DBSBook}, however these will not be discussed in this report.\\
 \subsubsection*{Aggregate functions}
 In conjunction with the basic relational operators Aggregate functions can be used over a set of values.
 Aggregate functions can take a set of values as input and get a single value as output \cite{DBSBook}. Some common aggregate functions are 
@@ -74,6 +77,11 @@ As we have now established both how to model database relations as well fundamen
 SQL is one of the most commonly used data definition language (DDL) and data manipulation languages (DML) \cite{DBSBook}.
 SQL is a declarative query language, where one executes a query to instruct the database system to perform a set of operations to compute a desired result. 
 Collectively, the resulting set of operations is known as a transaction.
+A transaction can be considered as a set of operations that is performed on data.
+To a user or connected system, the collection of operations must seem a single, indivisible operation \cite{DBSBook}.
+We will describe the effect of transactions in section \ref{sec:ACID}.
+
+
 In PostgreSQL, all queries, both to define and to manipulate data, are executed as transactions \cite{postgres_transactions}.
 As a DDL, SQL provides queries to define and modify relation schemas, as well as provide constraints for the attributes of the schema, such that data in the relation satisfies the constraint.  
 
