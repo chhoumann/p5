@@ -72,37 +72,20 @@ As an example if we for the book owner example instead assume that a book could 
 \\
 \textbf{One-to-one relationships}\\
 When converting one-to-one relationships with total participation, we simply create a union of the attributes of the participating entity sets and the relationship set \cite{DBSBook}. If there is not total participation, two relations are created from the entity set, and a foreign key is placed on one of the sets.\\
-As an example assume that for the book owner example that a book only has one owner, and each owner can only have one book. It would then be a one-to-one relationship. Assuming total participation between the entities, the relation can be seen in equation \ref*{eq:TotalOneToOne}, which is a union of the attributes of \texttt{book} and \texttt{book\_owner} in a single relation.
+As an example assume that for the book owner example that a book only has one owner, and each owner can only have one book. It would then be a one-to-one relationship. Assuming total participation between the entities, the relation can be seen in equation \ref*{eq:TotalOneToOne}, which is a union of the attributes of \texttt{book} and \texttt{book\_owner}.
 
 \begin{equation}\label{eq:TotalOneToOne}
     \begin{split}
-        book\_owner(\underline{owner\_id : \mathbb{Z}^+} , Owner\_name : text , \\
-        ISBN : text , title : text , author\_name : text , number\_of\_pages : \mathbb{Z}^+
-        )
+        owns(\underline{owner\_id \rightarrow book\_owner}, \underline{ISBN \rightarrow book}), \\
+        book\_owner(name:text,\underline{owner\_id:\mathbb{Z}^+})
     \end{split}
 \end{equation}
 
-If instead there is only partial participation between the entities, a foreign key can be placed on either \texttt{book} or \texttt{book\_owner}. A relation where the foreign key has been placed on \texttt{book\_owner} can be seen in equation \ref{eq:PartialOneToOne}
 
-\begin{equation}\label{eq:PartialOneToOne}
-    \begin{split}
-        book\_owner(\underline{owner\_id : \mathbb{Z}^+} , Owner\_name : text, ISBN \rightarrow book) \\
-        book(\underline{ISBN : text} , title : text , author\_name : text , number\_of\_pages : \mathbb{Z}^+
-        )
-    \end{split}
-\end{equation}
-\\
 \textbf{Weak entity sets}\\
 When representing weak entity sets, one creates a relation containing the attributes of the weak entity set as well as the attributes of the identifying set's primary key.
 The primary key of the identifying relation will also serve as a foreign key to the identifying relation. \cite{DBSBook}.
-The relationship set is simply ignored, as the relationship set will not have any attributes \cite{DBSBook}.\\
-As an example assume that for the book owner example a \texttt{book\_owner} is a weak entity identified by the owners id, and the book they own. To convert this into the relation seen in equation \ref*{eq:weakEntity}, the \texttt{book\_owner} entity set is made into a relation with its own attributes and the ISBN from \texttt{book}, ISBN and id is then used as a primary key for that relation. 
-
-\begin{equation}\label{eq:weakEntity}
-    \begin{split}
-        book\_owner(\underline{ISBN \rightarrow book} , \underline{owner\_id:\mathbb{Z}^+} , name : text)
-    \end{split}
-\end{equation}
+The relationship set is simply ignored, as the relationship set will not have any attributes \cite{DBSBook}. 
 
 % \begin{equation}\label{eq:bookOwnerExample}
 %     \begin{split}
