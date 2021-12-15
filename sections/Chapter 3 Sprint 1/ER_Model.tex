@@ -36,7 +36,8 @@ The relationship between a weak entity set and its identifying set is always man
 The ER model can be converted into the \textit{relational model}. The relational model is described using relations, thus we can describe operations that can be performed on the relations using set notation and relational algebra. 
 Therefore, it is useful to be able to convert an E-R model into an equivalent relational model, where domains of attributes can be well defined and operations on the entity sets described mathematically.
 
-\subsubsection*{Converting E-R Models to Relations}
+\subsubsection*{Converting ER Models to Relations}
+When converting an ER diagram into an equivalent relational model, we must consider the domains of the attributes in the ER model, since these need to be described in the relational model. Having the domain of the relations described makes it possible to establish well-defined operations that can be performed on the relations.
 \textbf{Strong entity sets}\\
 Strong entity sets are converted by taking each attribute of the entity set, and a relation with corresponding attributes. 
 The primary key of the entity set is chosen as primary key for the relation \cite{DBSBook}.\\
