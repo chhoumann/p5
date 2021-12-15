@@ -1,2 +1,15 @@
 \chapter{Conclusion}\label{ch:conclusion}
 There are probably still some bugs in the theme. If you should find one, then please submit it on \url{https://github.com/jkjaer/aauLatexTemplates}.
+
+The code that we overtook from last year for the search engine was incomplete and did not work.
+We therefore implemented the database from scratch using C\# and the Entity Framework Core.
+Our first attempt at this went well as is fulfilled the requirements provided by the Product Owner. 
+This was verified through an end to end test where all layers participated.
+However, despite this, the design had a major flaw in terms of excessive memory consumption. 
+Fortunately, near the end of the project, we were able to allocate time to a redesign which addressed this problem.
+We were unable to create a BCNF design on time though, and we therefore believe that the database group next year should prioritize this.
+
+[insert rdf database conclusion here]
+
+Both databases were tested using Postman to ensure that the endpoints work as intended.
+A few unit tests were also written for JSON validator, however the database functionality itself remains largely untested as we cannot, and should not, test a framework.
