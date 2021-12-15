@@ -7,8 +7,10 @@ However, despite this, the design had a major flaw in terms of excessive memory 
 Fortunately, near the end of the project, we were able to allocate time to a redesign which addressed this problem.
 We were unable to create a BCNF design on time though, and we therefore believe that the database group next year should prioritize this.
 
-The handed over solution used to store that \knox{} projects RDF data was deemed problematic due to it requiring periodically restarts in order to get the data from memory into the storage. A large effort was there for put into setting up a new system for handling \knox{} RDF data storage needs. 
-Here the Virtuoso was deemed as an appropriate framework since lived up to the requirements provided from the other layers. 
+The solution from last year used to store RDF data was deemed problematic.
+It required periodic restarts in order to move the data from in memory into persistent disk storage.
+Therefore, a large effort was made into building a new system for handling the \knox{} RDF data storage needs. 
+Here, Virtuoso was deemed as an appropriate framework since it lived up to the requirements provided from the other layers. 
 
 Both databases were tested using Postman to ensure that the endpoints work as intended.
 A few unit tests were also written for JSON validator, however the database functionality itself remains largely untested as we cannot, and should not, test a framework.
