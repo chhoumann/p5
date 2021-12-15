@@ -1,12 +1,12 @@
 \subsubsection{Entity Relationship Model}\label{sec:EntityRelationModel}
 The entity relationship model is a graphical representation of how database relations are structured.
-This is done in an \textit{entity relationship} (ER) diagram, and is commonly used facilitate database design from specifications of enterprise schemas \cite{DBSBook}.
+This is done in an \textit{entity relationship} (ER) diagram, and is commonly used facilitate database design from specifications of enterprise schemas\cite{DBSBook}.
 In the ER model, we differentiate between \textit{entity sets} representing domain elements and \textit{relationships sets} representing the connections between the domain elements. 
-The entity sets are represented graphically with a rectangle and relationship sets connecting the entity sets with a diamond \cite{DBSBook}.
-The attributes associated with the entity- and relationship sets can be modelled using ovals \cite{KatjaFirstPP}, however other alternatives exists.\footnote{Our style of choice is presented in Chapter 6.10 of \citetitle{DBSBook} \textit{\citefield[]{DBSBook}[]{edition}}}
+The entity sets are represented graphically with a rectangle and relationship sets connecting the entity sets with a diamond\cite{DBSBook}.
+The attributes associated with the entity- and relationship sets can be modelled using ovals\cite{KatjaFirstPP}, however other alternatives exists.\footnote{Our style of choice is presented in Chapter 6.10 of\citetitle{DBSBook} \textit{\citefield[]{DBSBook}[]{edition}}}
 Similar to the relational model, the entities (tuples) must be uniquely identified by one or more attributes. This is denoted by underlining the attributes of the entity sets. 
 
-The ER model has notations that denote the participations each entity has in a connecting relationship \cite{DBSBook}.
+The ER model has notations that denote the participations each entity has in a connecting relationship\cite{DBSBook}.
 In this project, we will use \text{min-max} notation; this notation denotes the minimum and maximum amount of entities participating in a relationship. 
 
 \begin{figure}[htp]
@@ -40,7 +40,7 @@ Therefore, it is useful to be able to convert an E-R model into an equivalent re
 When converting an ER diagram into an equivalent relational model, we must consider the domains of the attributes in the ER model, since these need to be described in the relational model. Having the domain of the relations described makes it possible to establish well-defined operations that can be performed on the relations.\\
 \textbf{Strong entity sets}\\
 Strong entity sets are converted by taking each attribute of the entity set, and a relation with corresponding attributes. 
-The primary key of the entity set is chosen as primary key for the relation \cite{DBSBook}.\\
+The primary key of the entity set is chosen as primary key for the relation\cite{DBSBook}.\\
 As an example of converting a strong entity we can use the book owner example from figure \ref{fig:ER_Book_Example}. In this example \texttt{Book} is a strong entity. The relation created from the book entity can be seen in equation \ref*{eq:StrongEntity}. The attributes from the entity are added to the relation and the primary key of the book entity, \texttt{ISBN}, is used as the primary key for the relation.
 
 \begin{equation}\label{eq:StrongEntity}
@@ -50,7 +50,7 @@ As an example of converting a strong entity we can use the book owner example fr
 \end{equation}
 \\
 \textbf{Many-to-many relationships}\\
-When converting many-to-many relationships to a relation, one creates a single relation with primary key attributes from the participating entity sets \cite{DBSBook}. These keys are used as foreign key to reference the converted entities participating in the relationship. 
+When converting many-to-many relationships to a relation, one creates a single relation with primary key attributes from the participating entity sets\cite{DBSBook}. These keys are used as foreign key to reference the converted entities participating in the relationship. 
 The remaining attributes of the entity set is similarly mapped to the relation.\\
 As an example, in the book owner example there is a many-to-many relationship between a \texttt{book\_owner} and a \texttt{book} called \texttt{Owns}. As can be seen in equation \ref{eq:ManyToMany}, to convert the relationship set into a relation, the keys of the participating entities must be put into the relation. 
 
@@ -71,7 +71,7 @@ As an example if we for the book owner example instead assume that a book could 
 \end{equation}
 \\
 \textbf{One-to-one relationships}\\
-When converting one-to-one relationships with total participation, we simply create a union of the attributes of the participating entity sets and the relationship set \cite{DBSBook}. If there is not total participation, two relations are created from the entity set, and a foreign key is placed on one of the sets.\\
+When converting one-to-one relationships with total participation, we simply create a union of the attributes of the participating entity sets and the relationship set\cite{DBSBook}. If there is not total participation, two relations are created from the entity set, and a foreign key is placed on one of the sets.\\
 As an example assume that for the book owner example that a book only has one owner, and each owner can only have one book. It would then be a one-to-one relationship. Assuming total participation between the entities, the relation can be seen in equation \ref*{eq:TotalOneToOne}, which is a union of the attributes of \texttt{book} and \texttt{book\_owner}.
 
 \begin{equation}\label{eq:TotalOneToOne}
@@ -85,7 +85,7 @@ As an example assume that for the book owner example that a book only has one ow
 \textbf{Weak entity sets}\\
 When representing weak entity sets, one creates a relation containing the attributes of the weak entity set as well as the attributes of the identifying set's primary key.
 The primary key of the identifying relation will also serve as a foreign key to the identifying relation. \cite{DBSBook}.
-The relationship set is simply ignored, as the relationship set will not have any attributes \cite{DBSBook}. 
+The relationship set is simply ignored, as the relationship set will not have any attributes\cite{DBSBook}. 
 
 % \begin{equation}\label{eq:bookOwnerExample}
 %     \begin{split}
