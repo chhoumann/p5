@@ -16,7 +16,7 @@ In this project, we will use \text{min-max} notation; this notation denotes the 
     \label{fig:ER_Book_Example}
 \end{figure}
 
-Figure \ref{fig:ER_Book_Example} shows an ER diagram equivalent to the $book$, $owns$, and $book\_owner$ relations from equation \ref{eq:bookOwnerExample} and \ref{eq:relational_schema}.
+Figure \ref{fig:ER_Book_Example} shows an ER diagram equivalent to the $book$, $owns$, and $book\_owner$ relations from equation \ref{eq:relational_schema} and \ref{eq:bookOwnerExample}.
 In figure \ref{fig:ER_Book_Example} we also see the participation cardinalities of the two entity sets. 
 The relationship from $book\_owner$ to $owns$ is one of total participation. That is, each book owner entity must own at least one book.
 \begin{figure}[h]
@@ -25,7 +25,8 @@ The relationship from $book\_owner$ to $owns$ is one of total participation. Tha
     \caption{Participation ratios for ER relationships}
     \label{fig:ERDiagram_Cardinality}
 \end{figure}
-The participation from $book$ to $owns$ is partial. Thus the model represents that books can be in the database, even if no one owns it, that a book can be owned by multiple book owners.
+The participation from $book$ to $owns$ is partial. 
+Thus, the model represents that books can be in the database, even if no one owns it, and that a book can be owned by multiple book owners.
 Graphical notation of participation connections can be seen on figure \ref{fig:ERDiagram_Cardinality}.
 
 
