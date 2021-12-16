@@ -71,7 +71,7 @@ public IActionResult GetFilepath(long id)
 }
 \end{lstlisting}
 
-In WordCount, we also implemented a \texttt{POST} method called \texttt{Post} which takes a JSON object from the HTTP body as a parameter that should correspond to an array of articles. 
+In WordCount, we also implemented a \texttt{POST} method called \texttt{Post}, which takes a JSON object from the HTTP body as a parameter that should correspond to an array of articles. 
 This method is shown in code snippet \ref{lst:POSTMethod}.
 
 \begin{lstlisting}[language=CSharp, caption={The \texttt{POST} method.}, label={lst:POSTMethod}]
@@ -110,7 +110,9 @@ public IActionResult Post([FromBody] JsonElement jsonElement)
 \end{lstlisting}
 
 The JSON object should be valid according to a JSON schema stored in the database. The schema is used to determine whether the required format of the received JSON object is correct. If the JSON object does not fit the schema, an error message is sent back. 
-The articles are then checked for duplicate data on the database, if there is any it is removed and a message is added to the response that the article already exists. The remaining articles can then be inserted into the database, and a status message is returned with the potential duplicate article names. 
+We then check if any of the articles already exist in the database.
+In case of duplicates, the duplicate is removed from the JSON object and a message is added to the response that the article already exists. 
+The remaining articles can then be inserted into the database, and a status message is returned with the potential duplicate article names. 
  
 \subsubsection{WordRatio}\label{WordRatioCrud}
 The WordRatio route is used by the functionality layer to fetch specific data from the database.
