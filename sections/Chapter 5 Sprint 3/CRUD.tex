@@ -3,7 +3,7 @@
 As outlined in the planning for this sprint, the main focus of this sprint was to implement API end-points for the database.
 As we already had a working database, the goal of this increment was to write a CRUD API in C\# such that the other layers could use to access the database via HTTP requests.
 The CRUD operations we implemented are based on requests from the other layers, and what they thought they needed to retrieve from the database.
-To implement this, we split the CRUD operations into three different routes, each facilitating access to a different part of the database. The routes are called: WordCount, WordRatio and Schema. Each route has its own endpoints and can access different tables in the database. The API has been split into three routes that each cover a section of the database. WordCount is for inserting articles into the database, WordRatio is used as an abstraction over the WordRatio table in the database, and the Schema route is used to add JSON Schemas to the database.
+To implement this, we split the CRUD operations into three different routes, respectively named: WordCount, WordRatio, and Schema. Each route has its own endpoints and can access different tables in the database. WordCount is used for inserting and querying articles in the database, WordRatio is used as an abstraction over the WordRatio view in the database, and the Schema route is used to insert and query JSON Schemas in the database.
 
 An overview of the components in the API is outlined in figure \ref{Node02Sprint3}.
 
