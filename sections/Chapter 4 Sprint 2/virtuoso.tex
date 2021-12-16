@@ -1,11 +1,10 @@
 \section{Virtuoso}
-During our research, we found that Virtuoso is a high-performance object-relational SQL database, which is highly effective at storing and querying RDF data. It supports SPARQL queries embedded in SQL queries. SPARQL is an acronym for SPARQL Protocol and RDF Query Language, which is an RDF query language.\todo{Marco add source PLSQL}
+During our research, we found that Virtuoso is a high-performance object-relational SQL database, which is highly effective at storing and querying RDF data. It supports SPARQL queries inside of SQL queries, and the use of SPARQL instead of SQL \cite{VirtuosoDataAcces}. SPARQL is an acronym for SPARQL Protocol and RDF Query Language, which is an RDF query language \cite{WhatIsSPARQL}.
 The Resource Descriptor Framework (RDF) data model relies on triples in the form of \texttt{<subject, predicate, object>} to represent RDF data\cite{ResourceDescriptionFramework2021}. For example, take the statement \texttt{Person X has answered questionnaire Q}. Our subject is \texttt{Person X}, our predicate is \texttt{has answered}, and our object is \texttt{questionnaire Q}. Given enough triples such as this one, one could form a graph over the data, which is what \knox{} attempts to do with the knowledge graph.
 
 
 Virtuoso supports access to the database through Open DataBase Connectivity (ODBC).
-ADO.NET is an older framework for C\# which can give database access to databases that are ODBC compliant.
-
+ADO.NET is an older framework for C\# which can give database access to databases that are ODBC compliant\cite{VirtuosoODBC}.
 
 After the initial research, we attempted to set up a Virtuoso server on a Virtual machine. This was a partial success: we created a database and were able to access it through the GUI in a browser, but were unable to make HTTP requests to the server.
 

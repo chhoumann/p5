@@ -7,21 +7,22 @@ Besides this, we also wrote documentation for the relevant implementation detail
 
 \begin{itemize}
     \item \texttt{GET} \& \texttt{POST} API endpoints for the WordCount database.
-    \item WordRatio response objects for endpoints, rather than previous layers directly querying the view.
-    \item API for JSON schemas used for validating data sent to the API.
+    \item WordRatio response objects for endpoints rather than previous layers directly querying the view.
+    \item API endpoints for JSON schemas used for validating data sent to the API.
     \item API project and database containerized.
     \item Development and production environment set up and configured for rapid development \& deployment.
     \item Implemented CI/CD using Docker and GitHub Actions.
     \item Restructured database using a code-first approach.
-    \item Repository-unit of work pattern has been implemented to promote encapsulation and separation of concerns.
+    \item Repository and unit of work patterns have been implemented to promote encapsulation and separation of concerns.
     \item Wiki restructuring and documentation of configuration and API.
 \end{itemize}
 
-While we did manage to implement most of what was requested of us, we did not document this to the extent that our Definition of Done requires. 
+While we did manage to implement most of what was requested of us, we did not document this to the extent that our Definition of Done required. 
 We have decided to carry over these tasks to the next sprint, prioritizing them first. In the sprint retrospective, we will discuss why we did not accomplish everything we wanted to, and what we are doing about it.
 
 Towards the end of this sprint, we demonstrated an end-to-end test to the \knox{} product owner. The pipeline seemed to work well, and we were able to get the product to work as expected. This was later confirmed by the PO. 
-Six days after the end-to-end test, an API endpoint stopped working due to heavy memory load. We pushed a hotfix to fix this shortly after.
+Six days after the end-to-end test, an API endpoint stopped working due to heavy memory load.
+To address this, we pushed a hotfix shortly after. In this hotfix, we removed the repository pattern and unit of work pattern.
 
 \subsubsection{What has changed in the environment?}
 For this sprint, the primary focus has been to implement the Knox Search Engine. As such, all other groups have had the same focus, and therefore they have not requested anything from the database layer yet. 
@@ -29,9 +30,9 @@ We expect to see a lot of changes to the database layer in the next sprint, as s
 A full overview of what has changed can be seen below.
 
 \begin{itemize}
-    \item The structure of the objects' sent from the below layer have changed: a 'publication' field has been introduced in the schema defining the object.
-    \item We found out that the Knox Product Owner will not be creating a new backlog with tasks for us to solve, but that we should rather create meaningful tasks ourselves.
-    \item We have made other groups realize that creating server-users, database schemas based on their use-cases, and similar task are their responsibility.
+    \item The structure of the objects sent from the below layer have changed: a 'publication' field has been introduced in the schema defining the object.
+    \item We found out that the Knox Product Owner will not be creating a new backlog with tasks for us to solve, but that we should instead create meaningful tasks ourselves.
+    \item We made other groups realize that creating server users and similar tasks is their own responsibility.
 \end{itemize}
 
 \subsubsection{What next?}
@@ -39,6 +40,6 @@ As mentioned before, we were asked to suggest possible next steps for our share 
 
 \begin{itemize}
     \item At the Scrum of Scrum retrospect, many groups told that they want to work with knowledge graphs. Therefore, we should prepare for tasks regarding the RDF database.
-    \item We should be prepared to provide assistance with the WordCount database endpoints. This included minor changes and new endpoint implementation.
-    \item Potentially, we could benchmark database technologies for the Knox project, to find a good option for the Knox use-case.
+    \item We should be prepared to provide assistance with the WordCount database endpoints. This includes minor changes and new endpoint implementations.
+    \item We could potentially benchmark database technologies for the Knox project to find a good option for the Knox use-case.
 \end{itemize}
