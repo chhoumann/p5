@@ -7,7 +7,7 @@ The renaming of the tables can be seen in code snippet \ref{lst:RenamingOldModel
 \begin{lstlisting}[
     label=lst:RenamingOldModelsSQL,
     language=SQL,
-    caption=SQL script renaming the existing database structures,
+    caption=SQL script renaming the existing database structures.,
     showspaces=false,
     numbers=left,
     numberstyle=\tiny,
@@ -23,7 +23,7 @@ ALTER TABLE "Term"
 When implementing the new tables, we base them on the just-renamed tables from the old database design.
 By doing this, we ensure that all data from the old tables are correctly transferred to the new ones, since each of the commands is a transaction (see section \ref{relational_databases}).
 After all data have been transferred to a new table, constraints, foreign- and primary keys are added to the tables. 
-This can be seen on code snippet \ref{lst:CreatingTheNewDBModelsSQL}.
+This can be seen in code snippet \ref{lst:CreatingTheNewDBModelsSQL}.
 We have ensured that the changes are reversible by creating a script dropping the new tables, and restoring the structure of the old tables.
 The script is found in Appendix \ref{SQLBackupScript}.
 
@@ -41,7 +41,8 @@ CREATE TABLE "Article" AS
 SELECT * FROM "Article_Redundant";
 ALTER TABLE "Article"
     ADD CONSTRAINT "Id_PRMK" PRIMARY KEY ("Id"),
-    ADD FOREIGN KEY ("PublisherName") REFERENCES "Publisher"("PublisherName");
+    ADD FOREIGN KEY ("PublisherName") REFERENCES 
+        "Publisher"("PublisherName");
 
 CREATE TABLE "Word" AS
 SELECT DISTINCT t."Word" AS "Text" FROM "Term_Redundant" t;
@@ -50,7 +51,8 @@ ALTER TABLE "Word" ADD CONSTRAINT "Literal_PRMK" PRIMARY KEY ("Text");
 CREATE TABLE "OccursIn" AS
     (
         SELECT "art"."Id" as "ArticleId", "t"."Count",  t."Word"
-        FROM"Term_Redundant" t JOIN wordcount.public."Article_Redundant" art ON t."ArticleId" = art."Id"
+        FROM "Term_Redundant" t JOIN wordcount.public."Article_Redundant" 
+            art ON t."ArticleId" = art."Id"
     );
 ALTER TABLE "OccursIn"
     ADD FOREIGN KEY ("ArticleId") REFERENCES "Article"("Id"),
