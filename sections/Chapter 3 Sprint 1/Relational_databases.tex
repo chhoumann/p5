@@ -11,13 +11,13 @@ The values of the tuples contained within the relation can be described by the a
 The relations are often described using a \textit{relational schema}, denoting the name and domains of the attributes.
 
 
-Equation \ref{eq:relational_schema} shows an example of a relation describing books as tuples of three text fields ($author\_name$, $title$, and $ISBN$) and a positive integer ($number\_of\_pages$).
+Equation \ref{eq:relational_schema} shows an example of a relation describing books as tuples of three text fields ($ISBN$, $author\_name$, and $title$ ) and a positive integer ($number\_of\_pages$).
 The relation also denotes a super key for the relation. A super key is one or more attributes that can uniquely identify a tuple in a given relation.
 A super key is called a \textit{candidate key} if removal of a single attribute from the key results in it longer uniquely identifying tuples.
-Attributes describing the super key are underlined.
+Attributes describing the primary key are underlined.
 
 \begin{equation} \label{eq:relational_schema}
-    book(author\_name:text, title: text, number\_of\_pages:\mathbb{Z}^+, \underline{ISBN: text})
+    book(\underline{ISBN: text}, author\_name:text, title: text, number\_of\_pages:\mathbb{Z}^+)
 \end{equation}
 Super keys can be defined as $t_1 \in r,\neq t_2 \in r \implies t_1.K \neq t_2.K$, where $t_1, t_2$ are tuples contained within the relation.
 That is, no two tuples $t_1, t_2$ from relation $r$ have the same values for all super key attributes $K$. 
@@ -32,7 +32,7 @@ There, primary keys from other relations are used to reference unique tuples. Th
 \begin{equation}\label{eq:bookOwnerExample}
     \begin{split}
         owns(\underline{owner\_id \rightarrow book\_owner}, \underline{ISBN \rightarrow book}), \\
-        book\_owner(name:text,\underline{owner\_id:\mathbb{Z}^+})
+        book\_owner(\underline{owner\_id:\mathbb{Z}^+}, name:text,)
     \end{split}
 \end{equation}
 
