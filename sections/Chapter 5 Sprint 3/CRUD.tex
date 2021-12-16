@@ -5,12 +5,12 @@ As we already had a working database, the goal of this increment was to write a 
 The CRUD operations we implemented are based on requests from the other layers, and what they thought they needed to retrieve from the database.
 To implement this, we split the CRUD operations into three different routes, respectively named: WordCount, WordRatio, and Schema. Each route has its own endpoints and can access different tables in the database. WordCount is used for inserting and querying articles in the database, WordRatio is used as an abstraction over the WordRatio view in the database, and the Schema route is used to insert and query JSON Schemas in the database.
 
-The pipeline for the API is outlined in figure \ref{Node02Sprint3}.
+An overview of the components in the API is outlined in figure \ref{Node02Sprint3}.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=\linewidth]{Images/Node02Pipeline.jpg}
-    \caption{Node02 server pipeline in sprint 3.}
+    \caption{Node02 database access API components in sprint 3.}
     \label{Node02Sprint3}
 \end{figure}
 
