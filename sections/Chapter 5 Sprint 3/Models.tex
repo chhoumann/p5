@@ -18,19 +18,19 @@ When a JSON object is received, it is parsed into an object from our model, whic
 \textbf{Input models}\\
 % ArticleJsonModel
 % TermJsonModel
-The first input model is \texttt{ArticleJsonModel} which can be seen in figure \ref{fig:CommunicationModels}. An article consists of a title, a publisher, a file path, the number of words in the article and an array containing all the words in the article. 
-The words are of type \texttt{TermJsonModel} which is a separate model containing the word itself and a number denoting how many times it occurs in the given article.
+The first input model is \texttt{ArticleJsonModel}, which can be seen in figure \ref{fig:CommunicationModels}. An article consists of a title, a publisher, a file path, the number of words in the article and an array containing all the words in the article. 
+The words are of type \texttt{TermJsonModel}, which is a separate model containing the word itself and a number denoting how many times it occurs in the given article.
 This model is used when the database receives a JSON object through our endpoint, which corresponds to the \texttt{ArticleJsonModel}. 
 After the JSON object has been converted to \texttt{ArticleJsonModel}, the data from the article can be inserted into the WordCount database using EF Core.
 \\
 % JsonSchemaInputModel
-The second input model is \texttt{JsonSchemaInputModel} which can be seen in figure \ref*{fig:CommunicationModels}. \texttt{JsonSchemaInputModel} contains a name of the JSON schema, and a body which is the JSON schema itself. 
-It is used when the other layers try to add JSON schemas to the WordCount database, which is then later used to validate future input. 
-How the validation is done will be described in section \ref*{sec:validation}.
+The second input model is \texttt{JsonSchemaInputModel}, which can be seen in figure \ref*{fig:CommunicationModels}. \texttt{JsonSchemaInputModel} contains a name of the JSON schema, and a body which is the JSON schema itself. 
+It is used when the other layers try to add JSON schemas to the WordCount database, which are used to validate future input. 
+How this validation is implemented is described in section \ref*{sec:validation}.
 \\
 \textbf{Response Models}\\
 % FileIdResponse
-The response model \texttt{FileIdResponse} is used when a request for the path of an article is made, and can be seen in figure \ref*{fig:CommunicationModels},
+The response model \texttt{FileIdResponse} is used when a request for the path of an article is made and can be seen in figure \ref*{fig:CommunicationModels}.
 After the path has been queried in the WordCount database, it is put into the response model, which is returned as a JSON object.
 
 \subsubsection*{Data access models}
