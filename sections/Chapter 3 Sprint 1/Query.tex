@@ -25,14 +25,14 @@ A few of these operations can be seen in table \ref{Relational algebra operators
 We will describe some operators of relational algebra, and use them to describe implemented queries later.
 Some common operators in relational algebra can be seen in table \ref{Relational algebra operators}.
 \subsubsection*{Select}
-The select operator defines a set, $R_{result}\subseteq R$ where all tuples $t \in R_{result}$ satisfies a given predicate\cite{DBSBook}.
+The select operator defines a set $R_{result}\subseteq R$ where all tuples $t \in R_{result}$ satisfies a given predicate\cite{DBSBook}.
 That is, $\forall t \in R_{result} \vDash predicate$.
 As an example, we can produce a relation containing all books with the title "Database System Concepts":
 $$\sigma_{author\_name = "Database System Concepts"}(books)$$
 \subsubsection*{Projection}
 The projection operator specifies a relation containing only a subset of the attributes of the operand relation\cite{DBSBook}.
 That is, attributes $A_1, ..., A_n$ of relation $R_{result}$ will be a subset or equal to the attributes of the operand.
-We can use the projection in combination with the select operator, to produce a relation containing only the ISBN and title of books titled "Database System Concepts":
+We can use the projection in combination with the select operator to produce a relation containing only the ISBN and title of books titled "Database System Concepts":
 $$\pi_{ISBN,title} (\sigma_{author\_name = "Database\ System\ Concepts"}(books))$$
 \subsubsection*{Cartesian product}
 The Cartesian product of two relations $R_1$ and $R_2$ produces a set containing concatenated tuples of the two operands.
