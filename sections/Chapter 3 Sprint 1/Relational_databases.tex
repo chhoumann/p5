@@ -59,7 +59,7 @@ Thus, if a relation $R$ is not in BCNF, there must be a functional dependency $\
 We can split such relation $R$ into two relations $R1(\alpha \cup \beta)$ and $R2(R-(\beta-\alpha))$ that are both in BCNF.
 
 Third Normal Form (TNF) prevents partial and transitive dependencies\cite{MontayaNormalForms}.
-A relation is in TNF with respect to functional dependencies $F$ is for all dependencies in $F^+$ of the form $\alpha \rightarrow \beta$ if one of the following holds: 
+A relation is in TNF with respect to functional dependencies $F$ if for all dependencies in $F^+$ of the form $\alpha \rightarrow \beta$ if one of the following holds: 
 $\alpha \rightarrow \beta$ is trivial, $\alpha$ is a super key, or each attribute $A \in \beta-\alpha$ is contained in a candidate key for $R$ \cite{DBSBook}.
 
 Having established how one can evaluate a relational database design schema, we can proceed to discuss how a different model that can be used to represent the logic of a relational schema can make it easier to ensure that relations are of at least TNF.
