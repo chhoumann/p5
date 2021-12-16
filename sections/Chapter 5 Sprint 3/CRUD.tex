@@ -113,7 +113,7 @@ The articles are then checked for duplicate data on the database, if there is an
  
 \subsubsection{WordRatio}\label{WordRatioCrud}
 The WordRatio route is used by the functionality layer to fetch specific data from the database.
-As the WordRatio table is a view (see appendix \ref{Appendix_WordRatioOld}), it cannot be used to store new data. 
+As WordRatio is a view (see appendix \ref{Appendix_WordRatioOld}), the route cannot be used to store new data. 
 The primary purpose of WordRatio is to check how many times a given word occurs in an article.
 WordRatio consists of one \texttt{GET} method with an optional parameter. 
 \begin{table}[h]
@@ -135,7 +135,6 @@ WordRatio consists of one \texttt{GET} method with an optional parameter.
 The \texttt{GetMatches} method is used to query one or more specific words on the WordRatio table.
 One may provide one or more sources in which to search for the specified words.
 If no sources are provided, the database searches for the given words in all sources.
-The Rows of the table matching the terms and sources.
 
 \subsubsection{Schema}
 The last route we implemented in this iteration is the Schema route which is used to post and retrieve a JSON schema from the database. These are later used to verify JSON objects as input on other endpoints. 
