@@ -1,7 +1,7 @@
 \section{Implementing Virtuoso}\label{sec:implementing_virtuoso}
 Following the user stories laid out in section \ref{section:sprintPlanningSprint5}, we will look at implementing a database that supports RDF data as well as SPARQL queries.
 
-The previous group responsible for \knox{} databases implemented an Apache Jena Fuseki database, as described in section \ref{currentState}.
+The previous group responsible for \knox{} databases implemented a Apache Jena Fuseki database, as described in section \ref{currentState}.
 This implementation was, however, not suitable for \knox{}, as it needed to be restarted periodically to persistently store the data. This was due to their usage of the HDT format for storing the data\cite{knox2020}.
 
 For this reason, we decided to invest time in implementing OpenLink Virtuoso\cite{OpenLinkSoftwareVirtuoso} for the \knox{} database layer. We had already made this decision in sprint 2, as seen in chapter \ref{chapter:sprint2}.
@@ -22,7 +22,7 @@ The API is connected to Virtuoso, and both run in a dockerized environment. They
 
 As mentioned, Virtuoso supports insertion of data in Turtle format and retrieval of data in RDF/XML format. Inserting and querying data is done through the Virtuoso SPARQL endpoint. The C\# API we have set up relies on this endpoint to do the actual work. We pass on the queries and data, acting as a proxy between the user and the Virtuoso endpoint. At least, this is the case when users send SPARQL queries to the API. When users send Turtle data to the API, we wrap it in a SPARQL query with some preset parameters, and then send it to Virtuoso. For example, we have specified a default graph in case the user does not specify one.
 This can be seen in the \texttt{Insert} function shown in code snippet \ref{lst:virtuoso_data_insertion}. Users send a HTTP POST request to the API with the data in Turtle format as a string, along with a string denoting the name of the graph they want to insert the data into. The API then sends the data to Virtuoso, which can be seen in the \texttt{InsertTurtleGraph} method, also shown in code snippet \ref{lst:virtuoso_data_insertion}. 
-As can be seen in the method signature, we have specified a default graph. First, we parse the Turtle data from the input string so we are certain that it is valid Turtle. Then, we log how many triples we have found in the given graph, after which we chunk and send the data to Virtuoso. We will return to the chunking logic momentarily, but for now, know that it returns the Turtle data as an array of strings, each of which is a chunk of data. Each chunk is wrapped in a SPARQL query that specifies that data should be inserted into the given graph. This query is then sent to the Virtuoso endpoint through HTTP.
+As can be seen in the method signature, we have specified a default graph. First, we parse the Turtle data from the input string, so we are certain that it is valid Turtle. Then, we log how many triples we have found in the given graph, after which we chunk and send the data to Virtuoso. We will return to the chunking logic momentarily, but for now, know that it returns the Turtle data as an array of strings, each of which is a chunk of data. Each chunk is wrapped in a SPARQL query that specifies that data should be inserted into the given graph. This query is then sent to the Virtuoso endpoint through HTTP.
 
 \begin{lstlisting}[language=CSharp, caption={Data insertion endpoint and data insertion logic.}, label={lst:virtuoso_data_insertion}]
 [HttpPost, Route("/[controller]/")]
@@ -84,8 +84,8 @@ public async Task<string> InsertTurtleGraph(string turtle,
 \end{lstlisting}
 
 
-As mentioned, we also implemented chunking logic for data insertion so users do not get an error when sending a large amount of data. 
-This was done because we, during our tests, experienced that Virtuoso would throw an exception when sending a large amount of data --- it could not execute such large amounts of generated SQL code. The logic for dividing chunks of data into smaller chunks is implemented in the \texttt{ChunkRecords} function, which can be seen in code snippet \ref{lst:virtuoso_chunking}. This is done by dividing a large string of input data into smaller chunks, given some separator and chunk size. This is done by first splitting the string into an array of strings with the separator, and then combining individual strings into chunks with the given size.
+As mentioned, we also implemented chunking logic for data insertion, so users do not get an error when sending a large amount of data. 
+This was done because we, during our tests, experienced that Virtuoso would throw an exception when we sent a large amount of data to it, as it could not execute such large amounts of generated SQL code. The logic for dividing chunks of data into smaller chunks is implemented in the \texttt{ChunkRecords} function, which can be seen in code snippet \ref{lst:virtuoso_chunking}. This is done by dividing a large string of input data into smaller chunks, given some separator and chunk size. This is done by first splitting the string into an array of strings with the separator, and then combining individual strings into chunks with the given size.
 
 \begin{lstlisting}[language=CSharp, caption={Chunking logic for large queries.}, label={lst:virtuoso_chunking}]
 private string[] ChunkRecords(string input, string separator, 
@@ -112,7 +112,7 @@ private string[] ChunkRecords(string input, string separator,
 \end{lstlisting}
 
 
-The architecture for this solution can be seen in figure \ref{fig:virtuoso_architecture}. The users do not communicate with Docker, as the figure may imply, but rather Docker allows for communication between the users and the containers within. Users access the exposed services through HTTP requests. The Docker containers are configured to run on the same network so they can communicate with each other.
+The architecture for this solution can be seen in figure \ref{fig:virtuoso_architecture}. The users do not communicate with Docker, as the figure may imply, but rather Docker allows for communication between the users and the containers within. Users access the exposed services through HTTP requests. The Docker containers are configured to run on the same network, so they can communicate with each other.
 
 \begin{figure}[h!]
 \centering
