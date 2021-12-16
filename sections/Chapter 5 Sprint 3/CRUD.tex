@@ -39,7 +39,7 @@ The respective APIs that the two adjacent layers use as part of their pipeline a
 
 The first route we created was the WordCount route. It is used by the knowledge layer to insert information about an article into the database. It is also used by the functionality layer to find the file path of an article.
 
-In the controller we implemented two methods, a \texttt{GET} and a \texttt{POST} method.
+In the controller, we implemented two methods, a \texttt{GET} and a \texttt{POST} method.
 \begin{table}[h]
     \begin{tabular}{|llll|}
     \hline
@@ -50,7 +50,7 @@ In the controller we implemented two methods, a \texttt{GET} and a \texttt{POST}
     \end{tabular}
 \end{table}
 
-The \texttt{GET} method called \texttt{GetFilepath}, takes an integer "id" as an argument and finds an article in the database with the given "id" and returns the articles filePath as a JsonResult if it exists, otherwise an error is sent back.
+The \texttt{GET} method called \texttt{GetFilepath} takes an integer "id" as an argument and finds an article in the database with the given "id" and returns the articles \texttt{filePath} as a \texttt{JsonResult} if it exists, otherwise an error is sent back.
 This method can be seen in code snippet \ref{lst:GetFilepathMethod}.
 
 \begin{lstlisting}[language=CSharp, caption={The \texttt{GetFilepath} method.}, label={lst:GetFilepathMethod}]
