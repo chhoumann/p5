@@ -1,9 +1,8 @@
-\subsection{CRUD}
+\subsection{Implementing Endpoints}
 
 As outlined in the planning for this sprint, the main focus of this sprint was to implement API endpoints for the database.
-As we already had a working database, the goal of this increment was to write a CRUD API in C\# that the other layers could use to access the database via HTTP requests.
-The CRUD operations we implemented are based on requests from the other layers, and what they believed they needed to retrieve from the database.
-To implement this, we split the CRUD operations into three different routes, respectively named: WordCount, WordRatio, and Schema. Each route has its own endpoints and can access different tables in the database. WordCount is used for inserting and querying articles in the database, WordRatio is used as an abstraction over the WordRatio view in the database, and the Schema route is used to insert and query JSON Schemas in the database.
+The endpoint operations we implemented are based on requests from the other layers, and what they believed they needed to retrieve from the database.
+To implement this, we split the operations into three different routes, respectively named: WordCount, WordRatio, and Schema. Each route has its own endpoints and can access different tables in the database. WordCount is used for inserting and querying articles in the database, WordRatio is used as an abstraction over the WordRatio view in the database, and the Schema route is used to insert and query JSON Schemas in the database.
 
 An overview of the components in the API is outlined in figure \ref{Node02Sprint3}.
 
@@ -13,9 +12,6 @@ An overview of the components in the API is outlined in figure \ref{Node02Sprint
     \caption{Node02 database access API components in sprint 3.}
     \label{Node02Sprint3}
 \end{figure}
-
-In the following sections, we will describe how the API and input validation were implemented. 
-Additionally, we will cover the re-design of the database.
 
 In order to illustrate how our layer interacts with the adjacent layers' components, we have included figure \ref{PipelineLayer2} and \ref{PipelineLayer4}.
 
@@ -35,12 +31,14 @@ In order to illustrate how our layer interacts with the adjacent layers' compone
 
 The respective APIs that the two adjacent layers use as part of their pipeline are highlighted in red. 
 
+In the following sections, we will describe the implementation of the design.
+
 \subsubsection{WordCount}
 
-The first route we created was the WordCount route. It is used by the knowledge layer to insert information about an article into the database. It is also used by the functionality layer to find the file path of an article.
+The WordCount route uses the \texttt{ArticleJsonModel} and \texttt{TermJsonModel}, as seen in figure \ref{fig:CommunicationModels}. The corresponding JSON objects are sent by the knowledge layer to insert information about articles into the database. The \texttt{FieldIdResponse} is received by the functionality layer when querying for the file path of an article. The methods for this endpoint are outlined in table \ref{fig:WordCountEndpoint}.
 
-In the controller, we implemented two methods, a \texttt{GET} and a \texttt{POST} method.
 \begin{table}[h]
+  \centering
     \begin{tabular}{|llll|}
     \hline
     \multicolumn{4}{|c|}{\textbf{WordCount}}                                                                                 \\ \hline
@@ -48,6 +46,7 @@ In the controller, we implemented two methods, a \texttt{GET} and a \texttt{POST
     \multicolumn{1}{|l|}{\texttt{GetFilepath}} & \multicolumn{1}{l|}{GET}    & \multicolumn{1}{l|}{Integer}     & Article        \\ \hline
     \multicolumn{1}{|l|}{\texttt{Post}}        & \multicolumn{1}{l|}{POST}   & \multicolumn{1}{l|}{JSON Object} & Status message \\ \hline
     \end{tabular}
+  \caption{Endpoints for the WordCount route.\label{fig:WordCountEndpoint}}
 \end{table}
 
 The \texttt{GET} method called \texttt{GetFilepath} takes an integer "id" as an argument and finds an article in the database with the given "id" and returns the articles \texttt{filePath} as a \texttt{JsonResult} if it exists, otherwise an error is sent back.
@@ -140,10 +139,11 @@ One may provide one or more sources in which to search for the specified words.
 If no sources are provided, the database searches for the given words in all sources.
 
 \subsubsection{Schema}
-The last route we implemented in this iteration is the Schema route, which is used to post and retrieve a JSON schema from the database. These are later used to verify JSON objects as input in other endpoints. 
-This schema consists of two \texttt{GET} methods and a single \texttt{POST} method.
+The Schema route is used to post and retrieve a JSON schema from the database. These are later used to verify JSON objects as input in other endpoints. 
+This schema consists of two \texttt{GET} methods and a single \texttt{POST} method, which can be seen table \ref{SchemaRoutes}.
 By creating a route for fetching the validation schemas, we enable easy validation and a common understanding of the structure of input data from the knowledge layer.
 \begin{table}[h]
+  \centering
     \begin{tabular}{|llll|}
     \hline
     \multicolumn{4}{|c|}{\textbf{Schema}}                                                                                                     \\ \hline
@@ -152,6 +152,7 @@ By creating a route for fetching the validation schemas, we enable easy validati
     \multicolumn{1}{|l|}{\texttt{GetAllSchemas}}   & \multicolumn{1}{l|}{GET}    & \multicolumn{1}{l|}{None}                & All JSON schemas    \\ \hline
     \multicolumn{1}{|l|}{\texttt{PostJSONSchemas}} & \multicolumn{1}{l|}{POST}   & \multicolumn{1}{l|}{JSON Schema}         & Status message      \\ \hline
     \end{tabular}
+    \caption{Schema routes\label{SchemaRoutes}}
 \end{table}
 
 The first \texttt{GET} method is called \texttt{GetSchema} which takes a schema name as its input and returns a JSON schema with the given name if it exists. 
@@ -160,5 +161,3 @@ The second \texttt{GET} method is called GetAllSchemas which takes no input and 
 
 The last method is a \texttt{POST} method called \texttt{PostJSONSchema}, which takes a JSON schema as its input and inserts it into the database.
 The body of the post request must consist of two fields - the schema name, which is its primary key in the database, and the schema content itself. Before the schema is inserted in the database, it is checked if it is a duplicate. If that is the case, an error message will be sent in response.
-A schema gets stored in the database in the format known as \texttt{jsonb}, or JSON binary, which is a built-in type provided by \postgres{}.
-This format is used to store a JSON object as binary, which seems to be more efficient than the regular \texttt{json} type\cite{FasterOperationsJSONB2017}.

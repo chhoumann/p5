@@ -1,5 +1,5 @@
 \subsection{Models}\label{models}
-To implement an API for the WordCount database, we needed communication models for the JSON objects we would be sending to and receiving from the other layers. 
+To implement an API for the WordCount database, we first needed communication models for the JSON objects we would be sending to and receiving from the other layers. 
 We also needed data access models corresponding to the database relations to access it through EF Core. 
 The communication models and the data access models will be described in the following sections.
 
@@ -15,7 +15,7 @@ When a JSON object is received, it is parsed into an object from our model, whic
     \label{fig:CommunicationModels}
 \end{figure}
 
-\textbf{Input models}\\
+\noindent\textbf{Input models}\\
 % ArticleJsonModel
 % TermJsonModel
 The first input model is \texttt{ArticleJsonModel}, which can be seen in figure \ref{fig:CommunicationModels}. An article consists of a title, a publisher, a file path, the number of words in the article and an array containing all the words in the article. 
@@ -28,15 +28,14 @@ The second input model is \texttt{JsonSchemaInputModel}, which can be seen in fi
 It is used when the other layers try to add JSON schemas to the WordCount database, which are used to validate future input. 
 How this validation is implemented is described in section \ref*{sec:validation}.
 \\
-\textbf{Response Models}\\
+\noindent\textbf{Response Models}\\
 % FileIdResponse
 The response model \texttt{FileIdResponse} is used when a request for the path of an article is made and can be seen in figure \ref*{fig:CommunicationModels}.
-After the path has been queried in the WordCount database, it is put into the response model, which is returned as a JSON object.
+After the path has been queried in the WordCount database, it is put into the response model, which is returned as a JSON object. The WordRatio model, seen in figure \ref{fig:DataAccesModels}, is also a response model, but contains the same fields as the data access model.
 
 \subsubsection*{Data access models}
-To use EF Core for data access, we also had to implement models of the relations in the database, which are being used to insert and query data. 
-All of these models must contain exactly the same fields as the relations in the database.
-EF Core then maps these models to the relations such that they can be used to manipulate data.
+To use EF Core as an ORM, described in section \ref{ORM}, for data access, we also had to implement models of the relations in the database, which are being used to insert and query data. 
+WordRatio is a model of the WordRatio view in the database, and as such does not support insertion of data.
 \\
 % Article
 % publisher
