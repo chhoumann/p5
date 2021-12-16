@@ -74,7 +74,7 @@ As we have now established both how to model database relations as well fundamen
 
 \subsubsection{SQL}\label{sec:SQL}
 SQL is one of the most commonly used data definition language (DDL) and data manipulation languages (DML) \cite{DBSBook}.
-SQL is a declarative query language, where one executes a query to instruct the database system to perform a set of operations to compute a desired result. 
+SQL is a declarative query language, where one executes a query to instruct the database system to perform a set of operations to compute a desired result.
 Collectively, the resulting set of operations is known as a transaction.
 A transaction can be considered as a set of operations that is performed on data.
 To a user or connected system, the collection of operations must seem a single, indivisible operation\cite{DBSBook}.
@@ -136,6 +136,6 @@ Code snippet \ref{lst:join} shows a simple join operation, returning all book ti
  owns JOIN book ON owns.isbn = book.isbn WHERE owns.owner_id = 10  
 \end{lstlisting}
 
-In relational algebra, an equivalent operation could be described as $\pi_{title}\sigma_{owns.owner\_id = 10}(owns \Join_{book.isbn = book.isbn} book )$.
+In relational algebra, an equivalent operation could be described as \\$\pi_{title}\sigma_{owns.owner\_id = 10}(owns \Join_{book.isbn = book.isbn} book )$.
 
 % Having established how one can define a database schemas using SQL as a DDL, as well as query data from the database using SQL as a DML.
