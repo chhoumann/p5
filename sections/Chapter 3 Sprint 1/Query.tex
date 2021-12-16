@@ -28,7 +28,7 @@ Some common operators in relational algebra can be seen in table \ref{Relational
 The select operator defines a set $R_{result}\subseteq R$ where all tuples $t \in R_{result}$ satisfies a given predicate\cite{DBSBook}.
 That is, $\forall t \in R_{result} \vDash predicate$.
 As an example, we can produce a relation containing all books with the title "Database System Concepts":
-$$\sigma_{author\_name = "Database System Concepts"}(books)$$
+$$\sigma_{title = "Database System Concepts"}(books)$$
 \subsubsection*{Projection}
 The projection operator specifies a relation containing only a subset of the attributes of the operand relation\cite{DBSBook}.
 That is, attributes $A_1, ..., A_n$ of relation $R_{result}$ will be a subset of or equal to the attributes of the operand.
@@ -42,7 +42,7 @@ For instance, we can concatenate the information in the $book\_owner$ and $owns$
 
 $book\_owner \times owns = r$ will result a relation with the structure as seen in equation \ref{eq:cart_struct}.
 \begin{equation}\label{eq:cart_struct}
-    r(owns.owner\_id, owns.ISBN,book\_owner.name,book\_owner.owner\_id, author\_name)
+    r(owns.owner\_id, owns.ISBN,book\_owner.name,book\_owner.owner\_id)
 \end{equation}
 \textbf{Join}\\
 The join operator defines a relation consisting of tuples from the Cartesian product of the operand, containing only tuples satisfying the given predicate.
