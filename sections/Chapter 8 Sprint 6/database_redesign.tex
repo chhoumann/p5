@@ -1,5 +1,5 @@
 \section{Redesigning the WordCount Database}
-In section \ref{InitialDesign} we established that the design would lead to duplicate or redundant data in the wordcount database.
+In section \ref{InitialDesign}, we established that the database design would lead to duplicate or redundant data in the WordCount database.
 Namely, the terms occurring in the Term entity set (see section \ref{newdatabaseER}) will not be unique. 
 Thus, the database can contain duplicate values.
  
@@ -21,4 +21,3 @@ Having implemented the new database structure, we can assess the changes to the 
 The number of words in the just implemented \texttt{Word} relation is 260,000.
 The number of unique tuples in the just implemented \texttt{WordOccurance} table is 6,900,000, the same as the number of tuples representing words in the old \texttt{Term} relation.
 Thus, the number of tuples in the new relation is the same, but the number of duplicate words have been reduced greatly.
-
