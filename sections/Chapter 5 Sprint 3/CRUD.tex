@@ -158,4 +158,4 @@ The second \texttt{GET} method is called GetAllSchemas which takes no input and 
 The last method is a \texttt{POST} method called PostJSONSchema and takes a JSON Schema as its input and inserts it into the database.
 The body of the post request must consist of two fields - the schema name, which is its primary key in the database, and the schema content itself. Before the schema is inserted in the database it is checked if it is a duplicate, if that is the case an error message will be sent in response.
 A schema gets stored in the database in the format known as \texttt{jsonb} or JSON binary which is a built-in type provided by \postgres{}.
-This format is used to store a JSON object as binary, which uses much less space than a \texttt{varchar} or regular JSON type would.
+This format is used to store a JSON object as binary, which seems to be more efficient than the regular \texttt{json} type\cite{FasterOperationsJSONB2017}.
