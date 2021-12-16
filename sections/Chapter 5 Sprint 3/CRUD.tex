@@ -17,7 +17,7 @@ An overview of the components in the API is outlined in figure \ref{Node02Sprint
 In the following sections, we will describe how the API and input validation were implemented. 
 Additionally, we will cover the re-design of the database.
 
-In order to illustrate how our layer interacts with the adjacent layers' components, we have included figure \ref{PipelineLayer2} and \ref{PipelineLayer4} 
+In order to illustrate how our layer interacts with the adjacent layers' components, we have included figure \ref{PipelineLayer2} and \ref{PipelineLayer4}.
 
 \begin{figure}[h!]
     \centering
@@ -39,7 +39,7 @@ The respective APIs that the two adjacent layers use as part of their pipeline a
 
 The first route we created was the WordCount route. It is used by the knowledge layer to insert information about an article into the database. It is also used by the functionality layer to find the file path of an article.
 
-In the controller we implemented two methods, a \texttt{GET} and a \texttt{POST} method.
+In the controller, we implemented two methods, a \texttt{GET} and a \texttt{POST} method.
 \begin{table}[h]
     \begin{tabular}{|llll|}
     \hline
@@ -50,7 +50,7 @@ In the controller we implemented two methods, a \texttt{GET} and a \texttt{POST}
     \end{tabular}
 \end{table}
 
-The \texttt{GET} method called \texttt{GetFilepath}, takes an integer "id" as an argument and finds an article in the database with the given "id" and returns the articles filePath as a JsonResult if it exists, otherwise an error is sent back.
+The \texttt{GET} method called \texttt{GetFilepath} takes an integer "id" as an argument and finds an article in the database with the given "id" and returns the articles \texttt{filePath} as a \texttt{JsonResult} if it exists, otherwise an error is sent back.
 This method can be seen in code snippet \ref{lst:GetFilepathMethod}.
 
 \begin{lstlisting}[language=CSharp, caption={The \texttt{GetFilepath} method.}, label={lst:GetFilepathMethod}]
@@ -71,7 +71,7 @@ public IActionResult GetFilepath(long id)
 }
 \end{lstlisting}
 
-In WordCount, we also implemented a \texttt{POST} method called \texttt{Post} which takes a JSON object from the HTTP body as a parameter that should correspond to an array of articles. 
+In WordCount, we also implemented a \texttt{POST} method called \texttt{Post}, which takes a JSON object from the HTTP body as a parameter that should correspond to an array of articles. 
 This method is shown in code snippet \ref{lst:POSTMethod}.
 
 \begin{lstlisting}[language=CSharp, caption={The \texttt{POST} method.}, label={lst:POSTMethod}]
@@ -110,7 +110,9 @@ public IActionResult Post([FromBody] JsonElement jsonElement)
 \end{lstlisting}
 
 The JSON object should be valid according to a JSON schema stored in the database. The schema is used to determine whether the required format of the received JSON object is correct. If the JSON object does not fit the schema, an error message is sent back. 
-The articles are then checked for duplicate data on the database, if there is any it is removed and a message is added to the response that the article already exists. The remaining articles can then be inserted into the database, and a status message is returned with the potential duplicate article names. 
+We then check if any of the articles already exist in the database.
+In case of duplicates, the duplicate is removed from the JSON object and a message is added to the response that the article already exists. 
+The remaining articles can then be inserted into the database, and a status message is returned with the potential duplicate article names. 
  
 \subsubsection{WordRatio}\label{WordRatioCrud}
 The WordRatio route is used by the functionality layer to fetch specific data from the database.
@@ -138,7 +140,7 @@ One may provide one or more sources in which to search for the specified words.
 If no sources are provided, the database searches for the given words in all sources.
 
 \subsubsection{Schema}
-The last route we implemented in this iteration is the Schema route which is used to post and retrieve a JSON schema from the database. These are later used to verify JSON objects as input on other endpoints. 
+The last route we implemented in this iteration is the Schema route, which is used to post and retrieve a JSON schema from the database. These are later used to verify JSON objects as input in other endpoints. 
 This schema consists of two \texttt{GET} methods and a single \texttt{POST} method.
 By creating a route for fetching the validation schemas, we enable easy validation and a common understanding of the structure of input data from the knowledge layer.
 \begin{table}[h]
@@ -146,17 +148,17 @@ By creating a route for fetching the validation schemas, we enable easy validati
     \hline
     \multicolumn{4}{|c|}{\textbf{Schema}}                                                                                                     \\ \hline
     \multicolumn{1}{|l|}{Name}                     & \multicolumn{1}{l|}{Method} & \multicolumn{1}{l|}{Input}               & Response on success \\ \hline
-    \multicolumn{1}{|l|}{\texttt{GetSchema}}       & \multicolumn{1}{l|}{GET}    & \multicolumn{1}{l|}{SchemaName (string)} & JSON Schema         \\ \hline
-    \multicolumn{1}{|l|}{\texttt{GetAllSchemas}}   & \multicolumn{1}{l|}{GET}    & \multicolumn{1}{l|}{None}                & All JSON Schemas    \\ \hline
+    \multicolumn{1}{|l|}{\texttt{GetSchema}}       & \multicolumn{1}{l|}{GET}    & \multicolumn{1}{l|}{Schema name (string)} & JSON schema         \\ \hline
+    \multicolumn{1}{|l|}{\texttt{GetAllSchemas}}   & \multicolumn{1}{l|}{GET}    & \multicolumn{1}{l|}{None}                & All JSON schemas    \\ \hline
     \multicolumn{1}{|l|}{\texttt{PostJSONSchemas}} & \multicolumn{1}{l|}{POST}   & \multicolumn{1}{l|}{JSON Schema}         & Status message      \\ \hline
     \end{tabular}
 \end{table}
 
-The first \texttt{GET} method is called GetSchema which takes a SchemaName as its input and returns a JSON Schema. 
+The first \texttt{GET} method is called \texttt{GetSchema} which takes a schema name as its input and returns a JSON schema with the given name if it exists. 
 
 The second \texttt{GET} method is called GetAllSchemas which takes no input and returns all stored JSON schemas. 
 
-The last method is a \texttt{POST} method called PostJSONSchema and takes a JSON Schema as its input and inserts it into the database.
-The body of the post request must consist of two fields - the schema name, which is its primary key in the database, and the schema content itself. Before the schema is inserted in the database it is checked if it is a duplicate, if that is the case an error message will be sent in response.
-A schema gets stored in the database in the format known as \texttt{jsonb} or JSON binary which is a built-in type provided by \postgres{}.
+The last method is a \texttt{POST} method called \texttt{PostJSONSchema}, which takes a JSON schema as its input and inserts it into the database.
+The body of the post request must consist of two fields - the schema name, which is its primary key in the database, and the schema content itself. Before the schema is inserted in the database, it is checked if it is a duplicate. If that is the case, an error message will be sent in response.
+A schema gets stored in the database in the format known as \texttt{jsonb}, or JSON binary, which is a built-in type provided by \postgres{}.
 This format is used to store a JSON object as binary, which seems to be more efficient than the regular \texttt{json} type\cite{FasterOperationsJSONB2017}.

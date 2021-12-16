@@ -4,9 +4,9 @@
 \input{sections/Chapter 3 Sprint 1/ER_Model.tex}
 \input{sections/Chapter 3 Sprint 1/Query.tex}
 \input{sections/Chapter 3 Sprint 1/ACID.tex}
-\subsection{The Current \knox{} databases}
-\subsubsection*{Relational databases}
-To summarize, the previous group set up a PostgreSQL database on \texttt{node02}.
+\subsection{The Current \knox{} Databases}
+\subsubsection*{The WordCount Database}
+The previous group set up a PostgreSQL database on \texttt{node02} to store information about word count in articles from \texttt{Nordjyske} and \texttt{Grundfos}.
 
 Figure \ref{olddatabase} shows an ER diagram of the database as we received it from the previous group.
 
@@ -17,8 +17,8 @@ Figure \ref{olddatabase} shows an ER diagram of the database as we received it f
     \label{olddatabase}
 \end{figure}
 
-\subsubsection*{Fuseki database}
-The previous group deployed Apache Jena Fuseki on \texttt{node01}. They chose to use HDT format, claiming that it is faster for querying than TDP\cite{knox2020}.
+\subsubsection*{The Fuseki Database}
+The previous group also deployed Apache Jena Fuseki on \texttt{node01}. They chose to use HDT format, claiming that it is faster for querying than TDP\cite{knox2020}.
 
 The setup is used to store the knowledge graph used in \knox{}.
 
