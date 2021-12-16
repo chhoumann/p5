@@ -1,4 +1,4 @@
-\section{End-to-End Testing}\label{scrumofscrumendtotend}
+\chapter{End-to-End Testing}\label{scrumofscrumendtotend}
 \textit{The following sections have been written in collaboration with other Knox project groups.}
 An end-to-end test was planned for the sprint to verify that the various implementations of the different layers fulfil the MVP when run in sequence. The test would entail scanning an article from Nordjyske and a manual from Grundfos in the preprocessing layer and delivering them in the correct format, as JSON, to the knowledge layer. The knowledge layer would then have to process the JSON, count the word frequencies in the document, and deliver this to the data layer. The data layer will then insert the given word frequencies, along with some metadata, into the database and make that accessible to the functionality layer, where the search engine itself can be used to search for word occurrences in the scanned documents.
 

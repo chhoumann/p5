@@ -59,6 +59,9 @@ Thus, if a relation $R$ is not in BCNF, there must be a functional dependency $\
 We can split such relation $R$ into two relations $R1(\alpha \cup \beta)$ and $R2(R-(\beta-\alpha))$ that are both in BCNF.
 
 Third Normal Form (TNF) prevents partial and transitive dependencies\cite{MontayaNormalForms}.
+That is, third normal form prevents functional dependencies of the form ${\alpha} \rightarrow{\beta}, {\beta \rightarrow \gamma}$,
+and functional dependencies where non-prime attributes are functionally dependent on only a part of the candidate key. 
+
 A relation is in TNF with respect to functional dependencies $F$ is for all dependencies in $F^+$ of the form $\alpha \rightarrow \beta$ if one of the following holds: 
 $\alpha \rightarrow \beta$ is trivial, $\alpha$ is a super key, or each attribute $A \in \beta-\alpha$ is contained in a candidate key for $R$ \cite{DBSBook}.
 
