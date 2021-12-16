@@ -74,19 +74,18 @@ As an example, if we for the book owner example instead assume that a book could
 \\
 \textbf{One-to-one relationships}\\
 When converting one-to-one relationships with total participation, we simply create a union of the attributes of the participating entity sets and the relationship set\cite{DBSBook}. If there is not total participation, two relations are created from the entity set, and a foreign key is placed on one of the sets.\\
-As an example, assume that for the book owner example that a book only has one owner, and each owner can only have one book. It would then be a one-to-one relationship. Assuming total participation between the entities, the relation can be seen in equation \ref*{eq:TotalOneToOne}, which is a union of the attributes of \texttt{book} and \texttt{book\_owner}.
+As an example, assume that a book can only be owned by only one book owner, and that a book owner have only one book. It would then be a one-to-one relationship. Assuming total participation between these entities, a relation can be formed from the union of the two relations' attributes. The union is seen in equation \ref*{eq:TotalOneToOne}. Notice that the domain of the attributes have been left out. 
 
 \begin{equation}\label{eq:TotalOneToOne}
     \begin{split}
-        owns(\underline{owner\_id \rightarrow book\_owner}, \underline{ISBN \rightarrow book}), \\
-        book\_owner(name:text,\underline{owner\_id:\mathbb{Z}^+})
+        r(owner\_id, ISBN, name, title, author\_name, number\_of\_pages).
     \end{split}
 \end{equation}
 
 
 \textbf{Weak entity sets}\\
 When representing weak entity sets, one creates a relation containing the attributes of the weak entity set as well as the attributes of the identifying set's primary key.
-The primary key of the identifying relation will also serve as a foreign key to the identifying relation. \cite{DBSBook}.
+The primary key of the identifying relation will also serve as a foreign key to the identifying relation\cite{DBSBook}.
 The relationship set is simply ignored, as the relationship set will not have any attributes\cite{DBSBook}. 
 
 % \begin{equation}\label{eq:bookOwnerExample}
