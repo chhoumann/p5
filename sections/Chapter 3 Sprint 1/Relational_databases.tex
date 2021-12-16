@@ -19,7 +19,7 @@ Attributes describing the primary key are underlined.
 \begin{equation} \label{eq:relational_schema}
     book(\underline{ISBN: text}, author\_name:text, title: text, number\_of\_pages:\mathbb{Z}^+)
 \end{equation}
-Super keys can be defined as $t_1 \in r,\neq t_2 \in r \implies t_1.K \neq t_2.K$, where $t_1, t_2$ are tuples contained within the relation.
+Super keys can be defined as $t_1 \in r\neq t_2 \in r \implies t_1.K \neq t_2.K$, where $t_1, t_2$ are tuples contained within the relation.
 That is, no two tuples $t_1, t_2$ from relation $r$ have the same values for all super key attributes $K$. 
 If the super key does not contain extraneous attributes, it is said to be \textit{minimal} \cite{DBSBook}.
 We will use the term \textit{primary key} to denote a chosen super key of a relation. 
@@ -48,7 +48,7 @@ Functional dependency between $\alpha$ and $\beta$, written as $\alpha \rightarr
 In this case, we say that $\alpha$ is the determinant and $\beta$ is the dependant. 
 We say that $\beta$ is functionally determined by $\alpha$ if $\alpha \rightarrow \beta$.
 It is logically implied that if $\alpha \rightarrow \beta$ and $\beta \rightarrow \gamma$, then $\gamma$ is functionally determined by $\alpha$.
-If all attributes are functionally determined by $alpha$, it is a super key\cite{DBSBook}.
+If all attributes are functionally determined by $\alpha$, it is a super key\cite{DBSBook}.
 The closure of functional dependency $\alpha$, denoted $\alpha^+$, describes all attributes that can be logically implied by functional dependencies having $\alpha$ as determinant\cite{DBSBook}. 
 
 Boyce-Codd Normal Form (BCNF) eliminates all redundancy that can be discovered using functional dependencies\cite{DBSBook}. 
