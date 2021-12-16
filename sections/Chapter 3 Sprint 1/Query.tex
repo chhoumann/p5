@@ -22,8 +22,8 @@ A few of these operations can be seen in table \ref{Relational algebra operators
     \label{Relational algebra operators}
 \end{table}
 
-We will describe some of the operators of relational algebra, and use them to describe implemented queries later.
-Some of the common operators of in relational algebra can be seen in table \ref{Relational algebra operators}.
+We will describe some operators of relational algebra, and use them to describe implemented queries later.
+Some common operators of in relational algebra can be seen in table \ref{Relational algebra operators}.
 \subsubsection*{Select}
 The select operator defines a set, $R_{result}\subseteq R$ where all tuples $t \in R_{result}$ satisfies a given predicate\cite{DBSBook}.
 That is, $\forall t \in R_{result} \vDash predicate$.
@@ -48,7 +48,7 @@ $book\_owner \times owns = r$ will result a relation with the structure as seen 
 The join operator defines a relation consisting of tuples from the Cartesian product of the operand, containing only tuples satisfying the given predicate.
 It is defined as $\sigma_{\Theta} (R_1 \times R_2)$ \cite{DBSBook}.
 
-Thus we can express the relation describing the name of all $book\_owner$ entities, that owns the book with $ISBN$ "987-1-...50-4" as both equation \ref{eq:join_s} and equation \ref{eq:join_j}.
+Thus, we can express the relation describing the name of all $book\_owner$ entities, that owns the book with $ISBN$ "987-1-...50-4" as both equation \ref{eq:join_s} and equation \ref{eq:join_j}.
 \begin{equation}\label{eq:join_s}
     \pi_{book\_owner.name} (\sigma_{owns.ISBN = book.ISBN \wedge owns.ISBN = 987-1-...50-4}  (book\_owner \times owns))
 \end{equation}
@@ -136,6 +136,6 @@ Code snippet \ref{lst:join} shows a simple join operation, returning all book ti
  owns JOIN book ON owns.isbn = book.isbn WHERE owns.owner_id = 10  
 \end{lstlisting}
 
-In relational algebra, an equivalent opertation could be described as $\pi_{title}\sigma_{owns.owner\_id = 10}(owns \Join_{book.isbn = book.isbn} book )$.
+In relational algebra, an equivalent operation could be described as $\pi_{title}\sigma_{owns.owner\_id = 10}(owns \Join_{book.isbn = book.isbn} book )$.
 
 % Having established how one can define a database schemas using SQL as a DDL, as well as query data from the database using SQL as a DML.
