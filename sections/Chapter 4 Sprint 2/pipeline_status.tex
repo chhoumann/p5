@@ -18,6 +18,9 @@ For the knowledge layer to extract information from the data provided by the pre
 For our layer, the responsibility was to be able to receive and provide data through application interfaces to the surrounding layers.
 To fulfill this, we had to update endpoints for CRUD operations.
 
+In our estimation, this would not be enough to fill en entire sprint duration. In section \ref{currentState}, we found the existing WordCount API solution to be relatively small.
+We spoke with our supervisor and other groups, and discussed reasonable tasks to work on. We decided to resolve the issue of having to restart the RDF database every time we update the data. To gain a better understanding, we asked our supervisor for alternatives to Fuseki, where Virtuoso was brought up as a potential alternative.
+
 \subsubsection*{Functionality layer}
 For the functionality layer to be able to provide the search functionality to a web based user interface, the following issues had to be resolved:
 \begin{itemize}
