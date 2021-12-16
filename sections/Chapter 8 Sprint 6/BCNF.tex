@@ -19,7 +19,7 @@ This is seen when considering the functional dependency of its single, primary k
 
 One could consider using only \textit{title} as key. 
 However, some article titles could occur multiple times; this is realized when considering the domain area of the \knox{} search engine.
-For instance, the title "The first snow of the season" could be occurring every year for the same publisher.
+For instance, the title "The first snow of the season" could occur every year for the same publisher.
 Thus, the composite, primary key $\{ publisher,article\_title \}$ would not guaranteee uniqueness either.
 One should notice that each of the files in the search engine (represented by the $file\_path$ attribute) can contain multiple articles.
 An example of a $file\_path$ could be a path to a newspaper in PDF format, containing many articles about the weather.
