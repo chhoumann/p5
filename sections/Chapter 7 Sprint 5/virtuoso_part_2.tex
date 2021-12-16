@@ -28,17 +28,21 @@ As can be seen in the method signature, we have specified a default graph. First
 [HttpPost, Route("/[controller]/")]
 public async Task<IActionResult> Insert(string turtle, string? graph)
 {
-    string? virtuosoEndpoint = Environment.GetEnvironmentVariable("VIRTUOSO_ENDPOINT");
+    string? virtuosoEndpoint = Environment
+        .GetEnvironmentVariable("VIRTUOSO_ENDPOINT");
     if (virtuosoEndpoint == null)
     {
-        return StatusCode((int)HttpStatusCode.InternalServerError, "VIRTUOSO_ENDPOINT environment variable not set");
+        return StatusCode((int)HttpStatusCode.InternalServerError, 
+            "VIRTUOSO_ENDPOINT environment variable not set");
     }
 
     try
     {
-        string insertResponse = !string.IsNullOrEmpty(graph) ?
-            await new VirtuosoDataStore(virtuosoEndpoint).InsertTurtleGraph(turtle, graph) :
-            await new VirtuosoDataStore(virtuosoEndpoint).InsertTurtleGraph(turtle);
+        string insertResponse = !string.IsNullOrEmpty(graph) 
+            ? await new VirtuosoDataStore(virtuosoEndpoint)
+                .InsertTurtleGraph(turtle, graph) 
+            : await new VirtuosoDataStore(virtuosoEndpoint)
+                .InsertTurtleGraph(turtle);
 
         return Ok(insertResponse);
     }
