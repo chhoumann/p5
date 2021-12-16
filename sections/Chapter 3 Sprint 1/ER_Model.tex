@@ -74,7 +74,7 @@ As an example, if we for the book owner example instead assume that a book could
 \\
 \textbf{One-to-one relationships}\\
 When converting one-to-one relationships with total participation, we simply create a union of the attributes of the participating entity sets and the relationship set\cite{DBSBook}. If there is not total participation, two relations are created from the entity set, and a foreign key is placed on one of the sets.\\
-As an example assume that for the book owner example that a book only has one owner, and each owner can only have one book. It would then be a one-to-one relationship. Assuming total participation between the entities, the relation can be seen in equation \ref*{eq:TotalOneToOne}, which is a union of the attributes of \texttt{book} and \texttt{book\_owner}.
+As an example, assume that for the book owner example that a book only has one owner, and each owner can only have one book. It would then be a one-to-one relationship. Assuming total participation between the entities, the relation can be seen in equation \ref*{eq:TotalOneToOne}, which is a union of the attributes of \texttt{book} and \texttt{book\_owner}.
 
 \begin{equation}\label{eq:TotalOneToOne}
     \begin{split}
