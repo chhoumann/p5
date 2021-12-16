@@ -11,7 +11,7 @@ This, in turn, helped us generate as much value to the pipeline as quickly as po
 \userStory{the functionality layer}{to be able to query an RDF graph}{can use it in search results, fact checking and virtual assistant applications without having to worry about changes to the database}
 
 \subsubsection*{Granulating the user stories}
-After talking to the functionality and knowledge layer, we found out some of the details about how they want database access to work. These requirements are specified below.
+After talking to the functionality and knowledge layer, we found out some details about how they want database access to work. These requirements are specified below.
 
 
 
@@ -25,7 +25,7 @@ After talking to the functionality and knowledge layer, we found out some of the
 At this stage, we had gotten enough insight to begin work on the database, however due to the other groups not knowing exactly what they want, there was a possibility of additional tasks emerging later, which would take precedence during the sprint.
 
 
-From the epics, we created a backlog. As mentioned in section \ref{Whatwelearnedsprint3}, we decided to work with a different unit of measurement for determining the size of a task.
+From the user stories, we created a backlog. As mentioned in section \ref{Whatwelearnedsprint3}, we decided to work with a different unit of measurement for determining the size of a task.
 Instead of using hours, we now estimate tasks by relative sizing - but we will keep using the Fibonacci numbers for points.
 
 To approach the prioritization of tasks differently, we decided to apply inversion thinking\cite{InversionThinking}. This involved trying to find issues with our prioritization by imagining what would happen if we did not work on the given tasks. 
@@ -39,7 +39,7 @@ The read operation should be done through an endpoint which returns the data in 
 Likewise, writing should be facilitated through an endpoint which receives data in the aforementioned Turtle format.
 
 
-The \textbf{non-functional requirement} for this sprint is simply that the reading and writing operations should be reasonably fast such that an acceptable amount of tuples can be queried within a feasible amount of time.
+The \textbf{non-functional requirement} for this sprint is simply that the reading and writing operations should be reasonably fast such that an acceptable amount of triples can be queried within a feasible amount of time.
 
 
 The \textbf{acceptance criteria} is that the aforementioned functional and non-functional requirements must be met before this feature is deemed acceptable. 

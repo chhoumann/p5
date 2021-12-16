@@ -13,7 +13,7 @@ We will start by creating an ER-model of the domain, and then describe the entit
 \end{figure}
 
 Equation \ref{eq:newDatabaseRelationalModel} shows relations representing the new database structures from figure \ref{fig:newdatabaseRedesignER}.
-Notice that the existing $publisher$ relation in the database have exactly the same attributes as the new one. 
+Notice that the existing $publisher$ relation in the database has exactly the same attributes as the new one. 
 
 \begin{equation}\label{eq:newDatabaseRelationalModel}
     \begin{split}
@@ -45,5 +45,3 @@ The resulting relation structure is seen in equation \ref{create_new_view_rel_al
         wordRatio(article\_id:\mathbb{Z^+}, text:text, count:\mathbb{Z^+},title:text, file\_path:text,\\ total\_words:\mathbb{Z^+}, publisher\_name:text, percent:\mathbb{R^+})
     \end{split}
 \end{equation}
-
-
