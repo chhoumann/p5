@@ -35,9 +35,9 @@ That is, attributes $A_1, ..., A_n$ of relation $R_{result}$ will be a subset of
 We can use the projection in combination with the select operator to produce a relation containing only the ISBN and title of books titled "Database System Concepts":
 $$\pi_{ISBN,title} (\sigma_{author\_name = "Database\ System\ Concepts"}(books))$$
 \subsubsection*{Cartesian product}
-The cartesian product of two relations $R_1$ and $R_2$ produces a set containing concatenated tuples of the two operands.
+The Cartesian product of two relations $R_1$ and $R_2$ produces a set containing concatenated tuples of the two operands.
 That is, taking the attributes of the two sets, $A_1,...,A_n \in R_1$ and $A_{n+1},...,A_k \in R_2$ produces a set with attributes $A_1,...,A_k$.
-If the attributes of the operands have the same names, we distinguish between them by denoting their original relation: $R_1.AttributeName$, $R_2.AttributeName$ \cite{DBSBook}.
+If the attributes of the operands have the same names, we distinguish between them by denoting their original relation: $R_1.AttributeName$, $R_2.AttributeName$.
 For instance, we can concatenate the information in the $book\_owner$ and $owns$ relations.
 
 $book\_owner \times owns = r$ will result a relation with the structure as seen in equation \ref{eq:cart_struct}.
