@@ -31,11 +31,11 @@ How the validation is done will be described in section \ref*{sec:validation}.
 \textbf{Response Models}\\
 % FileIdResponse
 The response model \texttt{FileIdResponse} is used when a request for the path of an article is made, and can be seen in figure \ref*{fig:CommunicationModels},
-After the path has been queried in the WordCount database, it is put into the response model which is returned as a JSON object.
+After the path has been queried in the WordCount database, it is put into the response model, which is returned as a JSON object.
 
 \subsubsection*{Data access models}
-To use EF Core for data access, we also had to implement models of the relations in the database, which are be used to insert and query data. 
-All of these models must be contain exactly the same fields as the relations in the database.
+To use EF Core for data access, we also had to implement models of the relations in the database, which are being used to insert and query data. 
+All of these models must contain exactly the same fields as the relations in the database.
 EF Core then maps these models to the relations such that they can be used to manipulate data.
 \\
 % Article
