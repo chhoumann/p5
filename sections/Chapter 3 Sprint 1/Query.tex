@@ -37,7 +37,7 @@ $$\pi_{ISBN,title} (\sigma_{author\_name = "Database\ System\ Concepts"}(books))
 \subsubsection*{Cartesian product}
 The Cartesian product of two relations $R_1$ and $R_2$ produces a set containing concatenated tuples of the two operands.
 That is, taking the attributes of the two sets, $A_1,...,A_n \in R_1$ and $A_{n+1},...,A_k \in R_2$ produces a set with attributes $A_1,...,A_k$.
-If the attributes of the operands have the same names, we distinguish between them by denoting their original relation: $R_1.AttributeName$, $R_2.AttributeName$.
+If the attributes of the operands have the same names, we distinguish between them by denoting their original relation: $R_1.AttributeName$, $R_2.AttributeName$. \cite{DBSBook}
 For instance, we can concatenate the information in the $book\_owner$ and $owns$ relations.
 
 $book\_owner \times owns = r$ will result a relation with the structure as seen in equation \ref{eq:cart_struct}.
@@ -57,10 +57,10 @@ Thus, we can express the relation describing the name of all $book\_owner$ entit
 \end{equation}\\
 
 
-Other variations of the join operation exists\cite{DBSBook}, however these will not be discussed in this report.\\
+Other variations of the join operation exist\cite{DBSBook}, however these will not be discussed in this report.\\
 \subsubsection*{Aggregate functions}
-In conjunction with the basic relational operators Aggregate functions can be used over a set of values.
-Aggregate functions can take a set of values as input and get a single value as output\cite{DBSBook}. Some common aggregate functions are 
+In conjunction with the basic relational operators, aggregate functions can be used over a set of values.
+Aggregate functions take a set of values as input and outputs a single value\cite{DBSBook}. Some common aggregate functions are 
 \begin{itemize} \label{aggregateFunctions}
     \item \texttt{count} --- returns the number of tuples in the set.
     \item \texttt{sum} --- returns the sum of the values in the set.
@@ -74,7 +74,7 @@ As we have now established both how to model database relations as well fundamen
 
 \subsubsection{SQL}\label{sec:SQL}
 SQL is one of the most commonly used data definition language (DDL) and data manipulation languages (DML) \cite{DBSBook}.
-SQL is a declarative query language, where one executes a query to instruct the database system to perform a set of operations to compute a desired result.
+SQL is a declarative query language where one executes a query to instruct the database system to perform a set of operations to compute a desired result.
 Collectively, the resulting set of operations is known as a transaction.
 A transaction can be considered as a set of operations that is performed on data.
 To a user or connected system, the collection of operations must seem a single, indivisible operation\cite{DBSBook}.
@@ -82,7 +82,7 @@ We will describe the effect of transactions in section \ref{sec:ACID}.
 
 
 In PostgreSQL, all queries, both to define and to manipulate data, are executed as transactions\cite{postgres_transactions}.
-As a DDL, SQL provides queries to define and modify relation schemas, as well as provide constraints for the attributes of the schema, such that data in the relation satisfies the constraint.  
+As a DDL, SQL provides queries to define and modify relation schemas, as well as provide constraints for the attributes of the schema such that data in the relation satisfies the constraint.  
 
 \begin{lstlisting}[
     label=lst:CreatingTablesInSQL,
@@ -114,12 +114,12 @@ As a DDL, SQL provides queries to define and modify relation schemas, as well as
     );
 \end{lstlisting}
 
-Code snippet \ref{lst:CreatingTablesInSQL} shows a possible definition of the relations from equation \ref{eq:bookOwnerExample} and \ref{eq:relational_schema}.
-On line \ref{line:sequence} a sequence describing the \texttt{owner\_id} primary key for the \texttt{owner} relation has been defined.
+Code snippet \ref{lst:CreatingTablesInSQL} shows a possible definition of the relations from equation \ref{eq:relational_schema} and \ref{eq:bookOwnerExample}.
+On line \ref{line:sequence}, a sequence describing the \texttt{owner\_id} primary key for the \texttt{owner} relation is defined.
 Whenever a new tuple is inserted into the table, the sequence will generate a unique owner\_id for the data.
 As a DML, SQL provides functionality to fetch data stored in the database. 
 Many of the operators presented in the previous section is predefined in SQL and describe the exact same operation. 
-Code snippet \ref{lst:join} shows a simple join operation, returning all book titles of books that are owned by the book\_owner with owner\_id 10.
+Code snippet \ref{lst:join} shows a simple join operation, returning all book titles of books that are owned by the \texttt{book\_owner} with \texttt{owner\_id} 10.
 
 \begin{lstlisting}[
     label=lst:join,
