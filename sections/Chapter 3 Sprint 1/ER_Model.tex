@@ -81,16 +81,27 @@ As an example, assume that a book can only be owned by only one book owner, and 
         r(\underline{owner\_id},\underline{ISBN}, name, title, author\_name, number\_of\_pages).
     \end{split}
 \end{equation}
+\\
+If instead the entities have partial participation, a foreign key is placed on either of the relations. In equation \ref{eq:PartialOneToOne} the foreign key is placed on the book owner.
 
+\begin{equation}\label{eq:PartialOneToOne}
+    \begin{split}
+        Book(\underline{ISBN : text} , title : text , author\_name : text , number\_of\_pages : \mathbb{Z}^+) \\
+        book\_owner(\underline{owner\_id:\mathbb{Z}^+} , name:text , ISBN \rightarrow Book)
+    \end{split}
+\end{equation}
+\\
 
 \textbf{Weak entity sets}\\
 When representing weak entity sets, one creates a relation containing the attributes of the weak entity set as well as the attributes of the identifying set's primary key.
 The primary key of the identifying relation will also serve as a foreign key to the identifying relation\cite{DBSBook}.
-The relationship set is simply ignored, as the relationship set will not have any attributes\cite{DBSBook}. 
+The relationship set is simply ignored, as the relationship set will not have any attributes\cite{DBSBook}. \\
+As an example assume that a book owner is a weak entity, which uses a book as an identifying attribute. As can be seen in equation \ref{eq:WeakEntity}, the relation for, the weak entity, book owner gains a foreign key to a book as part of its own primary key.
 
-% \begin{equation}\label{eq:bookOwnerExample}
-%     \begin{split}
-%         owns(\underline{owner\_id \rightarrow book\_owner}, \underline{ISBN \rightarrow book}), \\
-%         book\_owner(name:text,\underline{owner\_id:\mathbb{Z}^+})
-%     \end{split}
-% \end{equation}
+\begin{equation}\label{eq:WeakEntity}
+    \begin{split}
+        Book(\underline{ISBN : text} , title : text , author\_name : text , number\_of\_pages : \mathbb{Z}^+) \\
+        book\_owner(\underline{ISBN \rightarrow Book}, \underline{owner\_id:\mathbb{Z}^+} , name:text)
+    \end{split}
+\end{equation}
+\\
