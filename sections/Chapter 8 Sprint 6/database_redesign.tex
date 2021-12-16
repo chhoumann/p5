@@ -6,7 +6,7 @@ Thus, the database can contain duplicate values.
 To address this issue, we will create relations using the relational model (see section \ref{relational_databases}) and ensure they are well-designed.
 After ensuring that a normal form is reached, we will create the relations using SQL as a DDL.
 We will also need to adjust the data access models (see section \ref{models}) to ensure access using EF core.
-When implementing the new database structures, we need to ensure that the pipeline is operational and have a minimum downtime. 
+When implementing the new database structures, we need to ensure that the pipeline is operational and have minimum downtime. 
 Therefore, we have to ensure we can always roll back changes to the code and database structures.
 As described in section \ref{CI/CD}, we can easily deploy versions of our code.
 By reverting the changes to the old implementation of the models, we can ensure a quick response, should the new implementation fail.
