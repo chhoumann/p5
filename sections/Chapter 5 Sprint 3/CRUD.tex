@@ -113,7 +113,7 @@ The articles are then checked for duplicate data on the database, if there is an
  
 \subsubsection{WordRatio}\label{WordRatioCrud}
 The WordRatio route is used by the functionality layer to fetch specific data from the database.
-As the WordRatio table is a view (see appendix \ref{Appendix_WordRatioOld}), it cannot be used to store new data. 
+As WordRatio is a view (see appendix \ref{Appendix_WordRatioOld}), it cannot be used to store new data. 
 The primary purpose of WordRatio is to check how many times a given word occurs in an article.
 WordRatio consists of one \texttt{GET} method with an optional parameter. 
 \begin{table}[h]
