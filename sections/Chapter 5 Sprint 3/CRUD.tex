@@ -49,7 +49,7 @@ In the controller we implemented two methods, a \texttt{GET} and a \texttt{POST}
     \end{tabular}
 \end{table}
 
-The \texttt{GET} method called \texttt{GetFilepath}, takes a integer "id" as an argument and finds an article in the database with the given "id" and returns the articles filePath as a JsonResult if it exists, otherwise an error is sent back.
+The \texttt{GET} method called \texttt{GetFilepath}, takes an integer "id" as an argument and finds an article in the database with the given "id" and returns the articles filePath as a JsonResult if it exists, otherwise an error is sent back.
 This method can be seen in code snippet \ref{lst:GetFilepathMethod}.
 
 \begin{lstlisting}[language=CSharp, caption={The \texttt{GetFilepath} method.}, label={lst:GetFilepathMethod}]
