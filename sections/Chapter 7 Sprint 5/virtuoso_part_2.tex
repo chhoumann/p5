@@ -112,7 +112,7 @@ private string[] ChunkRecords(string input, string separator,
 \end{lstlisting}
 
 
-The architecture for this solution can be seen in figure \ref{fig:virtuoso_architecture}. The users do not communicate with Docker, as the figure may imply, but rather, Docker allows for communication between the users and the containers within. Users access the exposed services through HTTP requests. The Docker containers are configured to run on the same network, so that they can communicate with each other.
+The architecture for this solution can be seen in figure \ref{fig:virtuoso_architecture}. The users do not communicate with Docker, as the figure may imply, but rather Docker allows for communication between the users and the containers within. Users access the exposed services through HTTP requests. The Docker containers are configured to run on the same network so they can communicate with each other.
 
 \begin{figure}[h!]
 \centering
