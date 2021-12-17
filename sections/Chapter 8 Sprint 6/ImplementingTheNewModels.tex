@@ -1,7 +1,7 @@
 \subsubsection*{Implementing the Models}\label{implementing_new_WC_DB_models}
-Having established the quality of the design of the database structures, we will now implement them.
-When creating the new tables, we ensure that no loss of data occurs by not dropping the old tables, and instead renaming them. 
-The tables can then be dropped later after the completing the implementation of the new design.
+After having established the quality of the design of the database structures, we then implemented them.
+When creating the new tables, we ensured that no loss of data occurred by not dropping the old tables and instead renamed them. 
+The tables could then be dropped later after we completed the implementation of the new design.
 The renaming of the tables can be seen in code snippet \ref{lst:RenamingOldModelsSQL}.
 
 \begin{lstlisting}[
@@ -20,9 +20,9 @@ ALTER TABLE "Term"
     RENAME TO "Term_Redundant";
 \end{lstlisting}
 
-When implementing the new tables, we base them on the just-renamed tables from the old database design.
-By doing this, we ensure that all data from the old tables are correctly transferred to the new ones, since each of the commands is a transaction (see section \ref{relational_databases}).
-After all data have been transferred to a new table, constraints, foreign- and primary keys are added to the tables. 
+When implementing the new tables, we based them on the newly renamed tables from the old database design.
+By doing this, we ensured that all data from the old tables were correctly transferred to the new ones, since each command is a transaction (see section \ref{relational_databases}).
+After all data had been transferred to a new table, constraints, foreign- and primary keys were added to the tables. 
 This can be seen in code snippet \ref{lst:CreatingTheNewDBModelsSQL}.
 We have ensured that the changes are reversible by creating a script dropping the new tables, and restoring the structure of the old tables.
 The script is found in Appendix \ref{SQLBackupScript}.
@@ -60,7 +60,7 @@ ALTER TABLE "OccursIn"
     ADD PRIMARY KEY ("ArticleId", "Word");
 \end{lstlisting}
 
-Having implemented the new database structures, we can redefine the WordRatio view.
+After having implemented the new database structures, we redefined the WordRatio view.
 Notice that the view is an abstraction over a \texttt{SELECT} statement, thus it is replaceable without loss of data.
 
 
