@@ -35,11 +35,11 @@ Relationship sets connecting a weak entity set to its identifying entity set wil
 A weak entity set is identified by its \textit{identifying entity set}'s primary key along with some of its own attributes. 
 The relationship between a weak entity set and its identifying set is always many-to-one with total participation of the weak entity set.
 
-The ER model can be converted into the \textit{relational model}. The relational model is described using relations, thus we can describe operations that can be performed on the relations using set notation and relational algebra. 
-Therefore, it is useful to be able to convert an ER model into an equivalent relational model, where domains of attributes can be defined and operations on the entity sets described mathematically.
+The ER model can be converted into the \textit{relational model}\cite{DBSBook}. The relational model is described using relations, thus we can describe operations that can be performed on the relations using set notation and relational algebra. 
+Therefore, it is useful to be able to convert an ER model into an equivalent relational model\cite{DBSBook}, where domains of attributes can be defined and operations on the entity sets described mathematically.
 
 \subsubsection*{Converting ER Models to Relations}
-When converting an ER diagram into an equivalent relational model, we must consider the domains of the attributes in the ER model since these need to be described in the relational model. Having the domain of the relations described makes it possible to establish well-defined operations that can be performed on the relations.\\
+When converting an ER diagram into an equivalent relational model, we must consider the domains of the attributes in the ER model since these need to be described in the relational model\cite{DBSBook}. Having the domain of the relations described makes it possible to establish well-defined operations that can be performed on the relations.\\
 \textbf{Strong entity sets}\\
 Strong entity sets are converted by taking each attribute of the entity set, and creating a single relation with corresponding attributes. 
 The primary key of the entity set is chosen as primary key for the relation\cite{DBSBook}.\\
@@ -63,7 +63,7 @@ As an example, in the book owner example, there is a many-to-many relationship b
 \end{equation}
 \\
 \textbf{Many-to-one relationships}\\
-If we have a many-to-one relationship between two sets, we can combine the relationship set and the relation created from the entity set on the 'many' side into a single relation. This relation will use the primary key of the entity set as its primary key, and have a foreign referencing the relation created from the 'one' side of the relationship.\\
+If we have a many-to-one relationship between two sets, we can combine the relationship set and the relation created from the entity set on the 'many' side into a single relation. This relation will use the primary key of the entity set as its primary key, and have a foreign referencing the relation created from the 'one' side of the relationship\cite{DBSBook}.\\
 As an example, if we for the book owner example instead assume that a book could have only one owner, it would be a many-to-one relationship. To convert the relationship set to a relation, the relationship set should be merged with the 'many' side of the relations created, which in this case would be the book as it only has one owner, but an owner can have many books. The relation created from this can be seen in equation \ref*{eq:ManyToOne}, which has the attributes of the initial book relation and a foreign key to the \texttt{book\_owner}.
 
 \begin{equation}\label{eq:ManyToOne}

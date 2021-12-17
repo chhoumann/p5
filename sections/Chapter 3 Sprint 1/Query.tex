@@ -2,7 +2,7 @@
 Having established how to convert an ER diagram into an equivalent relational model, we can now describe the operations for the relational model.
 
 \subsubsection{Relational Algebra}\label{sec:relationalAlgebra}
-Relational algebra describes a set of unary and binary operations on relations.
+Relational algebra describes a set of unary and binary operations on relations\cite{DBSBook}.
 The operations are used to define new relations --- often, the tuples within the set will satisfy defined predicates.
 The relational operators form the foundations of data manipulation languages (see section \ref{sec:SQL}) which can be used to define database operations\cite{DBSBook}.
 A few of the common operaterations can be seen in table \ref{Relational algebra operators}.
@@ -34,7 +34,7 @@ That is, attributes $A_1, ..., A_n$ of relation $R_{result}$ will be a subset of
 We can use the projection in combination with the select operator to produce a relation containing only the ISBN and title of books titled "Database System Concepts":
 $$\pi_{ISBN,title} (\sigma_{title = "Database\ System\ Concepts"}(books))$$
 \subsubsection*{Cartesian Product}
-The Cartesian product of two relations $R_1$ and $R_2$ produces a set containing concatenated tuples of the two operands.
+The Cartesian product of two relations $R_1$ and $R_2$ produces a set containing concatenated tuples of the two operands\cite{DBSBook}.
 That is, taking the attributes of the two sets, $A_1,...,A_n \in R_1$ and $A_{n+1},...,A_k \in R_2$ produces a set with attributes $A_1,...,A_k$.
 If the attributes of the operands have the same names, we distinguish between them by denoting their original relation: $R_1.AttributeName$, $R_2.AttributeName$. \cite{DBSBook}
 For instance, we can concatenate the information in the $book\_owner$ and $owns$ relations.
@@ -44,7 +44,7 @@ $book\_owner \times owns = r$ will result a relation with the structure as seen 
     r(owns.owner\_id, owns.ISBN,book\_owner.name,book\_owner.owner\_id)
 \end{equation}
 \textbf{Join}\\
-The join operator defines a relation consisting of tuples from the Cartesian product of the operand, containing only tuples satisfying the given predicate.
+The join operator defines a relation consisting of tuples from the Cartesian product of the operand, containing only tuples satisfying the given predicate\cite{DBSBook}.
 It is defined as $\sigma_{\Theta} (R_1 \times R_2)$ \cite{DBSBook}.
 
 Thus, we can express the relation describing the name of all $book\_owner$ entities, that owns the book with $ISBN$ "987-1-...50-4" as both equation \ref{eq:join_s} and equation \ref{eq:join_j}.
@@ -116,8 +116,8 @@ CREATE TABLE owns (
 Code snippet \ref{lst:CreatingTablesInSQL} shows a possible definition of the relations from equation \ref{eq:relational_schema} and \ref{eq:bookOwnerExample}.
 On line \ref{line:sequence}, a sequence describing the \texttt{owner\_id} primary key for the \texttt{owner} relation is defined.
 Whenever a new tuple is inserted into the table, the sequence will generate a unique owner\_id for the data.
-As a DML, SQL provides functionality to fetch data stored in the database. 
-Many of the operators presented in the previous section is predefined in SQL and describe the exact same operation. 
+As a DML, SQL provides functionality to fetch data stored in the database\cite{DBSBook}. 
+Many of the operators presented in the previous section is predefined in SQL and describe the exact same operation\cite{DBSBook}.
 Code snippet \ref{lst:join} shows a simple join operation, returning all book titles of books that are owned by the \texttt{book\_owner} with \texttt{owner\_id} 10.
 
 \begin{lstlisting}[
