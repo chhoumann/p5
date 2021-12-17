@@ -1,24 +1,23 @@
 \section{Redesigning the WordCount Database}
-In section \ref{InitialDesign} we established that the design would lead to duplicate or redundant data in the wordcount database.
+In section \ref{InitialDesign}, we established that the database design would lead to duplicate or redundant data in the WordCount database.
 Namely, the terms occurring in the Term entity set (see section \ref{newdatabaseER}) will not be unique. 
 Thus, the database can contain duplicate values.
  
-To address this issue, we will create relations using the relational model (see section \ref{relational_databases}) and ensure they are well-designed.
-After ensuring that a normal form is reached, we will create the relations using SQL as a DDL.
-We will also need to adjust the data access models (see section \ref{models}) to ensure access using EF core.
-When implementing the new database structures, we need to ensure that the pipeline is operational and have a minimum downtime. 
-Therefore, we have to ensure we can always roll back changes to the code and database structures.
+To address this issue, we created relations using the relational model (see section \ref{relational_databases}) and ensured they are well-designed.
+After ensuring that a normal form is reached, we created the relations using SQL as a DDL.
+We also needed to adjust the data access models (see section \ref{models}) to ensure access using EF core.
+When implementing the new database structures, we needed to ensure that the pipeline is operational and has minimum downtime. 
+Therefore, we had to ensure we could always roll back changes to the code and database structures.
 As described in section \ref{CI/CD}, we can easily deploy versions of our code.
-By reverting the changes to the old implementation of the models, we can ensure a quick response, should the new implementation fail.
-We need to ensure that this is also the case for the database structures.
-This is done by taking a dump (backup) of the database, and verifying that no database relations are deleted during the data migration.
+By reverting the changes to the old implementation of the models, we were able to ensure a quick response in case the new implementation failed.
+We needed to ensure that this was also the case for the database structures.
+This was done by taking a dump (backup) of the database, and verifying that no database relations are deleted during the data migration.
 
 \input{sections/Chapter 8 Sprint 6/CreatingNewModels.tex}
 \input{sections/Chapter 8 Sprint 6/BCNF.tex}
 \input{sections/Chapter 8 Sprint 6/ImplementingTheNewModels.tex}
 \subsection{Result}
-Having implemented the new database structure, we can assess the changes to the database. 
-The number of words in the just implemented \texttt{Word} relation is 260,000.
-The number of unique tuples in the just implemented \texttt{WordOccurance} table is 6,900,000, the same as the number of tuples representing words in the old \texttt{Term} relation.
+After having implemented the new database structure, we assessed the changes to the database. 
+The number of words in the newly implemented \texttt{Word} relation is 260,000.
+The number of unique tuples in the newly implemented \texttt{WordOccurance} table is 6,900,000, the same as the number of tuples representing words in the old \texttt{Term} relation.
 Thus, the number of tuples in the new relation is the same, but the number of duplicate words have been reduced greatly.
-

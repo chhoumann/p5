@@ -4,9 +4,8 @@
 \input{sections/Chapter 3 Sprint 1/ER_Model.tex}
 \input{sections/Chapter 3 Sprint 1/Query.tex}
 \input{sections/Chapter 3 Sprint 1/ACID.tex}
-\subsection{The Current \knox{} databases}
-\subsubsection*{Relational databases}
-To summarize, the previous group set up a PostgreSQL database on \texttt{node02}.
+\subsection{The Current \knox{} Databases}
+The previous group set up a PostgreSQL database on \texttt{node02} to store information about word count in articles from \texttt{Nordjyske} and \texttt{Grundfos}. We will refer to this database as the WordCount database.
 
 Figure \ref{olddatabase} shows an ER diagram of the database as we received it from the previous group.
 
@@ -17,38 +16,27 @@ Figure \ref{olddatabase} shows an ER diagram of the database as we received it f
     \label{olddatabase}
 \end{figure}
 
-\subsubsection*{Fuseki database}
-The previous group set Apache Jena Fuseki on \texttt{node01}. They chose to use HDT format, claiming that it is faster for querying than TDP\cite{knox2020}.
 
+The previous group also deployed Apache Jena Fuseki on \texttt{node01}. They chose to use HDT format, claiming that it is faster for querying than TDP\cite{knox2020}. 
 The setup is used to store the knowledge graph used in \knox{}.
+We will refer to this database as the Fuseki database. 
 
-\subsection{Database endpoints and implemented applications}
-
-As previously mentioned, \knox{} was initially started in 2020.
-The previous group chose to develop API endpoints using Java.
-They set up a simple database system using the Apache Jena framework in combination with the Fuseki package.
-
-The system has two functionalities. 
-First, it can store knowledge graphs in HDT and convert triples to HDT.
-Second, it contains a prototype for counting the number of words in an article.
-There is no API for reading this data, only for writing. 
-In addition, at least one of other layers are directly connected to the database.
+The previous group chose to develop API endpoints for both databases using Java.
+The Fuseki database endpoint could be used to store knowledge graphs, and convert the data to HDT format. The API endpoint solution for the WordCount database contained a prototype for getting the ratio of how often a word occurs in an article compared to other occurring words.
+There is no API for reading this data, only for writing. Currently, the database is being accessed directly by the functionality layer. 
 
 Overall, not much code was written, and its quality is unknown due to a lack of testing and documentation.
-The Java language convention was also not followed \cite{java_convention}, making it difficult to comprehend.
+The Java language convention was also not followed\cite{java_convention}, making it difficult to comprehend.
 It appears as though no structure was established, making it difficult to navigate the code. 
-Furthermore, the database is set up such that it must be restarted every time new data is written to it - otherwise, the data cannot be fetched by the other layers.
+Furthermore, the Fuseki database is set up such that it must be restarted every time new data is written to it - otherwise, the data cannot be fetched by the other layers\cite{knox2020}.
 
 Based on this, we have discussed what work to do and in what order.
-After having read and understood the current code, we will have to start by cleaning up the inconsistencies and structure.
-We will then have to document what the code does and write tests for it.
-We must also address the unfortunate database implementation such that constantly restarting is no longer required.
-Finally, we need to decouple the other layers such that they are no longer directly connected to the database.
+After having read and understood the current code, we decided that the best approach would be to start by cleaning up the inconsistencies and structure.
+We then decided to document what the code does, write tests for it and to address the unfortunate database implementation, to ensure that constantly restarting was no longer required.
+Finally, we needed to decouple the other layers such that they were no longer directly connected to the database.
 
 To solve these issues, it was decided that the best approach was to discard all current implementations. 
 This decision was based on several factors such as unfamiliarity with the environment and the previously mentioned poor structure. 
-Discarding the current implementation also allows us to build the layer using C\#, a programming language that we are more familiar with which is also taught in the future semesters. 
-This will make it easier for the following groups to continue and not have to learn a new language.
-
+Discarding the current implementation would additionally allow us to build the database application using C\#, a programming language that we are more familiar with, and which is also taught in future semesters. 
 While doing so, we will follow a proper structure and write tests and documentation along the way. 
 Moreover, it would make the system more accessible to future students as C\# is taught on the 3rd semester.

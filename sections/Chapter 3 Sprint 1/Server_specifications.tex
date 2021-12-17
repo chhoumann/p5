@@ -1,14 +1,14 @@
 \subsection{Server Distribution and Their Specifications}
-The \knox{} server system consists of six servers, each having the Ubuntu 18.04 LTS operating system installed. The servers each have 4 GiB of RAM, 2 vCPUs, and about 100 GB of hard drive space. 
+The \knox{} server system consists of six servers, each running the Ubuntu 18.04 LTS operating system.
+The servers each have 4 GiB of RAM, 2 vCPUs, and about 100 GB of hard drive space. 
 
-Four of these nodes have no ports open to public, and serve as containers for running the various applications of the \knox{} pipeline.
+Four of these servers have no public ports open, and serve as containers for running the various applications of the \knox{} pipeline.
 These servers will be referred to as \textit{node servers} or \textit{server nodes}.
 The remaining two servers have port 80 and 443 open to public. These nodes will be referred to as \textit{master nodes}.
-Currently, one of the master nodes run Grafana \cite{GRAFANA}, Prometheus \cite{Prometheus}, Apache \cite{ApacheJena}, and Docker \cite{Docker_IBM}.
-The other master node only have a single running program, NMap \cite{NMap}.
-The Docker instance runs containers based on images of Portainer, Wiki.JS, as well as a PostgreSQL database.
-Many of the node servers runs applications written in Java and Python, as well as databases for the applications. 
+Currently, one of the master nodes run Grafana\cite{GRAFANA}, Prometheus\cite{Prometheus}, Apache\cite{ApacheJena}, and Docker\cite{Docker_IBM}.
+The other master node only has a single running program, NMap\cite{NMap}.
+The Docker instance runs containers based on images of Portainer, Wiki.js, as well as a PostgreSQL database.
+Many of the node servers run applications written in Java and Python, as well as databases for these applications. 
 No firewalls are set in place between the servers.
 
 Having established an overview of the programs and running on the servers, we will now take a closer look at the databases of the third pipeline layer.
-
