@@ -39,9 +39,9 @@ There, primary keys from other relations are used to reference unique tuples. Th
 \subsubsection*{Evaluating a Database Design}
 When evaluating the design of relational database schemas, we want to avoid redundant data duplication, loss by decomposition and change of dependencies\cite{DBSBook}.
 One approach to ensure this is to use normalization theory\cite{DBSBook}. 
-This approach examines the functional dependencies of the relations and evaluates them based on their \textit{normal form}.
+This approach examines the \textit{functional dependencies} of the relations and evaluates them based on their \textit{normal form}.
 When a relation is in a normal form, it adheres to certain design criteria. 
-These criteria are defined using \textit{functional dependencies}.
+These criteria are defined using functional dependencies.
 
 A functional dependency describes the relationship between two sets of attributes. 
 Functional dependency between $\alpha$ and $\beta$, written as $\alpha \rightarrow \beta$, defines that a value for $\alpha$ is sufficient to identify unique values for $\beta$ \cite{DBSBook}.
