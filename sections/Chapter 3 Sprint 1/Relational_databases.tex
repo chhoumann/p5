@@ -39,9 +39,9 @@ There, primary keys from other relations are used to reference unique tuples. Th
 \subsubsection*{Evaluating a Database Design}
 When evaluating the design of relational database schemas, we want to avoid redundant data duplication, loss by decomposition and change of dependencies\cite{DBSBook}.
 One approach to ensure this is to use normalization theory\cite{DBSBook}. 
-This approach examines the functional dependencies of the relations and evaluates them based on their \textit{normal form}.
+This approach examines the \textit{functional dependencies} of the relations and evaluates them based on their \textit{normal form}.
 When a relation is in a normal form, it adheres to certain design criteria. 
-These criteria are defined using \textit{functional dependencies}.
+These criteria are defined using functional dependencies.
 
 A functional dependency describes the relationship between two sets of attributes. 
 Functional dependency between $\alpha$ and $\beta$, written as $\alpha \rightarrow \beta$, defines that a value for $\alpha$ is sufficient to identify unique values for $\beta$ \cite{DBSBook}.
@@ -52,7 +52,7 @@ If all attributes are functionally determined by $\alpha$, it is a super key\cit
 The closure of functional dependency $\alpha$, denoted $\alpha^+$, describes all attributes that can be logically implied by functional dependencies having $\alpha$ as determinant\cite{DBSBook}. 
 
 Boyce-Codd Normal Form (BCNF) eliminates all redundancy that can be discovered using functional dependencies\cite{DBSBook}. 
-A relation is BCNF with respect to $F$ if, for all functional dependencies in $F^+$ of the form $\alpha \rightarrow \beta$ if one of the following holds:
+A relation is BCNF with respect to functional dependencies $F$ if, for all functional dependencies in $F^+$ of the form $\alpha \rightarrow \beta$ if one of the following holds:
 $\alpha \rightarrow \beta$ is trivial ($\alpha \rightarrow \alpha$) or $\alpha$ is a super key for the relation.
 
 Thus, if a relation $R$ is not in BCNF, there must be a functional dependency $\alpha \rightarrow \beta$ where $\alpha$ is not a super key. 
@@ -65,7 +65,7 @@ and functional dependencies where non-prime attributes are functionally dependen
     {\alpha} \rightarrow{\beta}, {\beta \rightarrow \gamma} \implies \alpha \rightarrow \gamma
 \end{equation}
 
-A relation is in TNF with respect to functional dependencies $F$ is for all dependencies in $F^+$ of the form $\alpha \rightarrow \beta$ if one of the following holds: 
+A relation is in TNF with respect to functional dependencies $F$ if, for all dependencies in $F^+$ of the form $\alpha \rightarrow \beta$, one of the following holds: 
 
 $\alpha \rightarrow \beta$ is trivial, $\alpha$ is a super key, or each attribute $A \in \beta-\alpha$ is contained in a candidate key for $R$ \cite{DBSBook}.
 
