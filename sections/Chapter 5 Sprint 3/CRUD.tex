@@ -52,12 +52,7 @@ The WordCount route uses the \texttt{ArticleJsonModel} and \texttt{TermJsonModel
 The \texttt{GET} method called \texttt{GetFilepath} takes an integer "id" as an argument and finds an article in the database with the given "id" and returns the articles \texttt{filePath} as a \texttt{JsonResult} if it exists, otherwise an error is sent back.
 This method can be seen in code snippet \ref{lst:GetFilepathMethod}.
 
-\begin{lstlisting}[
-  label={lst:GetFilepathMethod},
-  language=CSharp, 
-  caption={The \texttt{GetFilepath} method.}, 
-  basicstyle=\small\ttfamily
-]
+\begin{lstlisting}[language=CSharp, caption={The \texttt{GetFilepath} method.}, label={lst:GetFilepathMethod}]
 [HttpGet]
 [Route("/[controller]/filelist/{id:int}")]
 public IActionResult GetFilepath(long id)
@@ -78,12 +73,7 @@ public IActionResult GetFilepath(long id)
 In WordCount, we also implemented a \texttt{POST} method called \texttt{Post}, which takes a JSON object from the HTTP body as a parameter that should correspond to an array of articles. 
 This method is shown in code snippet \ref{lst:POSTMethod}.
 
-\begin{lstlisting}[
-  label={lst:POSTMethod},
-  language=CSharp, 
-  caption={The \texttt{POST} method.}, 
-  basicstyle=\small\ttfamily
-]
+\begin{lstlisting}[language=CSharp, caption={The \texttt{POST} method.}, label={lst:POSTMethod}]
 [HttpPost]
 public IActionResult Post([FromBody] JsonElement jsonElement)
 {
