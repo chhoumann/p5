@@ -1,4 +1,4 @@
-\subsubsection*{Preprocessing layer}
+\subsubsection*{Preprocessing Layer}
 The responsibility of the preprocessing layer is, as previously mentioned, to extract data from the \texttt{Nordjyske} articles and the \texttt{Grundfos} manuals. For this layer to accomplish this, the following issues had to be resolved:
 \begin{itemize}
     \item The ability to correctly parse articles and manuals.
@@ -7,21 +7,21 @@ The responsibility of the preprocessing layer is, as previously mentioned, to ex
     \item The ability to correctly annotate images.
 \end{itemize}
 
-\subsubsection*{Knowledge layer}
+\subsubsection*{Knowledge Layer}
 For the knowledge layer to extract information from the data provided by the preprocessing layer, the following issues had to be resolved:
 \begin{itemize}
     \item The ability to process the \texttt{Nordjyske} articles and \texttt{Grundfos} manuals.
     \item The ability to store the extracted information.
 \end{itemize}
 
-\subsubsection*{Data layer}
+\subsubsection*{Data Layer}
 The responsibility of our layer is to setup functionality to receive data, and provide data through application interfaces to the surrounding layers.
 To fulfill this, we had to update endpoints for CRUD operations.
 
 In our estimation, this would not be enough to fill en entire sprint duration. In section \ref{currentState}, we found the existing WordCount API solution to be relatively small.
 We spoke with our supervisor and other groups, and discussed reasonable tasks to work on. We decided to resolve the issue of having to restart the RDF database every time we update the data. To gain a better understanding, we asked our supervisor for alternatives to Fuseki, where Virtuoso was brought up as a potential alternative.
 
-\subsubsection*{Functionality layer}
+\subsubsection*{Functionality Layer}
 For the functionality layer to be able to provide the search functionality to a web based user interface, the following issues had to be resolved:
 \begin{itemize}
     \item Fetch article files based on words occurring in the article and the article publisher.

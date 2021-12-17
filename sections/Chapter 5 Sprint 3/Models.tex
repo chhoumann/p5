@@ -3,7 +3,7 @@ To implement an API for the WordCount database, we first needed communication mo
 We also needed data access models corresponding to the database relations to access it through EF Core. 
 The communication models and the data access models will be described in the following sections.
 
-\subsubsection*{Communication models}
+\subsubsection*{Communication Models}
 For communication between our layer and the other layers, we have made three input models and one response model. 
 These models correspond to the JSON objects we expect to send or receive from other layers when they attempt to insert data into or retrieve data from the database. 
 When a JSON object is received, it is parsed into an object from our model, which can then be used to add data to the database. The models used for communication between layers can be seen in figure \ref*{fig:CommunicationModels}.
@@ -33,7 +33,7 @@ How this validation is implemented is described in section \ref*{sec:validation}
 The response model \texttt{FileIdResponse} is used when a request for the path of an article is made and can be seen in figure \ref*{fig:CommunicationModels}.
 After the path has been queried in the WordCount database, it is put into the response model, which is returned as a JSON object. The WordRatio model, seen in figure \ref{fig:DataAccesModels}, is also a response model, but contains the same fields as the data access model.
 
-\subsubsection*{Data access models}
+\subsubsection*{Data Access Models}
 To use EF Core as an ORM, described in section \ref{ORM}, for data access, we also had to implement models of the relations in the database, which are being used to insert and query data. 
 WordRatio is a model of the WordRatio view in the database, and as such does not support insertion of data.
 \\
