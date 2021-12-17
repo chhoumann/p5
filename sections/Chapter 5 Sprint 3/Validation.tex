@@ -29,7 +29,7 @@ Code snippet \ref{lst:jsonSchemaExample} shows an example of a JSON schema that 
 \end{lstlisting}
 
 We first created a new controller called \texttt{SchemaController} which is responsible for posting JSON schemas to the database. 
-Currently, only one schema is stored in the database, however the system is developed to be scalable as more schemas could be added in the database and validation for these could be created in the \texttt{SchemaController}.
+At this stage, only one schema was stored in the database, however the system was developed to be scalable as more schemas can be added in the database, and validation for these can be created in the \texttt{SchemaController}.
 
 When the \texttt{POST} method in the WordCount controller is invoked, it first fetches the JSON schema from the database.
 A new object of type \texttt{JsonValidator} is then instantiated, and its \texttt{IsValid} method is then used to determine whether the input conforms to the structure defined within the given schema. 
