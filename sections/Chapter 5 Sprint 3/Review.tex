@@ -1,7 +1,7 @@
 \section{Review}
 The goal for this sprint can be seen in section \ref{ssec:sprint3Goal}. We were to implement part of the Knox Search Engine MVP, which meant that we were to facilitate data access and storage.
 
-\subsubsection{What has been accomplished?}
+\subsubsection{What Has Been Accomplished?}
 This sprint, we have implemented operations for the WordCount API. This was done in close collaboration with the neighboring layers. 
 Besides this, we also wrote documentation for the relevant implementation details. A full overview of what was done can be seen below.
 
@@ -20,22 +20,22 @@ Besides this, we also wrote documentation for the relevant implementation detail
 While we did manage to implement most of what was requested of us, we did not document this to the extent that our Definition of Done required. 
 We have decided to carry over these tasks to the next sprint, prioritizing them first. In the sprint retrospective, we will discuss why we did not accomplish everything we wanted to, and what we are doing about it.
 
-Towards the end of this sprint, two end-to-end test were performed by request of the \knox{} product owner. The first test was not succesfull.  By the second test, the pipeline seemed to work well, and we were able to get the product to work as expected. This was later confirmed by the PO. The end-to-end tests are described in appendix \ref{scrumofscrumendtotend}.
+Towards the end of this sprint, two end-to-end test were performed by request of the \knox{} PO. The first test was not successful.  By the second test, the pipeline seemed to work well, and we were able to get the product to work as expected. This was later confirmed by the PO. The end-to-end tests are described in appendix \ref{scrumofscrumendtotend}.
 Six days after the end-to-end test, an API endpoint stopped working due to heavy memory load.
 To address this, we pushed a hotfix shortly after. In this hotfix, we removed the repository pattern and unit of work pattern.
 
-\subsubsection{What has changed in the environment?}
+\subsubsection{What Has Changed in the Environment?}
 For this sprint, the primary focus has been to implement the Knox Search Engine. As such, all other groups have had the same focus, and therefore they have not requested anything from the database layer yet. 
 We expect to see a lot of changes to the database layer in the next sprint, as some groups have mentioned that they would like to store different types of data next sprint.
 A full overview of what has changed can be seen below.
 
 \begin{itemize}
     \item The structure of the objects sent from the below layer have changed: a 'publication' field has been introduced in the schema defining the object.
-    \item We found out that the Knox Product Owner will not be creating a new backlog with tasks for us to solve, but that we should instead create meaningful tasks ourselves.
+    \item We found out that the Knox PO will not be creating a new backlog with tasks for us to solve, but that we should instead create meaningful tasks ourselves.
     \item We made other groups realize that creating server users and similar tasks is their own responsibility.
 \end{itemize}
 
-\subsubsection{What next?}
+\subsubsection{What Next?}
 As mentioned before, we were asked to suggest possible next steps for our share of the Knox project. The below list encapsulates our suggestions---some of which are based upon requests from other groups.
 
 \begin{itemize}
