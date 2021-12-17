@@ -10,7 +10,7 @@ The renaming of the tables can be seen in code snippet \ref{lst:RenamingOldModel
     caption=SQL script renaming the existing database structures.,
     showspaces=false,
     numbers=left,
-    numberstyle=\tiny,
+    numberstyle=\footnotesize,
     commentstyle=\color{gray},
     escapechar=|
  ]
@@ -33,7 +33,7 @@ The script is found in Appendix \ref{SQLBackupScript}.
     caption=SQL script creating the tables described in \ref{databaseModelRedesignNF}. Foreign- and primary key constraints are also defined.,
     showspaces=false,
     numbers=left,
-    numberstyle=\tiny,
+    numberstyle=\footnotesize,
     commentstyle=\color{gray},
     escapechar=|
  ]
@@ -41,8 +41,8 @@ CREATE TABLE "Article" AS
 SELECT * FROM "Article_Redundant";
 ALTER TABLE "Article"
     ADD CONSTRAINT "Id_PRMK" PRIMARY KEY ("Id"),
-    ADD FOREIGN KEY ("PublisherName") REFERENCES 
-        "Publisher"("PublisherName");
+    ADD FOREIGN KEY ("PublisherName") 
+        REFERENCES "Publisher"("PublisherName");
 
 CREATE TABLE "Word" AS
 SELECT DISTINCT t."Word" AS "Text" FROM "Term_Redundant" t;
@@ -70,7 +70,7 @@ Notice that the view is an abstraction over a \texttt{SELECT} statement, thus it
     caption=SQL script defining a new WordRatio view.,
     showspaces=false,
     numbers=left,
-    numberstyle=\tiny,
+    numberstyle=\footnotesize,
     commentstyle=\color{gray},
     escapechar=|
  ]
@@ -82,8 +82,11 @@ SELECT "OccursIn"."ArticleId",
        "Article"."FilePath",
        "Article"."TotalWords",
        "Article"."PublisherName",
-       round("OccursIn"."Count"::numeric / "Article"."TotalWords"::numeric * 100::numeric, 2) AS "Percent"
+       round("OccursIn"."Count"::numeric 
+            / "Article"."TotalWords"::numeric * 100::numeric, 2) 
+            AS "Percent"
 FROM "Article"
          JOIN "OccursIn" ON "OccursIn"."ArticleId" = "Article"."Id"
-         JOIN "Publisher" ON "Article"."PublisherName" = "Publisher"."PublisherName";
+         JOIN "Publisher" ON "Article"."PublisherName" 
+            = "Publisher"."PublisherName";
 \end{lstlisting}
