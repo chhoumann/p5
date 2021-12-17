@@ -95,23 +95,23 @@ As a DDL, SQL provides queries to define and modify relation schemas, as well as
     commentstyle=\color{gray},
     escapechar=|
  ]
-    CREATE TABLE book (
-        author_name varchar(250) not null,
-        title varchar(250) NOT NULL,
-        number_of_pages INTEGER NOT NULL CHECK(number_of_pages > 0),
-        ISBN char(10) UNIQUE NOT NULL,
-        primary key (ISBN)
-    );
-    CREATE SEQUENCE ownerSequence INCREMENT BY 1 START 1; |\label{line:sequence}|
-    CREATE TABLE book_owner (
-        name varchar(250),
-        owner_id integer NOT NULL DEFAULT nextval('ownerSequence')
-    );
-    CREATE TABLE owns (
-        owner_id INTEGER NOT NULL REFERENCES book_owner(owner_id),
-        isbn char(10) NOT null REFERENCES book(isbn),
-        PRIMARY KEY (isbn, owner_id)
-    );
+CREATE TABLE book (
+    author_name varchar(250) not null,
+    title varchar(250) NOT NULL,
+    number_of_pages INTEGER NOT NULL CHECK(number_of_pages > 0),
+    ISBN char(10) UNIQUE NOT NULL,
+    primary key (ISBN)
+);
+CREATE SEQUENCE ownerSequence INCREMENT BY 1 START 1; |\label{line:sequence}|
+CREATE TABLE book_owner (
+    name varchar(250),
+    owner_id integer NOT NULL DEFAULT nextval('ownerSequence')
+);
+CREATE TABLE owns (
+    owner_id INTEGER NOT NULL REFERENCES book_owner(owner_id),
+    isbn char(10) NOT null REFERENCES book(isbn),
+    PRIMARY KEY (isbn, owner_id)
+);
 \end{lstlisting}
 
 Code snippet \ref{lst:CreatingTablesInSQL} shows a possible definition of the relations from equation \ref{eq:relational_schema} and \ref{eq:bookOwnerExample}.
