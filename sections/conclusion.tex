@@ -1,36 +1,14 @@
 \chapter{Conclusion}\label{ch:conclusion}
-The code that we overtook from last year for the search engine was incomplete and did not work.
-We therefore implemented the database from scratch using C\# and the Entity Framework Core.
-Our first attempt at this went well as is fulfilled the requirements provided by the Product Owner. 
-This was verified through an end-to-end test where all \knox{} layers participated.
-However, despite this, the design had a major flaw in terms of excessive memory consumption. 
-Fortunately, near the end of the project, we were able to allocate time to a redesign which addressed this problem.
-We were unable to create a BCNF design on time though, and we therefore believe that the database group next year should prioritize this.
-
-The solution from last year used to store RDF data was deemed problematic.
-It required periodic restarts in order to move the data from in memory into persistent disk storage.
-Therefore, a large effort was made into building a new system for handling the \knox{} RDF data storage needs. 
-Here, Virtuoso was deemed as an appropriate framework since it lived up to the requirements provided from the other layers. 
-
-Both database APIs were tested using Postman to ensure that the endpoints work as intended.
-A few unit tests were also written for JSON validator, however the database functionality itself remains largely untested as we cannot, and should not, test a framework.
-
 The main purpose of this semester project was to obtain knowledge and experience in analysis, design, implementation and evaluation of complex software systems in a large development environment \cite{AAULearningGoals5thSemester}.
-Due to different understandings of Agile and Scrum, however, conflicts and problems arose intermittently.
-Several committees were created whose purpose was to dictate specific guidelines or be responsible for certain aspects.
-Some groups disagreed with the decisions made by those committees, and as there was no concrete project lead, nothing could truly be enforced. 
-The lack of a project lead also meant that suggestions and complaints from groups resulted in little to no changes.
 
+During the span of this project, we implemented a WordCount API for the \knox{} Search Engine, which included a reworked database design. We also implemented an RDF API, which encapsulated a Virtuoso SPARQL endpoint.
 
-Another goal of this semester was to learn proper version control and module encapsulation, however this idea fell short due to the complete lack of security for the \knox{} repositories. 
-Any group could simply force code into other groups' repositories, which caused time-consuming conflicts to occur.
-In addition, other groups would suddenly request new features that needed to be implemented urgently.
+We evaluated the database redesign with normal forms, and found our initial design insufficient. For this reason, we redesigned our redesign which made the database TNF.
 
+As we implemented these APIs, we collaborated with the other groups in the project, which included various forms of testing and refining of tasks. Each group was represented in the project during Scrum-of-Scrums meetings where the \knox{} product owner and a representative from each team discussed issues, planning, and purpose of the sprints.
 
-Consequently, due to the aforementioned structural and management issues, it was difficult to follow a concrete sprint planning structure.
+Our group adhered to the Scrum group structure, which included a Product Owner, the Scrum master, and multiple developers.
+As a whole, our Scrum team strove for continuous improvement, which is reflected in our increased productivity throughout the project --- as documented in section \ref{sec:velocityAnalysis}.
 
-
-Ultimately, we feel as though the concept of \knox{} is good, however the execution was unfortunate. 
-While we did learn a lot, the rough nature of the project and its conflicts have resulted in division among students. 
-Internally, the structure of \knox{} resulted in a productive workflow for the group as a whole. 
-We believe that the positive workflow we experienced internally may also flourish across group collaboration in future projects when these issues have been addressed.
+Ultimately, we feel as though the concept of \knox{} is good, however the execution was unfortunate.
+We believe that the positive workflow we experienced internally may also flourish across group collaboration in future iterations of \knox{} when the issues discussed in section \ref{sec:knoxCollab} have been addressed.
