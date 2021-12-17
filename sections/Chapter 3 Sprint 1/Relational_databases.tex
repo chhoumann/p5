@@ -65,7 +65,7 @@ and functional dependencies where non-prime attributes are functionally dependen
     {\alpha} \rightarrow{\beta}, {\beta \rightarrow \gamma} \implies \alpha \rightarrow \gamma
 \end{equation}
 
-A relation is in TNF with respect to functional dependencies $F$ is for all dependencies in $F^+$ of the form $\alpha \rightarrow \beta$ if one of the following holds: 
+A relation is in TNF with respect to functional dependencies $F$ if, for all dependencies in $F^+$ of the form $\alpha \rightarrow \beta$, one of the following holds: 
 
 $\alpha \rightarrow \beta$ is trivial, $\alpha$ is a super key, or each attribute $A \in \beta-\alpha$ is contained in a candidate key for $R$ \cite{DBSBook}.
 
