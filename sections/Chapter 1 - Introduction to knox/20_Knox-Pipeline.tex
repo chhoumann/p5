@@ -18,7 +18,7 @@ Last year, a User Interface (UI) layer was introduced. This year, the responsibi
 The preprocessing layer is responsible for extracting data from \textit{Nordjyske Mediehus} articles and \textit{Grundfos} manuals. Many of these documents are photo scans of old articles, which means that both font, layout, and quality varies from document to document. For this reason, it is necessary to convert many of the documents to a standard format, before it is possible to extract any data. The result should allow all data from \textit{Nordjyske Mediehus} and \textit{Grundfos} to be extracted. 
 
 \subsubsection{Knowledge layer}
-The knowledge layer is used to process the data extracted by the preprocessing layer. Methods like Natural Language Processing (NLP) algorithms should be applied to extract knowledge, WordCount should be tallied and sent to the database, or the text should be annotated to extract entities and their relations, enabling a knowledge graph to be constructed.
+The knowledge layer is used to process the data extracted by the preprocessing layer. Methods like Natural Language Processing (NLP) algorithms should be applied to extract knowledge, word count should be tallied and sent to the database, or the text should be annotated to extract entities and their relations, enabling a knowledge graph to be constructed.
 
 \subsubsection{Data layer}\label{databaseResponsibility}
 The data layer is responsible for handling the flow of data between the knowledge layer and the functionality layer in the \knox{} pipeline.

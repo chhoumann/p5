@@ -5,7 +5,7 @@ Having established how to convert an ER diagram into an equivalent relational mo
 Relational algebra describes a set of unary and binary operations on relations.
 The operations are used to define new relations --- often, the tuples within the set will satisfy defined predicates.
 The relational operators form the foundations of data manipulation languages (see section \ref{sec:SQL}) which can be used to define database operations\cite{DBSBook}.
-A few of these operations can be seen in table \ref{Relational algebra operators}.
+A few of the common operaterations can be seen in table \ref{Relational algebra operators}.
 
 
 \begin{table}[h]
@@ -23,7 +23,6 @@ A few of these operations can be seen in table \ref{Relational algebra operators
 \end{table}
 
 We will describe some operators of relational algebra, and use them to describe implemented queries later.
-Some common operators in relational algebra can be seen in table \ref{Relational algebra operators}.
 \subsubsection*{Select}
 The select operator defines a set $R_{result}\subseteq R$ where all tuples $t \in R_{result}$ satisfies a given predicate\cite{DBSBook}.
 That is, $\forall t \in R_{result} \vDash predicate$.
@@ -33,7 +32,7 @@ $$\sigma_{title = "Database System Concepts"}(books)$$
 The projection operator specifies a relation containing only a subset of the attributes of the operand relation\cite{DBSBook}.
 That is, attributes $A_1, ..., A_n$ of relation $R_{result}$ will be a subset of or equal to the attributes of the operand.
 We can use the projection in combination with the select operator to produce a relation containing only the ISBN and title of books titled "Database System Concepts":
-$$\pi_{ISBN,title} (\sigma_{author\_name = "Database\ System\ Concepts"}(books))$$
+$$\pi_{ISBN,title} (\sigma_{title = "Database\ System\ Concepts"}(books))$$
 \subsubsection*{Cartesian product}
 The Cartesian product of two relations $R_1$ and $R_2$ produces a set containing concatenated tuples of the two operands.
 That is, taking the attributes of the two sets, $A_1,...,A_n \in R_1$ and $A_{n+1},...,A_k \in R_2$ produces a set with attributes $A_1,...,A_k$.
@@ -77,7 +76,7 @@ SQL is one of the most commonly used data definition language (DDL) and data man
 SQL is a declarative query language where one executes a query to instruct the database system to perform a set of operations to compute a desired result.
 Collectively, the resulting set of operations is known as a transaction.
 A transaction can be considered as a set of operations that is performed on data.
-To a user or connected system, the collection of operations must seem a single, indivisible operation\cite{DBSBook}.
+To a user or connected system, the collection of operations must seem like a single, indivisible operation\cite{DBSBook}.
 We will describe the effect of transactions in section \ref{sec:ACID}.
 
 

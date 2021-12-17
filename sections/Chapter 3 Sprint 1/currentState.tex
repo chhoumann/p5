@@ -31,15 +31,12 @@ It appears as though no structure was established, making it difficult to naviga
 Furthermore, the Fuseki database is set up such that it must be restarted every time new data is written to it - otherwise, the data cannot be fetched by the other layers\cite{knox2020}.
 
 Based on this, we have discussed what work to do and in what order.
-After having read and understood the current code, we will have to start by cleaning up the inconsistencies and structure.
-We will then have to document what the code does and write tests for it.
-We must also address the unfortunate database implementation such that constantly restarting is no longer required.
-Finally, we need to decouple the other layers such that they are no longer directly connected to the  database.
+After having read and understood the current code, we decided that the best approach would be to start by cleaning up the inconsistencies and structure.
+We then decided to document what the code does, write tests for it and to address the unfortunate database implementation, to ensure that constantly restarting was no longer required.
+Finally, we needed to decouple the other layers such that they were no longer directly connected to the database.
 
 To solve these issues, it was decided that the best approach was to discard all current implementations. 
 This decision was based on several factors such as unfamiliarity with the environment and the previously mentioned poor structure. 
-Discarding the current implementation also allows us to build the layer using C\#, a programming language that we are more familiar with, and which is also taught in future semesters. 
-This will make it easier for the following groups to continue and not have to learn a new language.
-
+Discarding the current implementation would additionally allow us to build the database application using C\#, a programming language that we are more familiar with, and which is also taught in future semesters. 
 While doing so, we will follow a proper structure and write tests and documentation along the way. 
 Moreover, it would make the system more accessible to future students as C\# is taught on the 3rd semester.
