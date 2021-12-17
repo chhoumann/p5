@@ -34,7 +34,7 @@ The projection operator specifies a relation containing only a subset of the att
 That is, attributes $A_1, ..., A_n$ of relation $R_{result}$ will be a subset of or equal to the attributes of the operand.
 We can use the projection in combination with the select operator to produce a relation containing only the ISBN and title of books titled "Database System Concepts":
 $$\pi_{ISBN,title} (\sigma_{author\_name = "Database\ System\ Concepts"}(books))$$
-\subsubsection*{Cartesian product}
+\subsubsection*{Cartesian Product}
 The Cartesian product of two relations $R_1$ and $R_2$ produces a set containing concatenated tuples of the two operands.
 That is, taking the attributes of the two sets, $A_1,...,A_n \in R_1$ and $A_{n+1},...,A_k \in R_2$ produces a set with attributes $A_1,...,A_k$.
 If the attributes of the operands have the same names, we distinguish between them by denoting their original relation: $R_1.AttributeName$, $R_2.AttributeName$. \cite{DBSBook}
@@ -58,7 +58,7 @@ Thus, we can express the relation describing the name of all $book\_owner$ entit
 
 
 Other variations of the join operation exist\cite{DBSBook}, however these will not be discussed in this report.\\
-\subsubsection*{Aggregate functions}
+\subsubsection*{Aggregate Functions}
 In conjunction with the basic relational operators, aggregate functions can be used over a set of values.
 Aggregate functions take a set of values as input and outputs a single value\cite{DBSBook}. Some common aggregate functions are 
 \begin{itemize} \label{aggregateFunctions}
