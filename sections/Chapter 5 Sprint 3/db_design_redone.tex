@@ -7,9 +7,9 @@ As mentioned in section \ref{ORM}, we opted to use EF Core to communicate with t
 Despite the many advantages of this approach, it resulted in a database design that had major space issue.
 In our rush to quickly implement the redesign, we unfortunately overlooked how to effectively store words from articles. 
 
-Currently, we just store every single word in the database without regard for duplicates, which takes up way more space than necessary. Thus, it is not of the third normal form, and therefore not in BCNF either.
-Ideally, we should instead store each word only once with an associated counter for how many times the given appears in an article.
-We realize the issues with the current design and would like to address them in the near-future if time permits it.
+At this stage, we stored every single word in the database without regard for duplicates, which took up more space than necessary. Therefore, it was not of the third normal form, and not in BCNF either.
+Ideally, we should instead have stored each word only once with an associated counter for how many times the given word appeared in an article.
+We realized that this was not an optimal approach and decided to address these in future sprints.
 
 The current database design is captured in the ER-diagram in figure \ref{newdatabaseER}.
 
