@@ -1,9 +1,9 @@
 \subsection{Redesigning the Database Model}\label{databaseModelRedesignNF}
-We will now create relations describing the new models for the database.
-Other groups of the \knox{} pipeline have requested that entities representing articles have a unique Id field, regardless of what is considered good database design.
-Similarly, they want a field denoting the total words appearing in the article.
+We will now describe how we created relations describing the new models for the database.
+Other groups of the \knox{} pipeline requested that entities representing articles have a unique Id field, regardless of what is considered good database design.
+Similarly, they wanted a field denoting the total words appearing in the article.
 
-We will start by creating an ER-model of the domain, and then describe the entity and relationship sets using the relational model, using the method described in section \ref{relational_databases}.
+We started by creating an ER-model of the domain, and then described the entity and relationship sets using the relational model, using the method described in section \ref{relational_databases}.
 
 \begin{figure}[H]
     \centering
@@ -25,8 +25,8 @@ Notice that the existing $publisher$ relation in the database has exactly the sa
 \end{equation}
 
 
-We have to ensure that the WordRatio view, described in section \ref{WordRatioCrud} and appendix \ref{Appendix_WordRatioOld}, still contains the same information as before.
-Since the view is an abstraction over a \texttt{SELECT} query, we will describe it using relational algebra.
+We had to ensure that the WordRatio view, described in section \ref{WordRatioCrud} and appendix \ref{Appendix_WordRatioOld}, still contained the same information as before.
+Since the view is an abstraction over a \texttt{SELECT} query, we describe it using relational algebra.
 The query of the view can be seen in equation \ref{create_new_view_rel_alg}.
 The resulting relation structure is seen in equation \ref{create_new_view_rel_alg_structure}.
 
