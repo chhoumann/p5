@@ -2,24 +2,22 @@
 The goal for this sprint was to finish the implementation of the WordCount database as well as the API, as we did not have enough time in the previous sprint to complete this. Additionally, the goal was also to put these into a development environment in Docker.
 
 \subsection{Knox Goal}\label{ssec:sprint3Goal}
-As previously mentioned, the product owner for \knox{} provided an updated specification of requirements to be completed in order to get the search engine to function. The new requirements are outlined below. 
+As previously mentioned, the PO for \knox{} provided an updated specification of requirements to be completed in order to get the search engine to function. The new requirements are outlined below. 
 \begin{itemize}
 	\item It should be possible to make searches in all the available databases.
 	\item It should be possible to make searches using keywords in all the available data.
-	\item It should be possible to make searches in all Nordjyske articles from 2017-2021
+	\item It should be possible to make searches in all Nordjyske articles from 2017-2021.
 	\item It should be possible to make searches in all the Grundfos manuals, barring those that have shown to be problematic during processing.
-	\item The UI should minimally be able to display a link to the given article but preferably display the title and text.
+	\item The UI should minimally be able to display a link to the given article, but preferably display the title and text.
 \end{itemize}
 
 
-\subsubsection{Backlog \& Increments}
-The requirements that fulfill our part of the \knox{} goal, for this sprint, were realized during the second sprint. As such, the tasks related to this sprint were only related to implementing what we did not have time to do in the previous sprint. 
-The only addition during the planning phase of this sprint was an ambition to implement a repository service and CI/CD. To estimate the time to complete these tasks, a session of planning poker was held. 
+\subsubsection{Backlog and Increments}
+The requirements that fulfill our part of the \knox{} goal for this sprint were realized during the second sprint. As such, the tasks related to this sprint were only related to implementing what we did not have time to do in the previous sprint. 
+The only addition during the planning phase of this sprint was an ambition to implement a repository service and Continuous Integration combined with Continuous Delivery (CI/CD) described in section \ref{CI/CD}.
+To estimate the time to complete these tasks, a session of planning poker was held. 
 
-Planning Poker is a game in which participants estimate the time it will take to complete a task. Each participant has a set of cards with numbers on. These numbers represent the relative sizing of a task, which is why it is common to use the Fibonacci sequence, whose numbers are well spread out.
-Each round begins with the Product Owner reading a user story, which is then discussed. Then, each participant selects a card with their estimate of the task. Once every participant has selected a card, the cards are turned over. If everyone is within two cards of each other, the average of the numbers on the cards is taken as the user story estimate. If that is not the case, the outliers will discuss, and a new round commences.
-This is done until there are no more user stories left\cite{sutherlandScrumArtDoing2014}.
-
+Some group members had previously adopted planning poker in their projects. It had worked well for them, so we decided to implement it in this project as well. The general understanding was that planning poker is a game in which participants estimate the time it will take to complete a task. This is done by having each member rate a task on a scale corresponding to the Fibonacci sequence. We would then play rounds until all members agree on the final estimate for that task. This would be repeated until all tasks were estimated.
 
 The tasks and their time estimate can be seen in table \ref{BacklogEstimationSprint3}.
 \begin{table}[h]
@@ -27,7 +25,7 @@ The tasks and their time estimate can be seen in table \ref{BacklogEstimationSpr
 \begin{tabular}{|l|l|l|ll}
 \cline{1-3}
 WordCount API Granulation   & Subtasks & Estimation &  &  \\ \cline{1-3}
-\multirow{4}{*}{Controller} & Get      & 2          &  &  \\ \cline{2-3}
+\multirow{4}{*}{API} 		& Get      & 2          &  &  \\ \cline{2-3}
                             & Post     & 5          &  &  \\ \cline{2-3}
                             & Update   & 8          &  &  \\ \cline{2-3}
                             & Delete   & 3          &  &  \\ \cline{1-3}
@@ -35,8 +33,8 @@ Docker                      &          & 13         &  &  \\ \cline{1-3}
 Repository Service          &          & 10         &  &  \\ \cline{1-3}
 CI/CD                       &          & 5          &  &  \\ \cline{1-3}
 \end{tabular}
-\caption{Backlog Granulation \& Estimation}
+\caption{Backlog Granulation and Estimation.}
 \label{BacklogEstimationSprint3}
 \end{table}
 
-Having estimates like these are also useful in the next sprints. Given the sum of the estimates, we can estimate how many tasks we can handle. Ideally, this number grows each sprint, which indicates that the team gets more efficient over time. Or, in other words, this corresponds to increasing velocity, which was described in section \ref{knox_collaboration}.
+Having estimates like these would also be useful in the next sprints. Given the sum of the estimates, we could gauge how many tasks we could handle. Ideally, this number would grow each sprint, which would indicate that the team became more efficient over time. In other words, this corresponds to increasing velocity, which was described in section \ref{knox_collaboration}.

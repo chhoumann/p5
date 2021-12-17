@@ -1,16 +1,16 @@
 \subsubsection*{Implementing the Models}\label{implementing_new_WC_DB_models}
-Having established the quality of the design of the database structures, we will now implement them.
-When creating the new tables, we ensure that no loss of data occurs by not dropping the old tables, and instead renaming them. 
-The tables can then be dropped later after the full implementations of the new design have been performed.
+After having established the quality of the design of the database structures, we then implemented them.
+When creating the new tables, we ensured that no loss of data occurred by not dropping the old tables and instead renamed them. 
+The tables could then be dropped later after we completed the implementation of the new design.
 The renaming of the tables can be seen in code snippet \ref{lst:RenamingOldModelsSQL}.
 
 \begin{lstlisting}[
     label=lst:RenamingOldModelsSQL,
     language=SQL,
-    caption=SQL script renaming the existing database structures,
+    caption=SQL script renaming the existing database structures.,
     showspaces=false,
     numbers=left,
-    numberstyle=\tiny,
+    numberstyle=\footnotesize,
     commentstyle=\color{gray},
     escapechar=|
  ]
@@ -20,10 +20,10 @@ ALTER TABLE "Term"
     RENAME TO "Term_Redundant";
 \end{lstlisting}
 
-When implementing the new tables, we base them on the just-renamed tables from the old database design.
-By doing this, we ensure that all data from the old tables are correctly transferred to the new ones, since each of the commands is a transaction (see section \ref{relational_databases}).
-After all data have been transferred to a new table, constraints, foreign- and primary keys are added to the tables. 
-This can be seen on code snippet \ref{lst:CreatingTheNewDBModelsSQL}.
+When implementing the new tables, we based them on the newly renamed tables from the old database design.
+By doing this, we ensured that all data from the old tables were correctly transferred to the new ones, since each command is a transaction (see section \ref{relational_databases}).
+After all data had been transferred to a new table, constraints, foreign- and primary keys were added to the tables. 
+This can be seen in code snippet \ref{lst:CreatingTheNewDBModelsSQL}.
 We have ensured that the changes are reversible by creating a script dropping the new tables, and restoring the structure of the old tables.
 The script is found in Appendix \ref{SQLBackupScript}.
 
@@ -33,7 +33,7 @@ The script is found in Appendix \ref{SQLBackupScript}.
     caption=SQL script creating the tables described in \ref{databaseModelRedesignNF}. Foreign- and primary key constraints are also defined.,
     showspaces=false,
     numbers=left,
-    numberstyle=\tiny,
+    numberstyle=\footnotesize,
     commentstyle=\color{gray},
     escapechar=|
  ]
@@ -41,7 +41,8 @@ CREATE TABLE "Article" AS
 SELECT * FROM "Article_Redundant";
 ALTER TABLE "Article"
     ADD CONSTRAINT "Id_PRMK" PRIMARY KEY ("Id"),
-    ADD FOREIGN KEY ("PublisherName") REFERENCES "Publisher"("PublisherName");
+    ADD FOREIGN KEY ("PublisherName") 
+        REFERENCES "Publisher"("PublisherName");
 
 CREATE TABLE "Word" AS
 SELECT DISTINCT t."Word" AS "Text" FROM "Term_Redundant" t;
@@ -50,7 +51,8 @@ ALTER TABLE "Word" ADD CONSTRAINT "Literal_PRMK" PRIMARY KEY ("Text");
 CREATE TABLE "OccursIn" AS
     (
         SELECT "art"."Id" as "ArticleId", "t"."Count",  t."Word"
-        FROM"Term_Redundant" t JOIN wordcount.public."Article_Redundant" art ON t."ArticleId" = art."Id"
+        FROM "Term_Redundant" t JOIN wordcount.public."Article_Redundant" 
+            art ON t."ArticleId" = art."Id"
     );
 ALTER TABLE "OccursIn"
     ADD FOREIGN KEY ("ArticleId") REFERENCES "Article"("Id"),
@@ -58,7 +60,7 @@ ALTER TABLE "OccursIn"
     ADD PRIMARY KEY ("ArticleId", "Word");
 \end{lstlisting}
 
-Having implemented the new database structures, we can redefine the WordRatio view.
+After having implemented the new database structures, we redefined the WordRatio view.
 Notice that the view is an abstraction over a \texttt{SELECT} statement, thus it is replaceable without loss of data.
 
 
@@ -68,7 +70,7 @@ Notice that the view is an abstraction over a \texttt{SELECT} statement, thus it
     caption=SQL script defining a new WordRatio view.,
     showspaces=false,
     numbers=left,
-    numberstyle=\tiny,
+    numberstyle=\footnotesize,
     commentstyle=\color{gray},
     escapechar=|
  ]
@@ -80,8 +82,11 @@ SELECT "OccursIn"."ArticleId",
        "Article"."FilePath",
        "Article"."TotalWords",
        "Article"."PublisherName",
-       round("OccursIn"."Count"::numeric / "Article"."TotalWords"::numeric * 100::numeric, 2) AS "Percent"
+       round("OccursIn"."Count"::numeric 
+            / "Article"."TotalWords"::numeric * 100::numeric, 2) 
+            AS "Percent"
 FROM "Article"
          JOIN "OccursIn" ON "OccursIn"."ArticleId" = "Article"."Id"
-         JOIN "Publisher" ON "Article"."PublisherName" = "Publisher"."PublisherName";
+         JOIN "Publisher" ON "Article"."PublisherName" 
+            = "Publisher"."PublisherName";
 \end{lstlisting}

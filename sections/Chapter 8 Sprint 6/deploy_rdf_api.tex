@@ -1,0 +1,6 @@
+\section{Deploying the RDF API}
+As mentioned in section \ref{sec:implementing_virtuoso}, we needed to deploy the API to a production environment.
+We used an automated deployment system that deployed the code to the production server, as described in section \ref{CI/CD}, which we used to deploy the RDF API.
+
+After deployment, we ran integration tests to test that everything worked as intended. These tests were run using Postman, a platform for building and using APIs\cite{PostmanAPIPlatform}. With Postman, we sent requests to the API's endpoints with \knox{} test data. This data was received from the Knowledge Extraction layer, so it resembled that which will be sent to the API.
+We also collaborated with the knowledge layer to do some separate tests, which produced the same results as our own tests.
