@@ -46,7 +46,7 @@ The WordCount route uses the \texttt{ArticleJsonModel} and \texttt{TermJsonModel
     \multicolumn{1}{|l|}{\texttt{GetFilepath}} & \multicolumn{1}{l|}{GET}    & \multicolumn{1}{l|}{Integer}     & Article        \\ \hline
     \multicolumn{1}{|l|}{\texttt{Post}}        & \multicolumn{1}{l|}{POST}   & \multicolumn{1}{l|}{JSON Object} & Status message \\ \hline
     \end{tabular}
-  \caption{Endpoints for the WordCount route.\label{fig:WordCountEndpoint}}
+  \caption{Endpoints for the WordCount route.\label{fig:WordCountEndpoint}.}
 \end{table}
 
 The \texttt{GET} method called \texttt{GetFilepath} takes an integer "id" as an argument and finds an article in the database with the given "id" and returns the articles \texttt{filePath} as a \texttt{JsonResult} if it exists, otherwise an error is sent back.
@@ -152,7 +152,7 @@ By creating a route for fetching the validation schemas, we enable easy validati
     \multicolumn{1}{|l|}{\texttt{GetAllSchemas}}   & \multicolumn{1}{l|}{GET}    & \multicolumn{1}{l|}{None}                & All JSON schemas    \\ \hline
     \multicolumn{1}{|l|}{\texttt{PostJSONSchemas}} & \multicolumn{1}{l|}{POST}   & \multicolumn{1}{l|}{JSON Schema}         & Status message      \\ \hline
     \end{tabular}
-    \caption{Schema routes\label{SchemaRoutes}}
+    \caption{Schema routes\label{SchemaRoutes}.}
 \end{table}
 
 The first \texttt{GET} method is called \texttt{GetSchema} which takes a schema name as its input and returns a JSON schema with the given name if it exists. 
